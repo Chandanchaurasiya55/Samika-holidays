@@ -12,6 +12,7 @@ import packageRoutes from './Src/routes/packageRoutes.js';
 import hotelRoutes from './Src/routes/hotelRoutes.js';
 import postRoutes from './Src/routes/postRoutes.js';
 import blogRoutes from './Src/routes/blogRoutes.js';
+import paymentRoutes from './Src/routes/paymentRoutes.js';
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -35,6 +36,7 @@ app.use('/api/packages', packageRoutes);
 app.use('/api/hotels', hotelRoutes);
 app.use('/api/posts', postRoutes);
 app.use('/api/blogs', blogRoutes);
+app.use('/api/payment', paymentRoutes);
 
 // Health Check API
 app.get('/api/health', (req, res) => {

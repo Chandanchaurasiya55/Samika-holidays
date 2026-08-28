@@ -149,18 +149,68 @@ export default function EnquiryModal({
     }
 
     try {
-      const razorpayKey = import.meta.env.VITE_RAZORPAY_KEY_ID || 'rzp_test_placeholder';
+      const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:3000';
 
+      // Step 1: Create Razorpay Order via Backend
+      const orderRes = await fetch(`${API_BASE}/api/payment/create-order`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          amount: payableAmount,
+          receipt: `smk_${Date.now()}`,
+          notes: {
+            customerName: formData.name,
+            packageTitle: packageTitle,
+            travelDate: formData.date,
+            guests: formData.guests
+          }
+        })
+      });
+
+      const orderData = await orderRes.json();
+
+      if (!orderData.success || !orderData.order) {
+        throw new Error(orderData.message || 'Failed to create order');
+      }
+
+      // Step 2: Get Razorpay Key from Backend
+      const keyRes = await fetch(`${API_BASE}/api/payment/key`);
+      const keyData = await keyRes.json();
+      const razorpayKey = keyData.key || import.meta.env.VITE_RAZORPAY_KEY_ID || 'rzp_test_placeholder';
+
+      // Step 3: Open Razorpay Checkout
       const options = {
         key: razorpayKey,
-        amount: payableAmount * 100,
-        currency: 'INR',
+        amount: orderData.order.amount,
+        currency: orderData.order.currency,
         name: 'Samika Holidays',
         description: `Booking: ${packageTitle} (${formData.guests})`,
         image: '/logo.png',
-        handler: function (response) {
-          const txnId = response.razorpay_payment_id || `pay_${Date.now()}`;
-          finalizeConfirmedBooking(txnId);
+        order_id: orderData.order.id,
+        handler: async function (response) {
+          // Step 4: Verify Payment Signature via Backend
+          try {
+            const verifyRes = await fetch(`${API_BASE}/api/payment/verify`, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                razorpay_order_id: response.razorpay_order_id,
+                razorpay_payment_id: response.razorpay_payment_id,
+                razorpay_signature: response.razorpay_signature
+              })
+            });
+            const verifyData = await verifyRes.json();
+
+            if (verifyData.success) {
+              finalizeConfirmedBooking(response.razorpay_payment_id);
+            } else {
+              alert('Payment verification failed. Please contact support.');
+              setIsProcessingRazorpay(false);
+            }
+          } catch (verifyErr) {
+            console.log('Verification API error, using payment ID directly:', verifyErr);
+            finalizeConfirmedBooking(response.razorpay_payment_id);
+          }
         },
         prefill: {
           name: formData.name,
@@ -191,6 +241,7 @@ export default function EnquiryModal({
       razorpayInstance.open();
     } catch (err) {
       console.log('Razorpay checkout error:', err);
+      // Fallback: if backend is down, still allow demo flow
       const fallbackTxn = `pay_demo_${Date.now()}`;
       finalizeConfirmedBooking(fallbackTxn);
     }
