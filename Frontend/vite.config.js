@@ -5,62 +5,134 @@ import tailwindcss from '@tailwindcss/vite'
 const SITE_URL = 'https://samikaholiday.com';
 
 const routeSeoMap = {
+  '/': {
+    title: 'Samika Holidays | Luxury Hotels, Resorts & Tour Packages in Uttarakhand',
+    desc: 'Discover extraordinary luxury hotels, bespoke tour packages, destination weddings, and Himalayan adventures with Samika Holidays.',
+    canonical: `${SITE_URL}/`,
+    content: `
+      <nav style="background:#0F172A;padding:16px 24px;display:flex;align-items:center;justify-content:space-between">
+        <a href="/" style="color:white;font-size:20px;font-weight:800;text-decoration:none">Samika Holidays</a>
+        <div style="display:flex;gap:16px">
+          <a href="/destinations" style="color:#94a3b8;font-size:13px;text-decoration:none">Destinations</a>
+          <a href="/hotels" style="color:#94a3b8;font-size:13px;text-decoration:none">Hotels</a>
+          <a href="/packages" style="color:#94a3b8;font-size:13px;text-decoration:none">Packages</a>
+          <a href="/weddings" style="color:#94a3b8;font-size:13px;text-decoration:none">Weddings</a>
+          <a href="/corporate" style="color:#94a3b8;font-size:13px;text-decoration:none">Corporate</a>
+          <a href="/blogs" style="color:#94a3b8;font-size:13px;text-decoration:none">Blogs</a>
+          <a href="/about" style="color:#94a3b8;font-size:13px;text-decoration:none">About Us</a>
+          <a href="/contact" style="color:#94a3b8;font-size:13px;text-decoration:none">Contact</a>
+        </div>
+      </nav>
+
+      <header style="background:#0F172A;color:white;padding:60px 24px;text-align:left">
+        <p style="color:#E11D48;font-size:14px;font-weight:700">Land of Gods • Devbhoomi Uttarakhand</p>
+        <p style="color:#E11D48;font-size:36px;font-family:cursive;font-weight:700">Discover The Beauty of</p>
+        <h1 style="font-size:64px;font-weight:900;color:white;margin:0">Uttarakhand</h1>
+        <h2 style="font-size:28px;font-weight:700;color:white;margin-top:4px">with Samika Holidays</h2>
+        <p style="color:#94a3b8;font-size:14px;margin-top:8px">Hotels • Resorts • Tour Packages • Destination Weddings • Corporate Tours</p>
+        <div style="margin-top:16px;display:flex;gap:12px">
+          <a href="/packages" style="background:linear-gradient(to right,#E11D48,#FF6B35);color:white;padding:12px 28px;border-radius:12px;font-weight:700;text-decoration:none;font-size:14px">Explore Packages</a>
+          <a href="https://wa.me/916284073623" style="background:white;color:#0F172A;padding:12px 24px;border-radius:12px;font-weight:700;text-decoration:none;font-size:14px">WhatsApp Us</a>
+        </div>
+      </header>
+
+      <section style="max-width:1200px;margin:32px auto;padding:24px;background:white;border-radius:16px;box-shadow:0 4px 24px rgba(0,0,0,0.08)">
+        <h2 style="font-size:18px;font-weight:700;margin-bottom:16px">Search Your Dream Uttarakhand Trip</h2>
+        <form style="display:grid;grid-template-columns:repeat(4,1fr);gap:16px">
+          <div><label style="font-size:10px;font-weight:700;color:#94a3b8;text-transform:uppercase">Destination</label><input type="text" placeholder="Where are you going? (e.g. Nainital, Corbett)" style="width:100%;padding:12px;border:1px solid #e2e8f0;border-radius:12px;font-size:14px"/></div>
+          <div><label style="font-size:10px;font-weight:700;color:#94a3b8;text-transform:uppercase">Check-In</label><input type="date" style="width:100%;padding:12px;border:1px solid #e2e8f0;border-radius:12px;font-size:14px"/></div>
+          <div><label style="font-size:10px;font-weight:700;color:#94a3b8;text-transform:uppercase">Check-Out</label><input type="date" style="width:100%;padding:12px;border:1px solid #e2e8f0;border-radius:12px;font-size:14px"/></div>
+          <button type="submit" style="background:linear-gradient(to right,#E11D48,#FF6B35);color:white;padding:12px;border-radius:12px;font-weight:700;font-size:14px;border:none;cursor:pointer">Search Now</button>
+        </form>
+      </section>
+
+      <section style="max-width:1200px;margin:32px auto;padding:32px;background:white;border-radius:16px;display:grid;grid-template-columns:repeat(4,1fr);gap:24px;text-align:center">
+        <div><h3 style="font-size:32px;font-weight:800;color:#0F172A">500+</h3><p style="font-size:12px;color:#64748b">Audited &amp; Verified Resorts</p></div>
+        <div><h3 style="font-size:32px;font-weight:800;color:#E11D48">4.9 ★</h3><p style="font-size:12px;color:#64748b">Average Traveler Rating</p></div>
+        <div><h3 style="font-size:32px;font-weight:800;color:#FF6B35">10,000+</h3><p style="font-size:12px;color:#64748b">Happy Travelers Hosted</p></div>
+        <div><h3 style="font-size:32px;font-weight:800;color:#06B6D4">24x7</h3><p style="font-size:12px;color:#64748b">Dedicated On-Trip Care</p></div>
+      </section>
+
+      <section style="max-width:1200px;margin:32px auto;padding:0 24px">
+        <h2 style="font-size:32px;font-weight:700;margin-bottom:8px">Top Trending Destinations in Uttarakhand</h2>
+        <p style="font-size:14px;color:#64748b;margin-bottom:24px">From Jim Corbett tiger reserves to Nainital lakes and high-altitude spiritual shrines.</p>
+        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:20px">
+          <article style="background:#0F172A;color:white;padding:24px;border-radius:16px"><h3 style="font-size:20px;font-weight:700">Jim Corbett National Park</h3><p style="font-size:12px;color:#E11D48;font-weight:700">Wildlife Safaris &amp; Sal Forests</p><p style="font-size:12px;color:#94a3b8;margin-top:8px">India's oldest tiger reserve featuring luxury jungle resorts, open jeep safaris in Bijrani &amp; Dhikala, and riverside bonfires.</p><p style="font-size:12px;color:#FF6B35;font-weight:700;margin-top:8px">From ₹4,500/night</p></article>
+          <article style="background:#0F172A;color:white;padding:24px;border-radius:16px"><h3 style="font-size:20px;font-weight:700">Nainital &amp; Lake District</h3><p style="font-size:12px;color:#E11D48;font-weight:700">Emerald Lakes &amp; Heritage Stays</p><p style="font-size:12px;color:#94a3b8;margin-top:8px">Surrounded by seven hills, famous for yacht boating on Naini Lake, Mall Road shopping, and vintage British heritage hotels.</p><p style="font-size:12px;color:#FF6B35;font-weight:700;margin-top:8px">From ₹3,800/night</p></article>
+          <article style="background:#0F172A;color:white;padding:24px;border-radius:16px"><h3 style="font-size:20px;font-weight:700">Rishikesh &amp; Ganga Valley</h3><p style="font-size:12px;color:#E11D48;font-weight:700">Yoga, Rafting &amp; Ganga Aarti</p><p style="font-size:12px;color:#94a3b8;margin-top:8px">The spiritual capital of the world offering white water river rafting, cliff jumping, Ganga Aarti, and luxury wellness retreats.</p><p style="font-size:12px;color:#FF6B35;font-weight:700;margin-top:8px">From ₹2,900/night</p></article>
+          <article style="background:#0F172A;color:white;padding:24px;border-radius:16px"><h3 style="font-size:20px;font-weight:700">Kedarnath &amp; Chardham</h3><p style="font-size:12px;color:#E11D48;font-weight:700">Sacred Himalayan Pilgrimage</p><p style="font-size:12px;color:#94a3b8;margin-top:8px">Sacred Jyotirlinga shrine set against snow-clad Himalayan peaks, accessible via trek or VIP helicopter package.</p><p style="font-size:12px;color:#FF6B35;font-weight:700;margin-top:8px">Pilgrimage Packages</p></article>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-top:20px">
+          <article style="background:#0F172A;color:white;padding:24px;border-radius:16px"><h3 style="font-size:20px;font-weight:700">Mussoorie Queen of Hills</h3><p style="font-size:12px;color:#E11D48;font-weight:700">Valley Vistas &amp; Waterfalls</p><p style="font-size:12px;color:#94a3b8;margin-top:8px">Colonial charm, Kempty Falls, Dhanaulti Eco Park, and romantic valley-view mountain resorts.</p><p style="font-size:12px;color:#FF6B35;font-weight:700;margin-top:8px">From ₹4,200/night</p></article>
+          <article style="background:#0F172A;color:white;padding:24px;border-radius:16px"><h3 style="font-size:20px;font-weight:700">Kainchi Dham &amp; Bhowali</h3><p style="font-size:12px;color:#E11D48;font-weight:700">Neem Karoli Baba Ashram</p><p style="font-size:12px;color:#94a3b8;margin-top:8px">World-famous spiritual ashram visited by global seekers, nestled in peaceful pine valleys near Bhimtal.</p><p style="font-size:12px;color:#FF6B35;font-weight:700;margin-top:8px">Spiritual Darshan Tour</p></article>
+          <article style="background:#0F172A;color:white;padding:24px;border-radius:16px"><h3 style="font-size:20px;font-weight:700">Bhimtal &amp; Naukuchiatal</h3><p style="font-size:12px;color:#E11D48;font-weight:700">Tranquil Lakes &amp; Paragliding</p><p style="font-size:12px;color:#94a3b8;margin-top:8px">Peaceful nine-cornered lakes, lakeside cottages, boating, and paragliding adventures.</p><p style="font-size:12px;color:#FF6B35;font-weight:700;margin-top:8px">From ₹3,200/night</p></article>
+          <article style="background:#0F172A;color:white;padding:24px;border-radius:16px"><h3 style="font-size:20px;font-weight:700">Auli Snow &amp; Ski Slopes</h3><p style="font-size:12px;color:#E11D48;font-weight:700">Nanda Devi Views &amp; Skiing</p><p style="font-size:12px;color:#94a3b8;margin-top:8px">Nanda Devi panoramic views, ski slopes, gondola rides, and alpine resort stays.</p><p style="font-size:12px;color:#FF6B35;font-weight:700;margin-top:8px">Alpine Resort Stays</p></article>
+        </div>
+      </section>
+
+      <section style="max-width:1200px;margin:32px auto;padding:0 24px">
+        <h2 style="font-size:32px;font-weight:700;margin-bottom:8px">Luxury Hotels &amp; Boutique Mountain Resorts</h2>
+        <p style="font-size:14px;color:#64748b;margin-bottom:24px">Personally inspected for scenic brilliance, top hygiene, swimming pools, Pahadi delicacies, and warm hospitality.</p>
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px">
+          <article style="background:white;border:1px solid #e2e8f0;border-radius:16px;overflow:hidden"><div style="padding:24px"><h3 style="font-size:20px;font-weight:700">Corbett Riverside Luxury Resort</h3><p style="font-size:12px;color:#E11D48;font-weight:700">Jim Corbett National Park • 5.0 ★</p><p style="font-size:12px;color:#64748b;margin-top:8px">Private riverside cottages, swimming pool, open lawn dining, and direct access to Corbett safari gates.</p><p style="font-size:18px;font-weight:800;margin-top:12px">₹6,500 <span style="font-size:12px;color:#94a3b8;font-weight:400">/ Night</span></p><a href="https://wa.me/916284073623?text=Book%20Corbett%20Riverside%20Resort" style="display:inline-block;margin-top:12px;background:linear-gradient(to right,#E11D48,#FF6B35);color:white;padding:10px 20px;border-radius:12px;font-size:12px;font-weight:700;text-decoration:none">Reserve Stay</a></div></article>
+          <article style="background:white;border:1px solid #e2e8f0;border-radius:16px;overflow:hidden"><div style="padding:24px"><h3 style="font-size:20px;font-weight:700">Nainital Heritage Lake Resort</h3><p style="font-size:12px;color:#E11D48;font-weight:700">Nainital Mall Road • 4.9 ★</p><p style="font-size:12px;color:#64748b;margin-top:8px">Colonial-style wooden suites overlooking Naini Lake, rooftop restaurant, and walking distance to boat stand.</p><p style="font-size:18px;font-weight:800;margin-top:12px">₹5,200 <span style="font-size:12px;color:#94a3b8;font-weight:400">/ Night</span></p><a href="https://wa.me/916284073623?text=Book%20Nainital%20Heritage%20Resort" style="display:inline-block;margin-top:12px;background:linear-gradient(to right,#E11D48,#FF6B35);color:white;padding:10px 20px;border-radius:12px;font-size:12px;font-weight:700;text-decoration:none">Reserve Stay</a></div></article>
+          <article style="background:white;border:1px solid #e2e8f0;border-radius:16px;overflow:hidden"><div style="padding:24px"><h3 style="font-size:20px;font-weight:700">Rishikesh Ganga View Spa Retreat</h3><p style="font-size:12px;color:#E11D48;font-weight:700">Rishikesh • 4.9 ★</p><p style="font-size:12px;color:#64748b;margin-top:8px">Riverside infinity pool, Ayurvedic spa, private yoga deck overlooking holy Ganga river.</p><p style="font-size:18px;font-weight:800;margin-top:12px">₹5,800 <span style="font-size:12px;color:#94a3b8;font-weight:400">/ Night</span></p><a href="https://wa.me/916284073623?text=Book%20Rishikesh%20Spa%20Resort" style="display:inline-block;margin-top:12px;background:linear-gradient(to right,#E11D48,#FF6B35);color:white;padding:10px 20px;border-radius:12px;font-size:12px;font-weight:700;text-decoration:none">Reserve Stay</a></div></article>
+        </div>
+      </section>
+
+      <section style="max-width:1200px;margin:32px auto;padding:0 24px">
+        <h2 style="font-size:32px;font-weight:700;margin-bottom:8px">Best-Selling Uttarakhand Tour Packages</h2>
+        <p style="font-size:14px;color:#64748b;margin-bottom:24px">Carefully planned itineraries featuring private sanitized cabs, top hotel stays, sightseeing entry, and local guides.</p>
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px">
+          <article style="background:white;border:1px solid #e2e8f0;border-radius:16px;padding:24px"><span style="background:#0F172A;color:white;font-size:10px;font-weight:700;padding:4px 12px;border-radius:12px">3 Days / 2 Nights</span><h3 style="font-size:20px;font-weight:700;margin-top:12px">Jim Corbett Wildlife Safari Experience</h3><p style="font-size:12px;color:#E11D48;font-weight:700">Corbett National Park • Family &amp; Adventure</p><p style="font-size:12px;color:#64748b;margin-top:8px">Includes 4-Star Riverside Resort Stay, Open Jeep Jungle Safari, All Meals, and Evening Bonfire Night.</p><p style="font-size:20px;font-weight:800;color:#E11D48;margin-top:12px">₹8,999 <span style="font-size:12px;color:#94a3b8;font-weight:400">/ Person</span></p><a href="https://wa.me/916284073623?text=Book%20Corbett%20Tour%20Package" style="display:inline-block;margin-top:12px;background:linear-gradient(to right,#E11D48,#FF6B35);color:white;padding:10px 20px;border-radius:12px;font-size:12px;font-weight:700;text-decoration:none">Book Package Now</a></article>
+          <article style="background:white;border:1px solid #e2e8f0;border-radius:16px;padding:24px"><span style="background:#0F172A;color:white;font-size:10px;font-weight:700;padding:4px 12px;border-radius:12px">4 Days / 3 Nights</span><h3 style="font-size:20px;font-weight:700;margin-top:12px">Nainital &amp; Bhimtal Lake Holiday</h3><p style="font-size:12px;color:#E11D48;font-weight:700">Nainital, Bhimtal, Sattal • Honeymoon &amp; Family</p><p style="font-size:12px;color:#64748b;margin-top:8px">Includes Lake View Hotel, Yacht Boating, Cable Car Ride, Local Sightseeing, and Private Car Transports.</p><p style="font-size:20px;font-weight:800;color:#E11D48;margin-top:12px">₹11,499 <span style="font-size:12px;color:#94a3b8;font-weight:400">/ Person</span></p><a href="https://wa.me/916284073623?text=Book%20Nainital%20Tour%20Package" style="display:inline-block;margin-top:12px;background:linear-gradient(to right,#E11D48,#FF6B35);color:white;padding:10px 20px;border-radius:12px;font-size:12px;font-weight:700;text-decoration:none">Book Package Now</a></article>
+          <article style="background:white;border:1px solid #e2e8f0;border-radius:16px;padding:24px"><span style="background:#0F172A;color:white;font-size:10px;font-weight:700;padding:4px 12px;border-radius:12px">5 Days / 4 Nights</span><h3 style="font-size:20px;font-weight:700;margin-top:12px">Kedarnath Divine Helicopter Yatra</h3><p style="font-size:12px;color:#E11D48;font-weight:700">Guptkashi &amp; Kedarnath • Spiritual Pilgrimage</p><p style="font-size:12px;color:#64748b;margin-top:8px">Includes Helicopter Priority Tickets, Guptkashi Resort, VIP Darshan Assistance, Meals, and Experienced Guide.</p><p style="font-size:20px;font-weight:800;color:#E11D48;margin-top:12px">₹21,999 <span style="font-size:12px;color:#94a3b8;font-weight:400">/ Person</span></p><a href="https://wa.me/916284073623?text=Book%20Kedarnath%20Yatra%20Package" style="display:inline-block;margin-top:12px;background:linear-gradient(to right,#E11D48,#FF6B35);color:white;padding:10px 20px;border-radius:12px;font-size:12px;font-weight:700;text-decoration:none">Book Package Now</a></article>
+        </div>
+      </section>
+
+      <section style="max-width:1200px;margin:32px auto;padding:0 24px;display:grid;grid-template-columns:repeat(2,1fr);gap:24px">
+        <article style="background:#0F172A;color:white;padding:40px;border-radius:16px"><p style="font-size:10px;font-weight:700;color:#FF6B35;text-transform:uppercase">Royal Himalayan Celebrations</p><h3 style="font-size:28px;font-weight:700;margin-top:8px">Destination Weddings in Uttarakhand</h3><p style="font-size:14px;color:#94a3b8;margin-top:8px">Exchange vows amidst mist-covered peaks, lush pine lawns, and riverside resorts in Jim Corbett, Nainital, Mussoorie &amp; Rishikesh.</p><a href="/weddings" style="display:inline-block;margin-top:16px;background:linear-gradient(to right,#E11D48,#FF6B35);color:white;padding:12px 24px;border-radius:12px;font-weight:700;text-decoration:none;font-size:14px">Explore Wedding Venues</a></article>
+        <article style="background:#1E293B;color:white;padding:40px;border-radius:16px"><p style="font-size:10px;font-weight:700;color:#22d3ee;text-transform:uppercase">Executive Outings &amp; Conferences</p><h3 style="font-size:28px;font-weight:700;margin-top:8px">Corporate Tours &amp; Offsite Retreats</h3><p style="font-size:14px;color:#94a3b8;margin-top:8px">Inspire your teams with state-of-the-art conference resorts, riverside bonfires, jungle safaris, and team-building activities.</p><a href="/corporate" style="display:inline-block;margin-top:16px;background:white;color:#0F172A;padding:12px 24px;border-radius:12px;font-weight:700;text-decoration:none;font-size:14px">Plan Corporate Offsite</a></article>
+      </section>
+
+      <section style="max-width:1200px;margin:32px auto;padding:40px 24px;background:white;border-top:1px solid #e2e8f0;border-bottom:1px solid #e2e8f0">
+        <h2 style="font-size:28px;font-weight:700;text-align:center;margin-bottom:8px">Why Travelers Trust Samika Holidays</h2>
+        <p style="font-size:12px;color:#E11D48;font-weight:700;text-align:center;text-transform:uppercase;margin-bottom:24px">THE SAMIKA ADVANTAGE</p>
+        <div style="display:grid;grid-template-columns:repeat(6,1fr);gap:16px">
+          <div style="background:#F8FAFC;padding:20px;border-radius:12px;border:1px solid #e2e8f0"><h4 style="font-size:14px;font-weight:700">Audited Stays</h4><p style="font-size:11px;color:#64748b;margin-top:4px">100% physically vetted boutique resorts &amp; hotels.</p></div>
+          <div style="background:#F8FAFC;padding:20px;border-radius:12px;border:1px solid #e2e8f0"><h4 style="font-size:14px;font-weight:700">Curated Trails</h4><p style="font-size:11px;color:#64748b;margin-top:4px">Hidden waterfalls, sacred temples &amp; jungle safaris.</p></div>
+          <div style="background:#F8FAFC;padding:20px;border-radius:12px;border:1px solid #e2e8f0"><h4 style="font-size:14px;font-weight:700">Sanitized Cabs</h4><p style="font-size:11px;color:#64748b;margin-top:4px">Experienced mountain drivers &amp; on-time transfers.</p></div>
+          <div style="background:#F8FAFC;padding:20px;border-radius:12px;border:1px solid #e2e8f0"><h4 style="font-size:14px;font-weight:700">Custom Itineraries</h4><p style="font-size:11px;color:#64748b;margin-top:4px">Flexible packages built around your family &amp; dates.</p></div>
+          <div style="background:#F8FAFC;padding:20px;border-radius:12px;border:1px solid #e2e8f0"><h4 style="font-size:14px;font-weight:700">24x7 Assistance</h4><p style="font-size:11px;color:#64748b;margin-top:4px">Dedicated trip manager assigned to every booking.</p></div>
+          <div style="background:#F8FAFC;padding:20px;border-radius:12px;border:1px solid #e2e8f0"><h4 style="font-size:14px;font-weight:700">Best Value Guarantee</h4><p style="font-size:11px;color:#64748b;margin-top:4px">Direct resort contracts ensure unbeatable prices.</p></div>
+        </div>
+      </section>
+
+      <footer style="background:#0F172A;color:white;padding:40px 24px;text-align:center">
+        <h3 style="font-size:20px;font-weight:700">Samika Holidays</h3>
+        <p style="font-size:14px;color:#94a3b8;margin-top:8px">Your Trusted Luxury Travel Partner in Devbhoomi Uttarakhand</p>
+        <p style="font-size:14px;margin-top:16px">Phone / WhatsApp: <a href="tel:+916284073623" style="color:#FF6B35;text-decoration:none">+91 6284 073 623</a></p>
+        <p style="font-size:14px;margin-top:4px">Email: <a href="mailto:info@samikaholiday.com" style="color:#FF6B35;text-decoration:none">info@samikaholiday.com</a></p>
+        <p style="font-size:12px;color:#475569;margin-top:16px">&copy; 2026 Samika Holidays. All rights reserved. | <a href="/about" style="color:#64748b;text-decoration:none">About</a> | <a href="/contact" style="color:#64748b;text-decoration:none">Contact</a> | <a href="/blogs" style="color:#64748b;text-decoration:none">Blogs</a></p>
+      </footer>
+    `
+  },
   '/destinations': {
     title: 'Popular Destinations in Uttarakhand | Samika Holidays',
     desc: 'Explore top Himalayan destinations including Jim Corbett National Park, Nainital, Rishikesh, Mussoorie, Kainchi Dham & Kedarnath.',
     canonical: `${SITE_URL}/destinations`,
     content: `
-      <div class="space-y-16 bg-[#F8FAFC] text-slate-900 pb-20">
-        <header class="bg-[#0F172A] text-white p-12 text-center space-y-4">
-          <span class="bg-[#E11D48]/20 text-[#FF6B35] px-4 py-1.5 rounded-full text-xs font-bold uppercase">EXPLORE DEVBHOOMI UTTARAKHAND</span>
-          <h1 class="text-5xl font-extrabold font-serif">Handpicked Himalayan Destinations</h1>
-          <p class="max-w-2xl mx-auto text-slate-300">From tiger safaris in Jim Corbett to serene lakes of Nainital and holy shrines of Kedarnath & Badrinath.</p>
-        </header>
-
-        <section class="max-w-[97%] mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
-          <article class="bg-white rounded-3xl p-6 shadow-md border space-y-3">
-            <h2 class="text-2xl font-bold font-serif text-[#0F172A]">Jim Corbett National Park</h2>
-            <p class="text-xs text-[#E11D48] font-bold uppercase">Wildlife Safaris & Sal Forests</p>
-            <p class="text-xs text-slate-600">India's oldest tiger reserve featuring luxury jungle resorts, open jeep safaris in Bijrani & Dhikala, and riverside bonfires.</p>
-            <a href="https://wa.me/916284073623?text=Inquiry%20for%20Jim%20Corbett" class="inline-block bg-gradient-to-r from-[#E11D48] to-[#FF6B35] text-white px-5 py-2.5 rounded-xl text-xs font-bold">Book Corbett Package</a>
-          </article>
-
-          <article class="bg-white rounded-3xl p-6 shadow-md border space-y-3">
-            <h2 class="text-2xl font-bold font-serif text-[#0F172A]">Nainital & Lake District</h2>
-            <p class="text-xs text-[#E11D48] font-bold uppercase">Emerald Lakes & Heritage Stays</p>
-            <p class="text-xs text-slate-600">Surrounded by seven hills, famous for yacht boating on Naini Lake, Mall Road shopping, and vintage British heritage hotels.</p>
-            <a href="https://wa.me/916284073623?text=Inquiry%20for%20Nainital" class="inline-block bg-gradient-to-r from-[#E11D48] to-[#FF6B35] text-white px-5 py-2.5 rounded-xl text-xs font-bold">Book Nainital Package</a>
-          </article>
-
-          <article class="bg-white rounded-3xl p-6 shadow-md border space-y-3">
-            <h2 class="text-2xl font-bold font-serif text-[#0F172A]">Rishikesh & Haridwar</h2>
-            <p class="text-xs text-[#E11D48] font-bold uppercase">Ganga Aarti, Yoga & Rafting</p>
-            <p class="text-xs text-slate-600">The spiritual capital of the world offering white water river rafting, cliff jumping, Ganga Aarti, and luxury wellness retreats.</p>
-            <a href="https://wa.me/916284073623?text=Inquiry%20for%20Rishikesh" class="inline-block bg-gradient-to-r from-[#E11D48] to-[#FF6B35] text-white px-5 py-2.5 rounded-xl text-xs font-bold">Book Rishikesh Package</a>
-          </article>
-
-          <article class="bg-white rounded-3xl p-6 shadow-md border space-y-3">
-            <h2 class="text-2xl font-bold font-serif text-[#0F172A]">Kedarnath & Badrinath</h2>
-            <p class="text-xs text-[#E11D48] font-bold uppercase">High Himalayan Chardham Pilgrimage</p>
-            <p class="text-xs text-slate-600">Sacred Jyotirlinga shrine set against snow-clad Himalayan peaks, accessible via trek or VIP helicopter package.</p>
-            <a href="https://wa.me/916284073623?text=Inquiry%20for%20Kedarnath" class="inline-block bg-gradient-to-r from-[#E11D48] to-[#FF6B35] text-white px-5 py-2.5 rounded-xl text-xs font-bold">Book Yatra Package</a>
-          </article>
-
-          <article class="bg-white rounded-3xl p-6 shadow-md border space-y-3">
-            <h2 class="text-2xl font-bold font-serif text-[#0F172A]">Mussoorie Queen of Hills</h2>
-            <p class="text-xs text-[#E11D48] font-bold uppercase">Panoramic Valley Vistas & Waterfalls</p>
-            <p class="text-xs text-slate-600">Colonial charm, Kempty Falls, Dhanaulti Eco Park, and romantic valley-view mountain resorts.</p>
-            <a href="https://wa.me/916284073623?text=Inquiry%20for%20Mussoorie" class="inline-block bg-gradient-to-r from-[#E11D48] to-[#FF6B35] text-white px-5 py-2.5 rounded-xl text-xs font-bold">Book Mussoorie Package</a>
-          </article>
-
-          <article class="bg-white rounded-3xl p-6 shadow-md border space-y-3">
-            <h2 class="text-2xl font-bold font-serif text-[#0F172A]">Kainchi Dham & Bhowali</h2>
-            <p class="text-xs text-[#E11D48] font-bold uppercase">Neem Karoli Baba Sacred Ashram</p>
-            <p class="text-xs text-slate-600">World-famous spiritual ashram visited by global seekers, nestled in peaceful pine valleys near Bhimtal.</p>
-            <a href="https://wa.me/916284073623?text=Inquiry%20for%20Kainchi%20Dham" class="inline-block bg-gradient-to-r from-[#E11D48] to-[#FF6B35] text-white px-5 py-2.5 rounded-xl text-xs font-bold">Book Ashram Tour</a>
-          </article>
-        </section>
-      </div>
+      <nav style="background:#0F172A;padding:16px 24px;display:flex;align-items:center;justify-content:space-between"><a href="/" style="color:white;font-size:20px;font-weight:800;text-decoration:none">Samika Holidays</a><div style="display:flex;gap:16px"><a href="/destinations" style="color:#FF6B35;font-size:13px;text-decoration:none;font-weight:700">Destinations</a><a href="/hotels" style="color:#94a3b8;font-size:13px;text-decoration:none">Hotels</a><a href="/packages" style="color:#94a3b8;font-size:13px;text-decoration:none">Packages</a><a href="/weddings" style="color:#94a3b8;font-size:13px;text-decoration:none">Weddings</a><a href="/corporate" style="color:#94a3b8;font-size:13px;text-decoration:none">Corporate</a><a href="/blogs" style="color:#94a3b8;font-size:13px;text-decoration:none">Blogs</a><a href="/about" style="color:#94a3b8;font-size:13px;text-decoration:none">About Us</a><a href="/contact" style="color:#94a3b8;font-size:13px;text-decoration:none">Contact</a></div></nav>
+      <header style="background:#0F172A;color:white;padding:60px 24px;text-align:center"><p style="color:#FF6B35;font-size:12px;font-weight:700;text-transform:uppercase">Explore Devbhoomi Uttarakhand</p><h1 style="font-size:48px;font-weight:800;margin-top:8px">Handpicked Himalayan Destinations</h1><p style="max-width:600px;margin:12px auto 0;color:#94a3b8;font-size:14px">From tiger safaris in Jim Corbett to serene lakes of Nainital and holy shrines of Kedarnath &amp; Badrinath.</p></header>
+      <section style="max-width:1200px;margin:32px auto;padding:0 24px;display:grid;grid-template-columns:repeat(3,1fr);gap:24px">
+        <article style="background:white;border:1px solid #e2e8f0;border-radius:16px;padding:24px"><h2 style="font-size:22px;font-weight:700">Jim Corbett National Park</h2><p style="font-size:12px;color:#E11D48;font-weight:700;text-transform:uppercase">Wildlife Safaris &amp; Sal Forests</p><p style="font-size:12px;color:#64748b;margin-top:8px">India's oldest tiger reserve featuring luxury jungle resorts, open jeep safaris in Bijrani &amp; Dhikala, and riverside bonfires.</p><a href="https://wa.me/916284073623?text=Inquiry%20for%20Jim%20Corbett" style="display:inline-block;margin-top:12px;background:linear-gradient(to right,#E11D48,#FF6B35);color:white;padding:10px 20px;border-radius:12px;font-size:12px;font-weight:700;text-decoration:none">Book Corbett Package</a></article>
+        <article style="background:white;border:1px solid #e2e8f0;border-radius:16px;padding:24px"><h2 style="font-size:22px;font-weight:700">Nainital &amp; Lake District</h2><p style="font-size:12px;color:#E11D48;font-weight:700;text-transform:uppercase">Emerald Lakes &amp; Heritage Stays</p><p style="font-size:12px;color:#64748b;margin-top:8px">Surrounded by seven hills, famous for yacht boating on Naini Lake, Mall Road shopping, and vintage British heritage hotels.</p><a href="https://wa.me/916284073623?text=Inquiry%20for%20Nainital" style="display:inline-block;margin-top:12px;background:linear-gradient(to right,#E11D48,#FF6B35);color:white;padding:10px 20px;border-radius:12px;font-size:12px;font-weight:700;text-decoration:none">Book Nainital Package</a></article>
+        <article style="background:white;border:1px solid #e2e8f0;border-radius:16px;padding:24px"><h2 style="font-size:22px;font-weight:700">Rishikesh &amp; Haridwar</h2><p style="font-size:12px;color:#E11D48;font-weight:700;text-transform:uppercase">Ganga Aarti, Yoga &amp; Rafting</p><p style="font-size:12px;color:#64748b;margin-top:8px">The spiritual capital of the world offering white water river rafting, cliff jumping, Ganga Aarti, and luxury wellness retreats.</p><a href="https://wa.me/916284073623?text=Inquiry%20for%20Rishikesh" style="display:inline-block;margin-top:12px;background:linear-gradient(to right,#E11D48,#FF6B35);color:white;padding:10px 20px;border-radius:12px;font-size:12px;font-weight:700;text-decoration:none">Book Rishikesh Package</a></article>
+        <article style="background:white;border:1px solid #e2e8f0;border-radius:16px;padding:24px"><h2 style="font-size:22px;font-weight:700">Kedarnath &amp; Badrinath</h2><p style="font-size:12px;color:#E11D48;font-weight:700;text-transform:uppercase">High Himalayan Chardham Pilgrimage</p><p style="font-size:12px;color:#64748b;margin-top:8px">Sacred Jyotirlinga shrine set against snow-clad Himalayan peaks, accessible via trek or VIP helicopter package.</p><a href="https://wa.me/916284073623?text=Inquiry%20for%20Kedarnath" style="display:inline-block;margin-top:12px;background:linear-gradient(to right,#E11D48,#FF6B35);color:white;padding:10px 20px;border-radius:12px;font-size:12px;font-weight:700;text-decoration:none">Book Yatra Package</a></article>
+        <article style="background:white;border:1px solid #e2e8f0;border-radius:16px;padding:24px"><h2 style="font-size:22px;font-weight:700">Mussoorie Queen of Hills</h2><p style="font-size:12px;color:#E11D48;font-weight:700;text-transform:uppercase">Panoramic Valley Vistas &amp; Waterfalls</p><p style="font-size:12px;color:#64748b;margin-top:8px">Colonial charm, Kempty Falls, Dhanaulti Eco Park, and romantic valley-view mountain resorts.</p><a href="https://wa.me/916284073623?text=Inquiry%20for%20Mussoorie" style="display:inline-block;margin-top:12px;background:linear-gradient(to right,#E11D48,#FF6B35);color:white;padding:10px 20px;border-radius:12px;font-size:12px;font-weight:700;text-decoration:none">Book Mussoorie Package</a></article>
+        <article style="background:white;border:1px solid #e2e8f0;border-radius:16px;padding:24px"><h2 style="font-size:22px;font-weight:700">Kainchi Dham &amp; Bhowali</h2><p style="font-size:12px;color:#E11D48;font-weight:700;text-transform:uppercase">Neem Karoli Baba Sacred Ashram</p><p style="font-size:12px;color:#64748b;margin-top:8px">World-famous spiritual ashram visited by global seekers, nestled in peaceful pine valleys near Bhimtal.</p><a href="https://wa.me/916284073623?text=Inquiry%20for%20Kainchi%20Dham" style="display:inline-block;margin-top:12px;background:linear-gradient(to right,#E11D48,#FF6B35);color:white;padding:10px 20px;border-radius:12px;font-size:12px;font-weight:700;text-decoration:none">Book Ashram Tour</a></article>
+      </section>
+      <footer style="background:#0F172A;color:white;padding:40px 24px;text-align:center"><p style="font-size:14px">Contact Samika Holidays: Phone <a href="tel:+916284073623" style="color:#FF6B35;text-decoration:none">+91 6284 073 623</a> | Email <a href="mailto:info@samikaholiday.com" style="color:#FF6B35;text-decoration:none">info@samikaholiday.com</a> | Web <a href="https://samikaholiday.com" style="color:#FF6B35;text-decoration:none">https://samikaholiday.com</a></p></footer>
     `
   },
   '/hotels': {
@@ -68,39 +140,17 @@ const routeSeoMap = {
     desc: 'Book physically audited luxury resorts, lakeside cottages, and mountain hotels in Nainital, Corbett, Mussoorie & Rishikesh.',
     canonical: `${SITE_URL}/hotels`,
     content: `
-      <div class="space-y-16 bg-[#F8FAFC] text-slate-900 pb-20">
-        <header class="bg-[#0F172A] text-white p-12 text-center space-y-4">
-          <span class="bg-[#E11D48]/20 text-[#FF6B35] px-4 py-1.5 rounded-full text-xs font-bold uppercase">100% PHYSICALLY AUDITED STAYS</span>
-          <h1 class="text-5xl font-extrabold font-serif">Handpicked Luxury Resorts & Cottages</h1>
-          <p class="max-w-2xl mx-auto text-slate-300">Verified for cleanliness, food quality, mountain views, and genuine mountain hospitality.</p>
-        </header>
-
-        <section class="max-w-[97%] mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
-          <article class="bg-white rounded-3xl p-6 shadow-md border space-y-3">
-            <h2 class="text-2xl font-bold font-serif text-[#0F172A]">Corbett Riverside Luxury Resort</h2>
-            <p class="text-xs text-[#E11D48] font-bold">Jim Corbett National Park • 5.0 ★ (Luxury)</p>
-            <p class="text-xs text-slate-600">Private riverside cottages, swimming pool, open lawn dining, and direct access to Corbett safari gates.</p>
-            <p class="text-lg font-extrabold text-[#0F172A]">₹6,500 / Night</p>
-            <a href="https://wa.me/916284073623?text=Book%20Corbett%20Riverside%20Resort" class="inline-block bg-gradient-to-r from-[#E11D48] to-[#FF6B35] text-white px-5 py-2.5 rounded-xl text-xs font-bold">Reserve Resort Stay</a>
-          </article>
-
-          <article class="bg-white rounded-3xl p-6 shadow-md border space-y-3">
-            <h2 class="text-2xl font-bold font-serif text-[#0F172A]">Nainital Heritage Lake Resort</h2>
-            <p class="text-xs text-[#E11D48] font-bold">Nainital Mall Road • 4.9 ★ (Lake View)</p>
-            <p class="text-xs text-slate-600">Colonial-style wooden suites overlooking Naini Lake, rooftop restaurant, and walking distance to boat stand.</p>
-            <p class="text-lg font-extrabold text-[#0F172A]">₹5,200 / Night</p>
-            <a href="https://wa.me/916284073623?text=Book%20Nainital%20Heritage%20Resort" class="inline-block bg-gradient-to-r from-[#E11D48] to-[#FF6B35] text-white px-5 py-2.5 rounded-xl text-xs font-bold">Reserve Resort Stay</a>
-          </article>
-
-          <article class="bg-white rounded-3xl p-6 shadow-md border space-y-3">
-            <h2 class="text-2xl font-bold font-serif text-[#0F172A]">Rishikesh Ganga View Spa Retreat</h2>
-            <p class="text-xs text-[#E11D48] font-bold">Rishikesh • 4.9 ★ (Wellness & Rafting)</p>
-            <p class="text-xs text-slate-600">Riverside infinity pool, Ayurvedic spa, private yoga deck overlooking holy Ganga river.</p>
-            <p class="text-lg font-extrabold text-[#0F172A]">₹5,800 / Night</p>
-            <a href="https://wa.me/916284073623?text=Book%20Rishikesh%20Spa%20Resort" class="inline-block bg-gradient-to-r from-[#E11D48] to-[#FF6B35] text-white px-5 py-2.5 rounded-xl text-xs font-bold">Reserve Resort Stay</a>
-          </article>
-        </section>
-      </div>
+      <nav style="background:#0F172A;padding:16px 24px;display:flex;align-items:center;justify-content:space-between"><a href="/" style="color:white;font-size:20px;font-weight:800;text-decoration:none">Samika Holidays</a><div style="display:flex;gap:16px"><a href="/destinations" style="color:#94a3b8;font-size:13px;text-decoration:none">Destinations</a><a href="/hotels" style="color:#FF6B35;font-size:13px;text-decoration:none;font-weight:700">Hotels</a><a href="/packages" style="color:#94a3b8;font-size:13px;text-decoration:none">Packages</a><a href="/weddings" style="color:#94a3b8;font-size:13px;text-decoration:none">Weddings</a><a href="/contact" style="color:#94a3b8;font-size:13px;text-decoration:none">Contact</a></div></nav>
+      <header style="background:#0F172A;color:white;padding:60px 24px;text-align:center"><p style="color:#FF6B35;font-size:12px;font-weight:700;text-transform:uppercase">100% Physically Audited Stays</p><h1 style="font-size:48px;font-weight:800;margin-top:8px">Handpicked Luxury Resorts &amp; Cottages</h1><p style="max-width:600px;margin:12px auto 0;color:#94a3b8;font-size:14px">Verified for cleanliness, food quality, mountain views, and genuine mountain hospitality.</p></header>
+      <section style="max-width:1200px;margin:32px auto;padding:0 24px;display:grid;grid-template-columns:repeat(3,1fr);gap:24px">
+        <article style="background:white;border:1px solid #e2e8f0;border-radius:16px;padding:24px"><h2 style="font-size:22px;font-weight:700">Corbett Riverside Luxury Resort</h2><p style="font-size:12px;color:#E11D48;font-weight:700">Jim Corbett National Park • 5.0 ★ (Luxury)</p><p style="font-size:12px;color:#64748b;margin-top:8px">Private riverside cottages, swimming pool, open lawn dining, and direct access to Corbett safari gates.</p><p style="font-size:20px;font-weight:800;margin-top:12px">₹6,500 <span style="font-size:12px;color:#94a3b8;font-weight:400">/ Night</span></p><a href="https://wa.me/916284073623?text=Book%20Corbett%20Riverside%20Resort" style="display:inline-block;margin-top:12px;background:linear-gradient(to right,#E11D48,#FF6B35);color:white;padding:10px 20px;border-radius:12px;font-size:12px;font-weight:700;text-decoration:none">Reserve Stay</a></article>
+        <article style="background:white;border:1px solid #e2e8f0;border-radius:16px;padding:24px"><h2 style="font-size:22px;font-weight:700">Nainital Heritage Lake Resort</h2><p style="font-size:12px;color:#E11D48;font-weight:700">Nainital Mall Road • 4.9 ★ (Lake View)</p><p style="font-size:12px;color:#64748b;margin-top:8px">Colonial-style wooden suites overlooking Naini Lake, rooftop restaurant, and walking distance to boat stand.</p><p style="font-size:20px;font-weight:800;margin-top:12px">₹5,200 <span style="font-size:12px;color:#94a3b8;font-weight:400">/ Night</span></p><a href="https://wa.me/916284073623?text=Book%20Nainital%20Heritage%20Resort" style="display:inline-block;margin-top:12px;background:linear-gradient(to right,#E11D48,#FF6B35);color:white;padding:10px 20px;border-radius:12px;font-size:12px;font-weight:700;text-decoration:none">Reserve Stay</a></article>
+        <article style="background:white;border:1px solid #e2e8f0;border-radius:16px;padding:24px"><h2 style="font-size:22px;font-weight:700">Rishikesh Ganga View Spa Retreat</h2><p style="font-size:12px;color:#E11D48;font-weight:700">Rishikesh • 4.9 ★ (Wellness &amp; Rafting)</p><p style="font-size:12px;color:#64748b;margin-top:8px">Riverside infinity pool, Ayurvedic spa, private yoga deck overlooking holy Ganga river.</p><p style="font-size:20px;font-weight:800;margin-top:12px">₹5,800 <span style="font-size:12px;color:#94a3b8;font-weight:400">/ Night</span></p><a href="https://wa.me/916284073623?text=Book%20Rishikesh%20Spa%20Resort" style="display:inline-block;margin-top:12px;background:linear-gradient(to right,#E11D48,#FF6B35);color:white;padding:10px 20px;border-radius:12px;font-size:12px;font-weight:700;text-decoration:none">Reserve Stay</a></article>
+        <article style="background:white;border:1px solid #e2e8f0;border-radius:16px;padding:24px"><h2 style="font-size:22px;font-weight:700">Mussoorie Royal Cliff Resort</h2><p style="font-size:12px;color:#E11D48;font-weight:700">Mussoorie • 4.8 ★ (Valley View)</p><p style="font-size:12px;color:#64748b;margin-top:8px">Premium valley-facing rooms, multi-cuisine restaurant, indoor games, and Kempty Falls proximity.</p><p style="font-size:20px;font-weight:800;margin-top:12px">₹4,800 <span style="font-size:12px;color:#94a3b8;font-weight:400">/ Night</span></p><a href="https://wa.me/916284073623?text=Book%20Mussoorie%20Royal%20Cliff" style="display:inline-block;margin-top:12px;background:linear-gradient(to right,#E11D48,#FF6B35);color:white;padding:10px 20px;border-radius:12px;font-size:12px;font-weight:700;text-decoration:none">Reserve Stay</a></article>
+        <article style="background:white;border:1px solid #e2e8f0;border-radius:16px;padding:24px"><h2 style="font-size:22px;font-weight:700">Bhimtal Valley Pines Cottage</h2><p style="font-size:12px;color:#E11D48;font-weight:700">Bhimtal • 4.8 ★ (Lake District)</p><p style="font-size:12px;color:#64748b;margin-top:8px">Quiet lakeside pine cottages, private balcony, bonfire area, and walking distance to Bhimtal Lake.</p><p style="font-size:20px;font-weight:800;margin-top:12px">₹3,200 <span style="font-size:12px;color:#94a3b8;font-weight:400">/ Night</span></p><a href="https://wa.me/916284073623?text=Book%20Bhimtal%20Pines%20Cottage" style="display:inline-block;margin-top:12px;background:linear-gradient(to right,#E11D48,#FF6B35);color:white;padding:10px 20px;border-radius:12px;font-size:12px;font-weight:700;text-decoration:none">Reserve Stay</a></article>
+        <article style="background:white;border:1px solid #e2e8f0;border-radius:16px;padding:24px"><h2 style="font-size:22px;font-weight:700">Auli Alpine Ski Lodge</h2><p style="font-size:12px;color:#E11D48;font-weight:700">Auli • 4.9 ★ (Snow &amp; Skiing)</p><p style="font-size:12px;color:#64748b;margin-top:8px">Panoramic Nanda Devi views, ski equipment rental, gondola access, and heated rooms.</p><p style="font-size:20px;font-weight:800;margin-top:12px">₹7,500 <span style="font-size:12px;color:#94a3b8;font-weight:400">/ Night</span></p><a href="https://wa.me/916284073623?text=Book%20Auli%20Ski%20Lodge" style="display:inline-block;margin-top:12px;background:linear-gradient(to right,#E11D48,#FF6B35);color:white;padding:10px 20px;border-radius:12px;font-size:12px;font-weight:700;text-decoration:none">Reserve Stay</a></article>
+      </section>
+      <footer style="background:#0F172A;color:white;padding:40px 24px;text-align:center"><p style="font-size:14px">Contact Samika Holidays: Phone <a href="tel:+916284073623" style="color:#FF6B35;text-decoration:none">+91 6284 073 623</a> | Email <a href="mailto:info@samikaholiday.com" style="color:#FF6B35;text-decoration:none">info@samikaholiday.com</a></p></footer>
     `
   },
   '/packages': {
@@ -108,42 +158,17 @@ const routeSeoMap = {
     desc: 'Explore curated family tour packages, wildlife safaris, spiritual yatras, and honeymoon trips in Uttarakhand.',
     canonical: `${SITE_URL}/packages`,
     content: `
-      <div class="space-y-16 bg-[#F8FAFC] text-slate-900 pb-20">
-        <header class="bg-[#0F172A] text-white p-12 text-center space-y-4">
-          <span class="bg-[#E11D48]/20 text-[#FF6B35] px-4 py-1.5 rounded-full text-xs font-bold uppercase">BESPOKE HIMALAYAN ITINERARIES</span>
-          <h1 class="text-5xl font-extrabold font-serif">Curated Uttarakhand Tour Packages</h1>
-          <p class="max-w-2xl mx-auto text-slate-300">Customized for families, couples, corporate groups, and spiritual pilgrims.</p>
-        </header>
-
-        <section class="max-w-[97%] mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
-          <article class="bg-white rounded-3xl p-6 shadow-md border space-y-3">
-            <span class="bg-[#0F172A] text-white text-[10px] font-bold px-3 py-1 rounded-full uppercase">3 Days / 2 Nights</span>
-            <h2 class="text-2xl font-bold font-serif text-[#0F172A]">Jim Corbett Wildlife Safari Experience</h2>
-            <p class="text-xs text-[#E11D48] font-bold">Corbett National Park • Family & Adventure</p>
-            <p class="text-xs text-slate-600">Includes 4-Star Riverside Resort Stay, Open Jeep Jungle Safari, All Meals, and Evening Bonfire Night.</p>
-            <p class="text-xl font-extrabold text-[#E11D48]">₹8,999 / Person</p>
-            <a href="https://wa.me/916284073623?text=Book%20Corbett%20Tour%20Package" class="inline-block bg-gradient-to-r from-[#E11D48] to-[#FF6B35] text-white px-6 py-3 rounded-xl text-xs font-bold">Book Package Now</a>
-          </article>
-
-          <article class="bg-white rounded-3xl p-6 shadow-md border space-y-3">
-            <span class="bg-[#0F172A] text-white text-[10px] font-bold px-3 py-1 rounded-full uppercase">4 Days / 3 Nights</span>
-            <h2 class="text-2xl font-bold font-serif text-[#0F172A]">Nainital & Bhimtal Lake Holiday</h2>
-            <p class="text-xs text-[#E11D48] font-bold">Nainital, Bhimtal, Sattal • Honeymoon & Family</p>
-            <p class="text-xs text-slate-600">Includes Lake View Hotel, Yacht Boating, Cable Car Ride, Local Sightseeing, and Private Car Transports.</p>
-            <p class="text-xl font-extrabold text-[#E11D48]">₹11,499 / Person</p>
-            <a href="https://wa.me/916284073623?text=Book%20Nainital%20Tour%20Package" class="inline-block bg-gradient-to-r from-[#E11D48] to-[#FF6B35] text-white px-6 py-3 rounded-xl text-xs font-bold">Book Package Now</a>
-          </article>
-
-          <article class="bg-white rounded-3xl p-6 shadow-md border space-y-3">
-            <span class="bg-[#0F172A] text-white text-[10px] font-bold px-3 py-1 rounded-full uppercase">5 Days / 4 Nights</span>
-            <h2 class="text-2xl font-bold font-serif text-[#0F172A]">Kedarnath Divine Helicopter Yatra</h2>
-            <p class="text-xs text-[#E11D48] font-bold">Guptkashi & Kedarnath • Spiritual Pilgrimage</p>
-            <p class="text-xs text-slate-600">Includes Helicopter Priority Tickets, Guptkashi Resort, VIP Darshan Assistance, Meals, and Experienced Guide.</p>
-            <p class="text-xl font-extrabold text-[#E11D48]">₹21,999 / Person</p>
-            <a href="https://wa.me/916284073623?text=Book%20Kedarnath%20Yatra%20Package" class="inline-block bg-gradient-to-r from-[#E11D48] to-[#FF6B35] text-white px-6 py-3 rounded-xl text-xs font-bold">Book Package Now</a>
-          </article>
-        </section>
-      </div>
+      <nav style="background:#0F172A;padding:16px 24px;display:flex;align-items:center;justify-content:space-between"><a href="/" style="color:white;font-size:20px;font-weight:800;text-decoration:none">Samika Holidays</a><div style="display:flex;gap:16px"><a href="/destinations" style="color:#94a3b8;font-size:13px;text-decoration:none">Destinations</a><a href="/hotels" style="color:#94a3b8;font-size:13px;text-decoration:none">Hotels</a><a href="/packages" style="color:#FF6B35;font-size:13px;text-decoration:none;font-weight:700">Packages</a><a href="/weddings" style="color:#94a3b8;font-size:13px;text-decoration:none">Weddings</a><a href="/contact" style="color:#94a3b8;font-size:13px;text-decoration:none">Contact</a></div></nav>
+      <header style="background:#0F172A;color:white;padding:60px 24px;text-align:center"><p style="color:#FF6B35;font-size:12px;font-weight:700;text-transform:uppercase">Bespoke Himalayan Itineraries</p><h1 style="font-size:48px;font-weight:800;margin-top:8px">Curated Uttarakhand Tour Packages</h1><p style="max-width:600px;margin:12px auto 0;color:#94a3b8;font-size:14px">Customized for families, couples, corporate groups, and spiritual pilgrims.</p></header>
+      <section style="max-width:1200px;margin:32px auto;padding:0 24px;display:grid;grid-template-columns:repeat(3,1fr);gap:24px">
+        <article style="background:white;border:1px solid #e2e8f0;border-radius:16px;padding:24px"><span style="background:#0F172A;color:white;font-size:10px;font-weight:700;padding:4px 12px;border-radius:12px">3 Days / 2 Nights</span><h2 style="font-size:22px;font-weight:700;margin-top:12px">Jim Corbett Wildlife Safari Experience</h2><p style="font-size:12px;color:#E11D48;font-weight:700">Corbett National Park • Family &amp; Adventure</p><p style="font-size:12px;color:#64748b;margin-top:8px">Includes 4-Star Riverside Resort Stay, Open Jeep Jungle Safari, All Meals, and Evening Bonfire Night.</p><p style="font-size:20px;font-weight:800;color:#E11D48;margin-top:12px">₹8,999 / Person</p><a href="https://wa.me/916284073623?text=Book%20Corbett%20Tour" style="display:inline-block;margin-top:12px;background:linear-gradient(to right,#E11D48,#FF6B35);color:white;padding:10px 20px;border-radius:12px;font-size:12px;font-weight:700;text-decoration:none">Book Package Now</a></article>
+        <article style="background:white;border:1px solid #e2e8f0;border-radius:16px;padding:24px"><span style="background:#0F172A;color:white;font-size:10px;font-weight:700;padding:4px 12px;border-radius:12px">4 Days / 3 Nights</span><h2 style="font-size:22px;font-weight:700;margin-top:12px">Nainital &amp; Bhimtal Lake Holiday</h2><p style="font-size:12px;color:#E11D48;font-weight:700">Nainital, Bhimtal, Sattal • Honeymoon &amp; Family</p><p style="font-size:12px;color:#64748b;margin-top:8px">Includes Lake View Hotel, Yacht Boating, Cable Car Ride, Local Sightseeing, and Private Car.</p><p style="font-size:20px;font-weight:800;color:#E11D48;margin-top:12px">₹11,499 / Person</p><a href="https://wa.me/916284073623?text=Book%20Nainital%20Tour" style="display:inline-block;margin-top:12px;background:linear-gradient(to right,#E11D48,#FF6B35);color:white;padding:10px 20px;border-radius:12px;font-size:12px;font-weight:700;text-decoration:none">Book Package Now</a></article>
+        <article style="background:white;border:1px solid #e2e8f0;border-radius:16px;padding:24px"><span style="background:#0F172A;color:white;font-size:10px;font-weight:700;padding:4px 12px;border-radius:12px">5 Days / 4 Nights</span><h2 style="font-size:22px;font-weight:700;margin-top:12px">Kedarnath Divine Helicopter Yatra</h2><p style="font-size:12px;color:#E11D48;font-weight:700">Guptkashi &amp; Kedarnath • Spiritual Pilgrimage</p><p style="font-size:12px;color:#64748b;margin-top:8px">Includes Helicopter Tickets, Guptkashi Resort, VIP Darshan Assistance, Meals, and Guide.</p><p style="font-size:20px;font-weight:800;color:#E11D48;margin-top:12px">₹21,999 / Person</p><a href="https://wa.me/916284073623?text=Book%20Kedarnath%20Yatra" style="display:inline-block;margin-top:12px;background:linear-gradient(to right,#E11D48,#FF6B35);color:white;padding:10px 20px;border-radius:12px;font-size:12px;font-weight:700;text-decoration:none">Book Package Now</a></article>
+        <article style="background:white;border:1px solid #e2e8f0;border-radius:16px;padding:24px"><span style="background:#0F172A;color:white;font-size:10px;font-weight:700;padding:4px 12px;border-radius:12px">3 Days / 2 Nights</span><h2 style="font-size:22px;font-weight:700;margin-top:12px">Rishikesh Rafting &amp; Yoga Retreat</h2><p style="font-size:12px;color:#E11D48;font-weight:700">Rishikesh • Adventure &amp; Wellness</p><p style="font-size:12px;color:#64748b;margin-top:8px">Includes 16km River Rafting, Camping, Yoga Sessions, Ganga Aarti Visit, and All Meals.</p><p style="font-size:20px;font-weight:800;color:#E11D48;margin-top:12px">₹6,999 / Person</p><a href="https://wa.me/916284073623?text=Book%20Rishikesh%20Rafting" style="display:inline-block;margin-top:12px;background:linear-gradient(to right,#E11D48,#FF6B35);color:white;padding:10px 20px;border-radius:12px;font-size:12px;font-weight:700;text-decoration:none">Book Package Now</a></article>
+        <article style="background:white;border:1px solid #e2e8f0;border-radius:16px;padding:24px"><span style="background:#0F172A;color:white;font-size:10px;font-weight:700;padding:4px 12px;border-radius:12px">7 Days / 6 Nights</span><h2 style="font-size:22px;font-weight:700;margin-top:12px">Complete Uttarakhand Grand Circuit</h2><p style="font-size:12px;color:#E11D48;font-weight:700">Multi-City • Premium Family Tour</p><p style="font-size:12px;color:#64748b;margin-top:8px">Nainital + Corbett + Rishikesh + Mussoorie combo with luxury stays and private car.</p><p style="font-size:20px;font-weight:800;color:#E11D48;margin-top:12px">₹29,999 / Person</p><a href="https://wa.me/916284073623?text=Book%20Grand%20Circuit" style="display:inline-block;margin-top:12px;background:linear-gradient(to right,#E11D48,#FF6B35);color:white;padding:10px 20px;border-radius:12px;font-size:12px;font-weight:700;text-decoration:none">Book Package Now</a></article>
+        <article style="background:white;border:1px solid #e2e8f0;border-radius:16px;padding:24px"><span style="background:#0F172A;color:white;font-size:10px;font-weight:700;padding:4px 12px;border-radius:12px">3 Days / 2 Nights</span><h2 style="font-size:22px;font-weight:700;margin-top:12px">Mussoorie &amp; Dhanaulti Family Trip</h2><p style="font-size:12px;color:#E11D48;font-weight:700">Mussoorie &amp; Dhanaulti • Romantic &amp; Family</p><p style="font-size:12px;color:#64748b;margin-top:8px">Kempty Falls, Mall Road, Eco Park, Cloud End, and luxury mountain resort with valley views.</p><p style="font-size:20px;font-weight:800;color:#E11D48;margin-top:12px">₹7,999 / Person</p><a href="https://wa.me/916284073623?text=Book%20Mussoorie%20Trip" style="display:inline-block;margin-top:12px;background:linear-gradient(to right,#E11D48,#FF6B35);color:white;padding:10px 20px;border-radius:12px;font-size:12px;font-weight:700;text-decoration:none">Book Package Now</a></article>
+      </section>
+      <footer style="background:#0F172A;color:white;padding:40px 24px;text-align:center"><p style="font-size:14px">Contact Samika Holidays: Phone <a href="tel:+916284073623" style="color:#FF6B35;text-decoration:none">+91 6284 073 623</a> | Email <a href="mailto:info@samikaholiday.com" style="color:#FF6B35;text-decoration:none">info@samikaholiday.com</a></p></footer>
     `
   },
   '/weddings': {
@@ -151,18 +176,15 @@ const routeSeoMap = {
     desc: 'Plan breathtaking mountain & lakeside destination weddings in Uttarakhand with end-to-end luxury management.',
     canonical: `${SITE_URL}/weddings`,
     content: `
-      <div class="space-y-16 bg-[#F8FAFC] text-slate-900 pb-20">
-        <header class="bg-[#0F172A] text-white p-12 text-center space-y-4">
-          <span class="bg-[#E11D48]/20 text-[#FF6B35] px-4 py-1.5 rounded-full text-xs font-bold uppercase">ROYAL HIMALAYAN WEDDINGS</span>
-          <h1 class="text-5xl font-extrabold font-serif">Breathtaking Mountain & Lake Weddings</h1>
-          <p class="max-w-2xl mx-auto text-slate-300">Turn your wedding into an unforgettable Himalayan fairy tale.</p>
-        </header>
-        <section class="max-w-[97%] mx-auto bg-white p-10 rounded-3xl shadow-xl text-center space-y-6">
-          <h2 class="text-3xl font-bold font-serif">Riverside Mandaps & Lakeside Reception Lawns</h2>
-          <p class="text-slate-600 max-w-xl mx-auto">From 5-star Corbett jungle resorts to Nainital lakefront estates and Mussoorie hilltop vistas.</p>
-          <a href="https://wa.me/916284073623?text=Inquiry%20for%20Destination%20Wedding" class="inline-block bg-gradient-to-r from-[#E11D48] to-[#FF6B35] text-white font-bold px-8 py-4 rounded-2xl">Plan Wedding With Us</a>
-        </section>
-      </div>
+      <nav style="background:#0F172A;padding:16px 24px;display:flex;align-items:center;justify-content:space-between"><a href="/" style="color:white;font-size:20px;font-weight:800;text-decoration:none">Samika Holidays</a><div style="display:flex;gap:16px"><a href="/destinations" style="color:#94a3b8;font-size:13px;text-decoration:none">Destinations</a><a href="/hotels" style="color:#94a3b8;font-size:13px;text-decoration:none">Hotels</a><a href="/packages" style="color:#94a3b8;font-size:13px;text-decoration:none">Packages</a><a href="/weddings" style="color:#FF6B35;font-size:13px;text-decoration:none;font-weight:700">Weddings</a><a href="/contact" style="color:#94a3b8;font-size:13px;text-decoration:none">Contact</a></div></nav>
+      <header style="background:#0F172A;color:white;padding:60px 24px;text-align:center"><p style="color:#FF6B35;font-size:12px;font-weight:700;text-transform:uppercase">Royal Himalayan Celebrations</p><h1 style="font-size:48px;font-weight:800;margin-top:8px">Breathtaking Mountain &amp; Lake Weddings</h1><p style="max-width:600px;margin:12px auto 0;color:#94a3b8;font-size:14px">Turn your wedding into an unforgettable Himalayan fairy tale at riverside mandaps and lakefront lawns.</p></header>
+      <section style="max-width:1200px;margin:32px auto;padding:40px;background:white;border-radius:16px;text-align:center"><h2 style="font-size:28px;font-weight:700">Riverside Mandaps &amp; Lakeside Reception Lawns</h2><p style="color:#64748b;max-width:600px;margin:12px auto;font-size:14px">From 5-star Corbett jungle resorts to Nainital lakefront estates and Mussoorie hilltop vistas. Full wedding coordination, catering, décor, entertainment, and luxury accommodation.</p><a href="https://wa.me/916284073623?text=Inquiry%20for%20Destination%20Wedding" style="display:inline-block;margin-top:20px;background:linear-gradient(to right,#E11D48,#FF6B35);color:white;padding:14px 28px;border-radius:14px;font-weight:700;text-decoration:none;font-size:16px">Plan Your Dream Wedding</a></section>
+      <section style="max-width:1200px;margin:32px auto;padding:0 24px;display:grid;grid-template-columns:repeat(3,1fr);gap:24px">
+        <article style="background:white;border:1px solid #e2e8f0;border-radius:16px;padding:24px"><h3 style="font-size:20px;font-weight:700">Corbett Riverside Wedding</h3><p style="font-size:12px;color:#64748b;margin-top:8px">Jungle-themed mandap, riverside haldi &amp; mehendi, bonfire sangeet night. 200-400 guests.</p></article>
+        <article style="background:white;border:1px solid #e2e8f0;border-radius:16px;padding:24px"><h3 style="font-size:20px;font-weight:700">Nainital Lakefront Wedding</h3><p style="font-size:12px;color:#64748b;margin-top:8px">Mountain-view open lawns, boat procession baraat, sunset pheras. 100-500 guests.</p></article>
+        <article style="background:white;border:1px solid #e2e8f0;border-radius:16px;padding:24px"><h3 style="font-size:20px;font-weight:700">Mussoorie Hilltop Wedding</h3><p style="font-size:12px;color:#64748b;margin-top:8px">Valley-facing grand ballroom, colonial heritage décor, fog-kissed morning ceremonies. 150-600 guests.</p></article>
+      </section>
+      <footer style="background:#0F172A;color:white;padding:40px 24px;text-align:center"><p style="font-size:14px">Contact Wedding Desk: Phone <a href="tel:+916284073623" style="color:#FF6B35;text-decoration:none">+91 6284 073 623</a> | Email <a href="mailto:info@samikaholiday.com" style="color:#FF6B35;text-decoration:none">info@samikaholiday.com</a></p></footer>
     `
   },
   '/corporate': {
@@ -170,23 +192,11 @@ const routeSeoMap = {
     desc: 'State-of-the-art MICE conference halls, team bonding safaris, and luxury resort buyouts in Uttarakhand Himalayas.',
     canonical: `${SITE_URL}/corporate`,
     content: `
-      <div class="space-y-16 bg-[#F8FAFC] text-slate-900 pb-20">
-        <header class="bg-[#0F172A] text-white p-12 text-center space-y-4">
-          <span class="bg-[#E11D48]/20 text-[#FF6B35] px-4 py-1.5 rounded-full text-xs font-bold uppercase">EXECUTIVE MICE & OFFSITES</span>
-          <h1 class="text-5xl font-extrabold font-serif">Corporate Tours & Retreats in Uttarakhand</h1>
-          <p class="max-w-2xl mx-auto text-slate-300">State-of-the-art MICE conference halls, team bonding safaris, and luxury resort buyouts.</p>
-        </header>
-        <section class="max-w-4xl mx-auto bg-white p-10 rounded-3xl shadow-xl border space-y-6">
-          <h2 class="text-3xl font-bold font-serif text-center">Request Corporate RFP Proposal</h2>
-          <form class="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <input type="text" placeholder="Contact Person" class="p-3 bg-slate-50 border rounded-xl" />
-            <input type="text" placeholder="Company Name" class="p-3 bg-slate-50 border rounded-xl" />
-            <input type="tel" placeholder="Phone (+91...)" class="p-3 bg-slate-50 border rounded-xl" />
-            <input type="email" placeholder="Official Email" class="p-3 bg-slate-50 border rounded-xl" />
-            <button type="submit" class="md:col-span-2 bg-gradient-to-r from-[#E11D48] to-[#FF6B35] text-white font-bold p-4 rounded-xl">Request Proposal</button>
-          </form>
-        </section>
-      </div>
+      <nav style="background:#0F172A;padding:16px 24px;display:flex;align-items:center;justify-content:space-between"><a href="/" style="color:white;font-size:20px;font-weight:800;text-decoration:none">Samika Holidays</a><div style="display:flex;gap:16px"><a href="/destinations" style="color:#94a3b8;font-size:13px;text-decoration:none">Destinations</a><a href="/hotels" style="color:#94a3b8;font-size:13px;text-decoration:none">Hotels</a><a href="/packages" style="color:#94a3b8;font-size:13px;text-decoration:none">Packages</a><a href="/corporate" style="color:#FF6B35;font-size:13px;text-decoration:none;font-weight:700">Corporate</a><a href="/contact" style="color:#94a3b8;font-size:13px;text-decoration:none">Contact</a></div></nav>
+      <header style="background:#0F172A;color:white;padding:60px 24px;text-align:center"><p style="color:#FF6B35;font-size:12px;font-weight:700;text-transform:uppercase">Executive MICE &amp; Offsites</p><h1 style="font-size:48px;font-weight:800;margin-top:8px">Corporate Tours &amp; Retreats in Uttarakhand</h1><p style="max-width:600px;margin:12px auto 0;color:#94a3b8;font-size:14px">State-of-the-art MICE conference halls, team bonding safaris, and luxury resort buyouts.</p></header>
+      <section style="max-width:1200px;margin:32px auto;padding:32px;display:grid;grid-template-columns:repeat(4,1fr);gap:24px;text-align:center;background:white;border-radius:16px"><div><h3 style="font-size:32px;font-weight:800;color:#0F172A">200+</h3><p style="font-size:12px;color:#64748b">Corporate Events Managed</p></div><div><h3 style="font-size:32px;font-weight:800;color:#E11D48">50+</h3><p style="font-size:12px;color:#64748b">Fortune 500 Clients Served</p></div><div><h3 style="font-size:32px;font-weight:800;color:#FF6B35">2 Hrs</h3><p style="font-size:12px;color:#64748b">RFP Response Guarantee</p></div><div><h3 style="font-size:32px;font-weight:800;color:#06B6D4">300+</h3><p style="font-size:12px;color:#64748b">Seats Conference Capacity</p></div></section>
+      <section style="max-width:800px;margin:32px auto;padding:40px;background:white;border-radius:16px;border:1px solid #e2e8f0"><h2 style="font-size:28px;font-weight:700;text-align:center">Request Corporate RFP Proposal</h2><form style="display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:24px"><input type="text" placeholder="Contact Person" style="padding:12px;border:1px solid #e2e8f0;border-radius:12px;font-size:14px"/><input type="text" placeholder="Company Name" style="padding:12px;border:1px solid #e2e8f0;border-radius:12px;font-size:14px"/><input type="tel" placeholder="Phone (+91...)" style="padding:12px;border:1px solid #e2e8f0;border-radius:12px;font-size:14px"/><input type="email" placeholder="Official Email" style="padding:12px;border:1px solid #e2e8f0;border-radius:12px;font-size:14px"/><button type="submit" style="grid-column:span 2;background:linear-gradient(to right,#E11D48,#FF6B35);color:white;padding:14px;border-radius:12px;font-weight:700;font-size:14px;border:none;cursor:pointer">Request Proposal</button></form></section>
+      <footer style="background:#0F172A;color:white;padding:40px 24px;text-align:center"><p style="font-size:14px">Contact MICE Desk: Phone <a href="tel:+916284073623" style="color:#FF6B35;text-decoration:none">+91 6284 073 623</a> | Email <a href="mailto:info@samikaholiday.com" style="color:#FF6B35;text-decoration:none">info@samikaholiday.com</a></p></footer>
     `
   },
   '/blogs': {
@@ -194,26 +204,14 @@ const routeSeoMap = {
     desc: 'Read insider travel guides, itinerary tips, best places to visit, and local stories from Devbhoomi Uttarakhand.',
     canonical: `${SITE_URL}/blogs`,
     content: `
-      <div class="space-y-16 bg-[#F8FAFC] text-slate-900 pb-20">
-        <header class="bg-[#0F172A] text-white p-12 text-center space-y-4">
-          <span class="bg-[#E11D48]/20 text-[#FF6B35] px-4 py-1.5 rounded-full text-xs font-bold uppercase">HIMALAYAN TRAVEL JOURNAL</span>
-          <h1 class="text-5xl font-extrabold font-serif">Uttarakhand Travel Blogs & Guides</h1>
-        </header>
-        <section class="max-w-[97%] mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
-          <article class="bg-white rounded-3xl p-6 shadow-md border space-y-2">
-            <h2 class="text-xl font-bold font-serif">Ultimate 3-Day Jim Corbett Safari Itinerary</h2>
-            <p class="text-xs text-slate-500">Best zones, safari timing, resort stay tips, and wildlife rules.</p>
-          </article>
-          <article class="bg-white rounded-3xl p-6 shadow-md border space-y-2">
-            <h2 class="text-xl font-bold font-serif">Top 10 Hidden Places in Nainital Lake District</h2>
-            <p class="text-xs text-slate-500">Beyond Mall Road: Pangot, Mukteshwar, Bhimtal & Sattal lakes.</p>
-          </article>
-          <article class="bg-white rounded-3xl p-6 shadow-md border space-y-2">
-            <h2 class="text-xl font-bold font-serif">Kedarnath Yatra 2026: Complete Registration Guide</h2>
-            <p class="text-xs text-slate-500">Helicopter booking tips, trek medical fitness, and stay options.</p>
-          </article>
-        </section>
-      </div>
+      <nav style="background:#0F172A;padding:16px 24px;display:flex;align-items:center;justify-content:space-between"><a href="/" style="color:white;font-size:20px;font-weight:800;text-decoration:none">Samika Holidays</a><div style="display:flex;gap:16px"><a href="/destinations" style="color:#94a3b8;font-size:13px;text-decoration:none">Destinations</a><a href="/hotels" style="color:#94a3b8;font-size:13px;text-decoration:none">Hotels</a><a href="/packages" style="color:#94a3b8;font-size:13px;text-decoration:none">Packages</a><a href="/blogs" style="color:#FF6B35;font-size:13px;text-decoration:none;font-weight:700">Blogs</a><a href="/contact" style="color:#94a3b8;font-size:13px;text-decoration:none">Contact</a></div></nav>
+      <header style="background:#0F172A;color:white;padding:60px 24px;text-align:center"><p style="color:#FF6B35;font-size:12px;font-weight:700;text-transform:uppercase">Himalayan Travel Journal</p><h1 style="font-size:48px;font-weight:800;margin-top:8px">Uttarakhand Travel Blogs &amp; Guides</h1><p style="max-width:600px;margin:12px auto 0;color:#94a3b8;font-size:14px">Tips, weather guides, best times to visit, and offbeat scenic destinations curated by our local explorers.</p></header>
+      <section style="max-width:1200px;margin:32px auto;padding:0 24px;display:grid;grid-template-columns:repeat(3,1fr);gap:24px">
+        <article style="background:white;border:1px solid #e2e8f0;border-radius:16px;padding:24px"><h2 style="font-size:20px;font-weight:700">Ultimate 3-Day Jim Corbett Safari Itinerary</h2><p style="font-size:12px;color:#64748b;margin-top:8px">Best zones, safari timing, resort stay tips, and wildlife rules. Complete day-wise guide.</p></article>
+        <article style="background:white;border:1px solid #e2e8f0;border-radius:16px;padding:24px"><h2 style="font-size:20px;font-weight:700">Top 10 Hidden Places in Nainital Lake District</h2><p style="font-size:12px;color:#64748b;margin-top:8px">Beyond Mall Road: Pangot, Mukteshwar, Bhimtal, Sattal lakes, and secret viewpoints.</p></article>
+        <article style="background:white;border:1px solid #e2e8f0;border-radius:16px;padding:24px"><h2 style="font-size:20px;font-weight:700">Kedarnath Yatra 2026: Complete Guide</h2><p style="font-size:12px;color:#64748b;margin-top:8px">Helicopter booking tips, trek medical fitness, and best stay options near Guptkashi.</p></article>
+      </section>
+      <footer style="background:#0F172A;color:white;padding:40px 24px;text-align:center"><p style="font-size:14px">Contact Samika Holidays: Phone <a href="tel:+916284073623" style="color:#FF6B35;text-decoration:none">+91 6284 073 623</a></p></footer>
     `
   },
   '/about': {
@@ -221,17 +219,12 @@ const routeSeoMap = {
     desc: 'Learn about Samika Holidays, our local mountain roots, verified resort networks, and commitment to Pahadi hospitality.',
     canonical: `${SITE_URL}/about`,
     content: `
-      <div class="space-y-16 bg-[#F8FAFC] text-slate-900 pb-20">
-        <header class="bg-[#0F172A] text-white p-12 text-center space-y-4">
-          <span class="bg-[#E11D48]/20 text-[#FF6B35] px-4 py-1.5 rounded-full text-xs font-bold uppercase">THE STORY OF SAMIKA HOLIDAYS</span>
-          <h1 class="text-5xl font-extrabold font-serif">Crafting Journeys Across Devbhoomi</h1>
-          <p class="max-w-2xl mx-auto text-slate-300">Born in the mountains, dedicated to 100% verified luxury stays & on-ground concierge care.</p>
-        </header>
-        <section class="max-w-3xl mx-auto bg-white p-8 rounded-3xl shadow-xl text-center space-y-4 border">
-          <h2 class="text-2xl font-bold font-serif">10,000+ Happy Travelers • 500+ Audited Resorts</h2>
-          <p class="text-slate-600 text-sm">Samika Holidays is your trusted local mountain concierge in Uttarakhand.</p>
-        </section>
-      </div>
+      <nav style="background:#0F172A;padding:16px 24px;display:flex;align-items:center;justify-content:space-between"><a href="/" style="color:white;font-size:20px;font-weight:800;text-decoration:none">Samika Holidays</a><div style="display:flex;gap:16px"><a href="/destinations" style="color:#94a3b8;font-size:13px;text-decoration:none">Destinations</a><a href="/hotels" style="color:#94a3b8;font-size:13px;text-decoration:none">Hotels</a><a href="/packages" style="color:#94a3b8;font-size:13px;text-decoration:none">Packages</a><a href="/about" style="color:#FF6B35;font-size:13px;text-decoration:none;font-weight:700">About Us</a><a href="/contact" style="color:#94a3b8;font-size:13px;text-decoration:none">Contact</a></div></nav>
+      <header style="background:#0F172A;color:white;padding:60px 24px;text-align:center"><p style="color:#FF6B35;font-size:12px;font-weight:700;text-transform:uppercase">The Story of Samika Holidays</p><h1 style="font-size:48px;font-weight:800;margin-top:8px">Crafting Journeys Across Devbhoomi</h1><p style="max-width:600px;margin:12px auto 0;color:#94a3b8;font-size:14px">Born in the mountains, dedicated to 100% verified luxury stays &amp; on-ground concierge care.</p></header>
+      <section style="max-width:1200px;margin:32px auto;padding:32px;display:grid;grid-template-columns:repeat(4,1fr);gap:24px;text-align:center;background:white;border-radius:16px"><div><h3 style="font-size:32px;font-weight:800;color:#0F172A">10,000+</h3><p style="font-size:12px;color:#64748b">Happy Guests Hosted</p></div><div><h3 style="font-size:32px;font-weight:800;color:#E11D48">500+</h3><p style="font-size:12px;color:#64748b">Verified Luxury Resorts</p></div><div><h3 style="font-size:32px;font-weight:800;color:#FF6B35">4.9 ★</h3><p style="font-size:12px;color:#64748b">Average Traveler Rating</p></div><div><h3 style="font-size:32px;font-weight:800;color:#06B6D4">24x7</h3><p style="font-size:12px;color:#64748b">Dedicated On-Trip Support</p></div></section>
+      <section style="max-width:1200px;margin:32px auto;padding:40px;background:white;border-radius:16px;border:1px solid #e2e8f0"><h2 style="font-size:28px;font-weight:700;margin-bottom:16px">Our Mountain Roots &amp; Heritage</h2><p style="font-size:14px;color:#64748b;line-height:1.8">Samika Holidays was born from a deep, lifelong love for the mountains of Uttarakhand — the sacred Devbhoomi. We are not a generic online aggregator. We are a local mountain concierge service, run by people who were born and raised in these valleys. Every resort we list has been physically visited and audited by our team. Every driver we assign is a seasoned mountain expert. Every itinerary we design draws from decades of local knowledge — the secret waterfalls, the best breakfast joints, the safest routes, and the most photogenic viewpoints that only a local would know.</p><p style="font-size:14px;color:#64748b;line-height:1.8;margin-top:16px">Our promise is simple: an extraordinary, hassle-free mountain experience, backed by 24x7 on-ground support, honest pricing, and genuine Pahadi warmth. From Jim Corbett tiger safaris to Kedarnath helicopter yatras, from Nainital honeymoons to executive MICE conferences — we handle it all with care and precision.</p></section>
+      <section style="max-width:1200px;margin:32px auto;padding:0 24px"><h2 style="font-size:28px;font-weight:700;margin-bottom:16px">Our 4 Core Promises</h2><div style="display:grid;grid-template-columns:repeat(4,1fr);gap:16px"><div style="background:#F8FAFC;padding:20px;border-radius:12px;border:1px solid #e2e8f0"><h4 style="font-size:14px;font-weight:700">100% Audited Stays</h4><p style="font-size:11px;color:#64748b;margin-top:4px">Every resort physically inspected for hygiene, views, food, and hospitality.</p></div><div style="background:#F8FAFC;padding:20px;border-radius:12px;border:1px solid #e2e8f0"><h4 style="font-size:14px;font-weight:700">Mountain-Born Team</h4><p style="font-size:11px;color:#64748b;margin-top:4px">Local Pahadi guides and drivers who know every trail and shortcut.</p></div><div style="background:#F8FAFC;padding:20px;border-radius:12px;border:1px solid #e2e8f0"><h4 style="font-size:14px;font-weight:700">Honest Pricing</h4><p style="font-size:11px;color:#64748b;margin-top:4px">Direct resort contracts — no hidden charges or inflated markups.</p></div><div style="background:#F8FAFC;padding:20px;border-radius:12px;border:1px solid #e2e8f0"><h4 style="font-size:14px;font-weight:700">24x7 On-Trip Care</h4><p style="font-size:11px;color:#64748b;margin-top:4px">Dedicated trip manager assigned from booking to checkout.</p></div></div></section>
+      <footer style="background:#0F172A;color:white;padding:40px 24px;text-align:center"><p style="font-size:14px">Samika Holidays: Phone <a href="tel:+916284073623" style="color:#FF6B35;text-decoration:none">+91 6284 073 623</a> | Email <a href="mailto:info@samikaholiday.com" style="color:#FF6B35;text-decoration:none">info@samikaholiday.com</a></p></footer>
     `
   },
   '/contact': {
@@ -239,28 +232,32 @@ const routeSeoMap = {
     desc: 'Get in touch with Samika Holidays travel desk via phone +91 6284 073 623 or email info@samikaholiday.com.',
     canonical: `${SITE_URL}/contact`,
     content: `
-      <div class="space-y-16 bg-[#F8FAFC] text-slate-900 pb-20">
-        <header class="bg-[#0F172A] text-white p-12 text-center space-y-4">
-          <span class="bg-[#E11D48]/20 text-[#FF6B35] px-4 py-1.5 rounded-full text-xs font-bold uppercase">24X7 TRAVEL HELPDESK</span>
-          <h1 class="text-5xl font-extrabold font-serif">Connect With Our Mountain Concierge</h1>
-        </header>
-        <section class="max-w-3xl mx-auto bg-white p-8 rounded-3xl shadow-xl border space-y-4 text-center">
-          <p class="text-lg font-bold text-[#0F172A]">Phone / WhatsApp: +91 6284 073 623</p>
-          <p class="text-lg font-bold text-[#0F172A]">Email: info@samikaholiday.com</p>
-          <p class="text-slate-600">Uttarakhand Headquarters with local desks in Nainital, Corbett & Haridwar.</p>
-        </section>
-      </div>
+      <nav style="background:#0F172A;padding:16px 24px;display:flex;align-items:center;justify-content:space-between"><a href="/" style="color:white;font-size:20px;font-weight:800;text-decoration:none">Samika Holidays</a><div style="display:flex;gap:16px"><a href="/destinations" style="color:#94a3b8;font-size:13px;text-decoration:none">Destinations</a><a href="/hotels" style="color:#94a3b8;font-size:13px;text-decoration:none">Hotels</a><a href="/packages" style="color:#94a3b8;font-size:13px;text-decoration:none">Packages</a><a href="/contact" style="color:#FF6B35;font-size:13px;text-decoration:none;font-weight:700">Contact</a></div></nav>
+      <header style="background:#0F172A;color:white;padding:60px 24px;text-align:center"><p style="color:#FF6B35;font-size:12px;font-weight:700;text-transform:uppercase">24x7 Travel Helpdesk</p><h1 style="font-size:48px;font-weight:800;margin-top:8px">Connect With Our Mountain Concierge</h1><p style="max-width:600px;margin:12px auto 0;color:#94a3b8;font-size:14px">We're here to plan your perfect Uttarakhand holiday.</p></header>
+      <section style="max-width:800px;margin:32px auto;padding:40px;background:white;border-radius:16px;border:1px solid #e2e8f0;text-align:center">
+        <h2 style="font-size:24px;font-weight:700">Reach Us Anytime</h2>
+        <p style="font-size:18px;font-weight:700;margin-top:16px">Phone / WhatsApp: <a href="tel:+916284073623" style="color:#E11D48;text-decoration:none">+91 6284 073 623</a></p>
+        <p style="font-size:18px;font-weight:700;margin-top:8px">Email: <a href="mailto:info@samikaholiday.com" style="color:#E11D48;text-decoration:none">info@samikaholiday.com</a></p>
+        <p style="font-size:14px;color:#64748b;margin-top:16px">Uttarakhand Headquarters with local desks in Nainital, Corbett &amp; Haridwar.</p>
+        <a href="https://wa.me/916284073623" style="display:inline-block;margin-top:20px;background:linear-gradient(to right,#E11D48,#FF6B35);color:white;padding:14px 28px;border-radius:14px;font-weight:700;text-decoration:none;font-size:14px">Chat on WhatsApp Now</a>
+      </section>
+      <section style="max-width:800px;margin:32px auto;padding:40px;background:white;border-radius:16px;border:1px solid #e2e8f0">
+        <h2 style="font-size:24px;font-weight:700;text-align:center;margin-bottom:24px">Send Us a Message</h2>
+        <form style="display:grid;grid-template-columns:repeat(2,1fr);gap:16px"><input type="text" placeholder="Your Name" style="padding:12px;border:1px solid #e2e8f0;border-radius:12px;font-size:14px"/><input type="email" placeholder="Email Address" style="padding:12px;border:1px solid #e2e8f0;border-radius:12px;font-size:14px"/><input type="tel" placeholder="Phone Number" style="padding:12px;border:1px solid #e2e8f0;border-radius:12px;font-size:14px"/><input type="text" placeholder="Subject" style="padding:12px;border:1px solid #e2e8f0;border-radius:12px;font-size:14px"/><textarea placeholder="Your Message" rows="4" style="grid-column:span 2;padding:12px;border:1px solid #e2e8f0;border-radius:12px;font-size:14px"></textarea><button type="submit" style="grid-column:span 2;background:linear-gradient(to right,#E11D48,#FF6B35);color:white;padding:14px;border-radius:12px;font-weight:700;font-size:14px;border:none;cursor:pointer">Send Message</button></form>
+      </section>
+      <footer style="background:#0F172A;color:white;padding:40px 24px;text-align:center"><p style="font-size:14px">Samika Holidays: <a href="tel:+916284073623" style="color:#FF6B35;text-decoration:none">+91 6284 073 623</a> | <a href="mailto:info@samikaholiday.com" style="color:#FF6B35;text-decoration:none">info@samikaholiday.com</a> | <a href="https://samikaholiday.com" style="color:#FF6B35;text-decoration:none">samikaholiday.com</a></p></footer>
     `
   }
 };
 
 function devHtmlPrerenderPlugin() {
   return {
-    name: 'dev-html-prerender-plugin',
+    name: 'samika-seo-prerender',
     transformIndexHtml(html, ctx) {
-      const urlPath = (ctx.originalUrl || ctx.url || '/').split('?')[0].toLowerCase();
-      const matchedData = routeSeoMap[urlPath];
+      const rawUrl = ctx.originalUrl || ctx.url || '/';
+      const urlPath = rawUrl.split('?')[0].replace(/\/+$/, '') || '/';
 
+      const matchedData = routeSeoMap[urlPath];
       if (!matchedData) return html;
 
       let resHtml = html;
@@ -281,6 +278,7 @@ function devHtmlPrerenderPlugin() {
   };
 }
 
+// https://vite.dev/config/
 export default defineConfig({
   plugins: [react(), tailwindcss(), devHtmlPrerenderPlugin()],
 })
