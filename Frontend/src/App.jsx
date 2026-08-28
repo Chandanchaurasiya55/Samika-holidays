@@ -95,23 +95,98 @@ export default function App() {
     localStorage.setItem('samika_is_admin_auth', isAdminAuthenticated ? 'true' : 'false');
   }, [isAdminAuthenticated]);
 
+  const SITE_URL = 'https://samikaholiday.com';
+
+  const seoDataMap = {
+    home: {
+      title: 'Samika Holidays | Luxury Hotels, Resorts & Tour Packages in Uttarakhand',
+      desc: 'Discover extraordinary luxury hotels, bespoke tour packages, destination weddings, and Himalayan adventures with Samika Holidays.',
+      path: '/'
+    },
+    hotels: {
+      title: 'Luxury Hotels & Resorts in Uttarakhand | Samika Holidays',
+      desc: 'Book physically audited luxury resorts, lakeside cottages, and mountain hotels in Nainital, Corbett, Mussoorie & Rishikesh.',
+      path: '/hotels'
+    },
+    packages: {
+      title: 'Tour Packages in Uttarakhand | Samika Holidays',
+      desc: 'Explore curated family tour packages, wildlife safaris, spiritual yatras, and honeymoon trips in Uttarakhand.',
+      path: '/packages'
+    },
+    destinations: {
+      title: 'Popular Destinations in Uttarakhand | Samika Holidays',
+      desc: 'Explore top Himalayan destinations including Jim Corbett National Park, Nainital, Rishikesh, Mussoorie, Kainchi Dham & Kedarnath.',
+      path: '/destinations'
+    },
+    weddings: {
+      title: 'Destination Weddings in Uttarakhand | Samika Holidays',
+      desc: 'Plan breathtaking mountain & lakeside destination weddings in Uttarakhand with end-to-end luxury management.',
+      path: '/weddings'
+    },
+    corporate: {
+      title: 'Corporate Tours & Retreats in Uttarakhand | Samika Holidays',
+      desc: 'State-of-the-art MICE conference halls, team bonding safaris, and luxury resort buyouts in Uttarakhand Himalayas.',
+      path: '/corporate'
+    },
+    blogs: {
+      title: 'Travel Blogs & Guides | Samika Holidays',
+      desc: 'Read insider travel guides, itinerary tips, best places to visit, and local stories from Devbhoomi Uttarakhand.',
+      path: '/blogs'
+    },
+    about: {
+      title: 'About Us & Our Heritage | Samika Holidays',
+      desc: 'Learn about Samika Holidays, our local mountain roots, verified resort networks, and commitment to Pahadi hospitality.',
+      path: '/about'
+    },
+    contact: {
+      title: 'Contact Us & Help Desk | Samika Holidays',
+      desc: 'Get in touch with Samika Holidays travel desk via phone +91 6284 073 623 or email info@samikaholiday.com.',
+      path: '/contact'
+    },
+    admin: {
+      title: 'Admin Panel | Samika Holidays',
+      desc: 'Samika Holidays Admin Control Center',
+      path: '/admin'
+    },
+    'admin-login': {
+      title: 'Admin Login | Samika Holidays',
+      desc: 'Samika Holidays Admin Portal Login',
+      path: '/admin-login'
+    }
+  };
+
   useEffect(() => {
     localStorage.setItem('samika_active_tab', activeTab);
-    const titles = {
-      home: 'Samika Holidays | Luxury Hotels, Resorts & Tour Packages in Uttarakhand',
-      hotels: 'Luxury Hotels & Resorts in Uttarakhand | Samika Holidays',
-      packages: 'Tour Packages in Uttarakhand | Samika Holidays',
-      destinations: 'Popular Destinations in Uttarakhand | Samika Holidays',
-      weddings: 'Destination Weddings in Uttarakhand | Samika Holidays',
-      corporate: 'Corporate Tours & Retreats | Samika Holidays',
-      blogs: 'Travel Blogs & Guides | Samika Holidays',
-      'blog-detail': 'Blog Article | Samika Holidays',
-      about: 'About Us | Samika Holidays',
-      contact: 'Contact Us | Samika Holidays',
-      admin: 'Admin Panel | Samika Holidays',
-      'admin-login': 'Admin Login | Samika Holidays'
-    };
-    document.title = titles[activeTab] || 'Samika Holidays | Luxury Travel Partner in Uttarakhand';
+    const meta = seoDataMap[activeTab] || seoDataMap.home;
+    document.title = meta.title;
+
+    // Update Meta Description
+    let descTag = document.querySelector('meta[name="description"]');
+    if (!descTag) {
+      descTag = document.createElement('meta');
+      descTag.setAttribute('name', 'description');
+      document.head.appendChild(descTag);
+    }
+    descTag.setAttribute('content', meta.desc);
+
+    // Update Production Canonical Link (Always https://samikaholiday.com/...)
+    const canonicalUrl = meta.path === '/' ? `${SITE_URL}/` : `${SITE_URL}${meta.path}`;
+    let canonicalTag = document.getElementById('canonical-url') || document.querySelector('link[rel="canonical"]');
+    if (!canonicalTag) {
+      canonicalTag = document.createElement('link');
+      canonicalTag.setAttribute('rel', 'canonical');
+      canonicalTag.setAttribute('id', 'canonical-url');
+      document.head.appendChild(canonicalTag);
+    }
+    canonicalTag.setAttribute('href', canonicalUrl);
+
+    // Update OpenGraph
+    const ogTitle = document.getElementById('og-title');
+    if (ogTitle) ogTitle.setAttribute('content', meta.title);
+    const ogDesc = document.getElementById('og-description');
+    if (ogDesc) ogDesc.setAttribute('content', meta.desc);
+    const ogUrl = document.getElementById('og-url');
+    if (ogUrl) ogUrl.setAttribute('content', canonicalUrl);
   }, [activeTab]);
 
   // --- DYNAMIC DATA STATES (Managed 100% via Admin Panel & Backend) ---
