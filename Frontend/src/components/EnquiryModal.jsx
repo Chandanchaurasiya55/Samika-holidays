@@ -247,7 +247,7 @@ export default function EnquiryModal({
     } catch (err) {
       console.error('Razorpay checkout error:', err);
       setIsProcessingRazorpay(false);
-      alert('Payment could not be initiated. Please ensure Razorpay credentials are configured or try again later.');
+      alert(err.message || 'Payment could not be initiated.');
     }
   };
 
