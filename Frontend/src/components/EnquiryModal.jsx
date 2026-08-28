@@ -167,6 +167,11 @@ export default function EnquiryModal({
         })
       });
 
+      const contentType = orderRes.headers.get('content-type') || '';
+      if (!contentType.includes('application/json')) {
+        throw new Error('Backend server is not responding properly. Please check backend running status.');
+      }
+
       const orderData = await orderRes.json();
 
       if (!orderData.success || !orderData.order) {
