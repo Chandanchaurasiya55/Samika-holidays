@@ -11,7 +11,7 @@ export default function Navbar({ activeTab, setActiveTab, onOpenLogin, isLoggedI
     { id: 'packages', label: 'Tour Packages' },
     { id: 'weddings', label: 'Weddings' },
     { id: 'corporate', label: 'Corporate' },
-    { id: 'blogs', label: 'Travel Journal' },
+    { id: 'blogs', label: 'Blogs' },
     { id: 'about', label: 'About Us' },
     { id: 'contact', label: 'Contact' },
   ];
@@ -203,7 +203,7 @@ export default function Navbar({ activeTab, setActiveTab, onOpenLogin, isLoggedI
 
           <div className="pt-4 border-t border-slate-100 flex flex-col gap-3">
             <a
-              href="https://wa.me/919258677823"
+              href="https://wa.me/916284073623"
               target="_blank"
               rel="noreferrer"
               className="bg-emerald-600 hover:bg-emerald-700 text-white px-4 py-3 rounded-xl font-bold text-xs flex items-center justify-center gap-2 shadow-sm"

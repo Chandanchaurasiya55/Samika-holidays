@@ -60,7 +60,7 @@ export default function WeddingsPage({ onOpenEnquiry, postsList = [] }) {
             </button>
 
             <a
-              href="https://wa.me/919258677823?text=Hello%20Samika%20Holidays%2C%20I%20want%20to%20plan%20a%20destination%20wedding%20in%20Uttarakhand."
+              href="https://wa.me/916284073623?text=Hello%20Samika%20Holidays%2C%20I%20want%20to%20plan%20a%20destination%20wedding%20in%20Uttarakhand."
               target="_blank"
               rel="noreferrer"
               className="bg-white/15 hover:bg-white/25 backdrop-blur-md border border-white/20 text-white px-6 py-3.5 rounded-2xl font-bold text-xs sm:text-sm flex items-center gap-2 transition-all"

@@ -38,39 +38,45 @@ export default function HomePage({
   const [isGuestsOpen, setIsGuestsOpen] = useState(false);
 
   const [activeDestCategory, setActiveDestCategory] = useState('All');
+  const [isMobileSearchExpanded, setIsMobileSearchExpanded] = useState(false);
 
   // Ultra HD Cinematic Slider Images & Captions
   const heroSlides = [
     {
       id: 1,
-      image: 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=2400&q=90',
-      title: 'Nainital & Serene Lakes',
-      sub: 'Emerald Waters, Boating & Pine Forest Trails',
-      tag: 'Lakes & Mountain Retreats'
+      image: 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=2400&q=95',
+      title: 'Uttarakhand Himalayan Panoramas',
+      sub: 'Snow-Capped Peaks, Sunset Clouds & Sacred Valleys',
+      tag: 'Land of Gods • Devbhoomi'
     },
     {
       id: 2,
-      image: 'https://images.unsplash.com/photo-1561731216-c3a4d99437d5?auto=format&fit=crop&w=2400&q=90',
+      image: 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=2400&q=95',
+      title: 'Nainital & Serene Lake District',
+      sub: 'Emerald Waters, Yacht Boating & Pine Forest Trails',
+      tag: 'Lakes & Mountain Retreats'
+    },
+    {
+      id: 3,
+      image: 'https://images.unsplash.com/photo-1561731216-c3a4d99437d5?auto=format&fit=crop&w=2400&q=95',
       title: 'Jim Corbett Tiger Reserve',
-      imageAlt: 'Jim Corbett Wildlife Safari',
       sub: 'Jungle Safaris, Sal Forests & Riverside Luxury Lodges',
       tag: 'Wildlife Adventure'
     },
     {
-      id: 3,
-      image: 'https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=2400&q=90',
-      title: 'Rishikesh & Holy Ganga',
+      id: 4,
+      image: 'https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=2400&q=95',
+      title: 'Rishikesh & Holy Ganga Valley',
       sub: 'White Water Rafting, Spiritual Aarti & Yoga Retreats',
       tag: 'Adventure & Wellness'
     },
     {
-      id: 4,
-      image: 'https://images.unsplash.com/photo-1605649487212-47bdab064df7?auto=format&fit=crop&w=2400&q=90',
-      title: 'Kedarnath & Chardham Shrines',
+      id: 5,
+      image: 'https://images.unsplash.com/photo-1605649487212-47bdab064df7?auto=format&fit=crop&w=2400&q=95',
+      title: 'Kedarnath & Divine Pilgrimages',
       sub: 'Sacred High-Altitude Yatra & VIP Helicopter Care',
-      tag: 'Divine Pilgrimage'
-    },
-    
+      tag: 'Spiritual Yatra'
+    }
   ];
 
   // Auto Slider Carousel Timer
@@ -183,9 +189,14 @@ export default function HomePage({
     ? popularDestinations 
     : popularDestinations.filter(d => (d.category || '').toLowerCase() === activeDestCategory.toLowerCase());
 
+  // Populate input when selected from dropdown without navigating immediately
   const handleDestinationSelect = (destName) => {
     setSearchDest(destName);
     setIsDestOpen(false);
+  };
+
+  // Direct card click in destination grid
+  const handleCardDestinationClick = (destName) => {
     if (onNavigateToPackages) {
       onNavigateToPackages(destName);
     } else {
@@ -193,10 +204,11 @@ export default function HomePage({
     }
   };
 
+  // Trigger search ONLY on Search Now button click or form submit
   const handleSearchSubmit = (e) => {
     e.preventDefault();
-    if (searchDest.trim()) {
-      handleDestinationSelect(searchDest);
+    if (onNavigateToPackages) {
+      onNavigateToPackages(searchDest);
     } else {
       setActiveTab('packages');
     }
@@ -284,31 +296,31 @@ export default function HomePage({
               <span>Corporate Tours</span>
             </div>
 
-            {/* CTAs */}
-            <div className="flex flex-wrap items-center gap-3 pt-4">
+            {/* CTAs in single row on mobile & desktop */}
+            <div className="flex flex-row items-center gap-2 sm:gap-3 pt-3 sm:pt-4">
               <button
                 onClick={() => setActiveTab('packages')}
-                className="bg-gradient-to-r from-[#E11D48] to-[#FF6B35] hover:from-[#BE123C] hover:to-[#EA580C] text-white px-7 py-3.5 rounded-xl font-bold text-xs sm:text-sm flex items-center gap-2 shadow-lg shadow-rose-900/20 transition-all cursor-pointer hover:scale-105"
+                className="bg-gradient-to-r from-[#E11D48] to-[#FF6B35] hover:from-[#BE123C] hover:to-[#EA580C] text-white px-3.5 sm:px-7 py-2.5 sm:py-3.5 rounded-xl font-bold text-[11px] sm:text-sm flex items-center gap-1.5 sm:gap-2 shadow-lg shadow-rose-900/20 transition-all cursor-pointer hover:scale-105 whitespace-nowrap shrink-0"
               >
                 <span>Explore Packages</span>
-                <ArrowRight className="w-4 h-4 text-white" />
+                <ArrowRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-white" />
               </button>
 
               <a
-                href="https://wa.me/919258677823?text=Hello%20Samika%20Holidays%2C%20I%20want%20to%20plan%20a%20trip%20to%20Uttarakhand."
+                href="https://wa.me/916284073623?text=Hello%20Samika%20Holidays%2C%20I%20want%20to%20plan%20a%20trip%20to%20Uttarakhand."
                 target="_blank"
                 rel="noreferrer"
-                className="bg-white hover:bg-slate-50 text-slate-900 border border-slate-300 px-6 py-3.5 rounded-xl font-bold text-xs sm:text-sm flex items-center gap-2 shadow-xs transition-all hover:scale-105"
+                className="bg-white hover:bg-slate-50 text-slate-900 border border-slate-300 px-3.5 sm:px-6 py-2.5 sm:py-3.5 rounded-xl font-bold text-[11px] sm:text-sm flex items-center gap-1.5 sm:gap-2 shadow-xs transition-all hover:scale-105 whitespace-nowrap shrink-0"
               >
-                <MessageCircle className="w-4 h-4 text-[#06B6D4] fill-[#06B6D4]" />
+                <MessageCircle className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#06B6D4] fill-[#06B6D4]" />
                 <span>WhatsApp Us</span>
               </a>
             </div>
 
           </div>
 
-          {/* Right Floating Trust Badge Card */}
-          <div className="bg-white/95 backdrop-blur-md rounded-2xl p-4 sm:p-5 shadow-2xl border border-white/80 space-y-3.5 max-w-[220px] self-end lg:self-center mr-2 sm:mr-6">
+          {/* Right Floating Trust Badge Card (Hidden on Mobile) */}
+          <div className="hidden lg:block bg-white/95 backdrop-blur-md rounded-2xl p-4 sm:p-5 shadow-2xl border border-white/80 space-y-3.5 max-w-[220px] self-center mr-2 sm:mr-6">
             <div className="flex items-center gap-3">
               <div className="w-9 h-9 rounded-xl bg-amber-50 border border-amber-200 text-amber-600 flex items-center justify-center shrink-0">
                 <Shield className="w-5 h-5 fill-amber-500/20 text-amber-600" />
@@ -332,8 +344,8 @@ export default function HomePage({
 
         </div>
 
-        {/* Carousel Dots & Active Slide Name Bar */}
-        <div className="relative z-20 w-full max-w-[97%] 2xl:max-w-[1780px] mx-auto flex items-center justify-between pt-6">
+        {/* Carousel Dots & Active Slide Name Bar (Hidden on Mobile) */}
+        <div className="hidden sm:flex relative z-20 w-full max-w-[97%] 2xl:max-w-[1780px] mx-auto items-center justify-between pt-6">
           <div className="flex items-center gap-2 text-xs font-bold text-slate-800 bg-white/80 backdrop-blur-md px-3.5 py-1.5 rounded-full border border-white/60 shadow-2xs">
             <span className="w-2 h-2 rounded-full bg-[#E11D48] animate-pulse" />
             <span>{heroSlides[currentSlide].title}</span>
@@ -364,7 +376,10 @@ export default function HomePage({
             
             {/* Field 1: DESTINATION */}
             <div className="lg:col-span-3 relative">
-              <div className="flex items-center justify-between p-3 sm:p-3.5 bg-slate-50 rounded-2xl border border-slate-200 focus-within:border-[#E11D48] focus-within:bg-white transition-all">
+              <div 
+                onClick={() => setIsMobileSearchExpanded(true)}
+                className="flex items-center justify-between p-3 sm:p-3.5 bg-slate-50 rounded-2xl border border-slate-200 focus-within:border-[#E11D48] focus-within:bg-white transition-all cursor-pointer"
+              >
                 <div className="flex items-center gap-3 w-full">
                   <MapPin className="w-5 h-5 text-[#E11D48] shrink-0" />
                   <div className="w-full text-left">
@@ -374,17 +389,21 @@ export default function HomePage({
                       autoComplete="off"
                       placeholder="Where are you going?"
                       value={searchDest}
-                      onFocus={() => setIsDestOpen(true)}
+                      onFocus={() => {
+                        setIsDestOpen(true);
+                        setIsMobileSearchExpanded(true);
+                      }}
                       onBlur={() => setTimeout(() => setIsDestOpen(false), 200)}
                       onChange={(e) => {
                         setSearchDest(e.target.value);
                         setIsDestOpen(true);
+                        setIsMobileSearchExpanded(true);
                       }}
                       className="w-full bg-transparent text-xs sm:text-sm font-semibold text-slate-800 focus:outline-none placeholder:text-slate-400"
                     />
                   </div>
                 </div>
-                <Calendar className="w-4 h-4 text-slate-400 shrink-0 ml-2" />
+                <Search className="w-4 h-4 text-slate-400 shrink-0 ml-2" />
               </div>
 
               {/* Destination Dropdown */}
@@ -412,8 +431,19 @@ export default function HomePage({
               )}
             </div>
 
+            {/* Mobile Expand / Collapse Toggle Button */}
+            <div className="sm:hidden w-full text-center">
+              <button 
+                type="button" 
+                onClick={() => setIsMobileSearchExpanded(!isMobileSearchExpanded)}
+                className="text-[11px] font-bold text-[#E11D48] hover:text-[#FF6B35] flex items-center justify-center gap-1 mx-auto py-0.5 cursor-pointer transition-colors"
+              >
+                <span>{isMobileSearchExpanded ? '▲ Hide Dates & Guest Options' : '▼ Add Travel Dates & Guests (Optional)'}</span>
+              </button>
+            </div>
+
             {/* Field 2: CHECK-IN */}
-            <div className="lg:col-span-2">
+            <div className={`${isMobileSearchExpanded ? 'block' : 'hidden sm:block'} lg:col-span-2`}>
               <div className="flex items-center justify-between p-3 sm:p-3.5 bg-slate-50 rounded-2xl border border-slate-200 focus-within:border-[#E11D48] focus-within:bg-white transition-all">
                 <div className="text-left w-full">
                   <label className="block text-[9px] sm:text-[10px] font-extrabold uppercase tracking-wider text-slate-400">CHECK-IN</label>
@@ -429,7 +459,7 @@ export default function HomePage({
             </div>
 
             {/* Field 3: CHECK-OUT */}
-            <div className="lg:col-span-2">
+            <div className={`${isMobileSearchExpanded ? 'block' : 'hidden sm:block'} lg:col-span-2`}>
               <div className="flex items-center justify-between p-3 sm:p-3.5 bg-slate-50 rounded-2xl border border-slate-200 focus-within:border-[#E11D48] focus-within:bg-white transition-all">
                 <div className="text-left w-full">
                   <label className="block text-[9px] sm:text-[10px] font-extrabold uppercase tracking-wider text-slate-400">CHECK-OUT</label>
@@ -445,7 +475,7 @@ export default function HomePage({
             </div>
 
             {/* Field 4: GUESTS & ROOMS */}
-            <div className="lg:col-span-3 relative">
+            <div className={`${isMobileSearchExpanded ? 'block' : 'hidden sm:block'} lg:col-span-3 relative`}>
               <div 
                 onClick={() => setIsGuestsOpen(!isGuestsOpen)}
                 className="flex items-center justify-between p-3 sm:p-3.5 bg-slate-50 rounded-2xl border border-slate-200 cursor-pointer hover:border-[#E11D48] transition-all"
@@ -572,7 +602,7 @@ export default function HomePage({
           {filteredDestinations.slice(0, 8).map((dest) => (
             <div
               key={dest.id}
-              onClick={() => handleDestinationSelect(dest.searchKey || dest.name)}
+              onClick={() => handleCardDestinationClick(dest.searchKey || dest.name)}
               className="group relative rounded-3xl overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-300 cursor-pointer bg-slate-900 aspect-[4/5] flex flex-col justify-end p-6 border border-slate-200/50"
             >
               <img
@@ -817,7 +847,7 @@ export default function HomePage({
 
                   <div className="flex items-center gap-2">
                     <a
-                      href={`https://wa.me/919258677823?text=${encodeURIComponent(`Hello Samika Holidays, I want to inquire about: ${pkg.title}`)}`}
+                      href={`https://wa.me/916284073623?text=${encodeURIComponent(`Hello Samika Holidays, I want to inquire about: ${pkg.title}`)}`}
                       target="_blank"
                       rel="noreferrer"
                       onClick={(e) => e.stopPropagation()}

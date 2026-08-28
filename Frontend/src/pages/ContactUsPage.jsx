@@ -111,20 +111,13 @@ export default function ContactUsPage({ onAddEnquiry }) {
                   <Phone className="w-3.5 h-3.5 text-[#E11D48]" />
                   <span>Call & WhatsApp Lines:</span>
                 </div>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                <div className="grid grid-cols-1 gap-2">
                   <a 
-                    href="tel:+919258677823" 
+                    href="tel:+916284073623" 
                     className="p-3 rounded-2xl bg-slate-50 hover:bg-rose-50 hover:text-[#E11D48] border border-slate-200 font-bold text-slate-800 transition-colors flex items-center gap-2"
                   >
                     <Phone className="w-3.5 h-3.5 text-[#FF6B35] shrink-0" />
-                    <span>+91 92586 77823</span>
-                  </a>
-                  <a 
-                    href="tel:+917819913686" 
-                    className="p-3 rounded-2xl bg-slate-50 hover:bg-rose-50 hover:text-[#E11D48] border border-slate-200 font-bold text-slate-800 transition-colors flex items-center gap-2"
-                  >
-                    <Phone className="w-3.5 h-3.5 text-[#FF6B35] shrink-0" />
-                    <span>+91 78199 13686</span>
+                    <span>+91 6284 073 623</span>
                   </a>
                 </div>
               </div>
@@ -135,7 +128,7 @@ export default function ContactUsPage({ onAddEnquiry }) {
                   <span className="text-xs text-slate-600 font-medium">Uttarakhand, India</span>
                 </div>
                 <a
-                  href="https://wa.me/919258677823?text=Hello%20Samika%20Holidays%2C%20I%20need%20assistance."
+                  href="https://wa.me/916284073623?text=Hello%20Samika%20Holidays%2C%20I%20need%20assistance."
                   target="_blank"
                   rel="noreferrer"
                   className="bg-emerald-600 hover:bg-emerald-700 text-white px-4 py-2 rounded-xl text-xs font-bold flex items-center gap-1.5 shadow-sm transition-all"
@@ -155,16 +148,16 @@ export default function ContactUsPage({ onAddEnquiry }) {
 
               <div className="space-y-2 text-xs">
                 <div className="flex items-center justify-between p-3 bg-slate-50 rounded-2xl border border-slate-200">
-                  <span className="text-slate-500 font-medium">Reservations:</span>
-                  <a href="mailto:reservations@samikaholidays.com" className="font-bold text-[#E11D48] hover:underline">
-                    reservations@samikaholidays.com
+                  <span className="text-slate-500 font-medium">Email Support:</span>
+                  <a href="mailto:info@samikaholiday.com" className="font-bold text-[#E11D48] hover:underline">
+                    info@samikaholiday.com
                   </a>
                 </div>
 
                 <div className="flex items-center justify-between p-3 bg-slate-50 rounded-2xl border border-slate-200">
                   <span className="text-slate-500 font-medium">General Inquiries:</span>
-                  <a href="mailto:info@samikaholidays.com" className="font-bold text-[#E11D48] hover:underline">
-                    info@samikaholidays.com
+                  <a href="mailto:info@samikaholiday.com" className="font-bold text-[#E11D48] hover:underline">
+                    info@samikaholiday.com
                   </a>
                 </div>
 

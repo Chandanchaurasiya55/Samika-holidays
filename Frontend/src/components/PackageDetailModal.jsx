@@ -115,7 +115,7 @@ export default function PackageDetailModal({ pkg, onClose, onEnquire }) {
           
           <div className="flex items-center gap-2.5">
             <a
-              href="tel:+919258677823"
+              href="tel:+916284073623"
               className="border border-[#0F382C] text-[#0F382C] hover:bg-[#0F382C]/5 px-3.5 py-2.5 rounded-xl font-bold text-xs flex items-center gap-1.5 transition-colors"
             >
               <Phone className="w-3.5 h-3.5" />

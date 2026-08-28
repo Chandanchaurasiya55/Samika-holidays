@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { 
-  MapPin, Calendar, Users, Search, Tag, ShieldCheck, Hotel, PhoneCall, 
+  MapPin, Calendar, Users, Search, Tag, ShieldCheck, Hotel, PhoneCall, Star,
   Sparkles, Compass, Utensils, Car, Flame, Heart, Award, Clock, Headphones, RefreshCw, MessageCircle, X, ChevronRight, Check
 } from 'lucide-react';
 
@@ -322,7 +322,7 @@ export default function TourPackagesPage({ onOpenEnquiry, onSelectPackage, packa
 
                     <div className="flex items-center gap-2">
                       <a
-                        href={`https://wa.me/919258677823?text=${encodeURIComponent(`Hello Samika Holidays, I want to book the package: ${pkg.title} (Price: ₹${pkg.price})`)}`}
+                        href={`https://wa.me/916284073623?text=${encodeURIComponent(`Hello Samika Holidays, I want to book the package: ${pkg.title} (Price: ₹${pkg.price})`)}`}
                         target="_blank"
                         rel="noreferrer"
                         onClick={(e) => e.stopPropagation()}

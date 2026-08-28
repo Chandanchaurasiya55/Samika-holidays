@@ -139,7 +139,7 @@ export default function LoginModal({ isOpen, onClose, onLoginSuccess, onAdminLog
         const fallbackUser = {
           name: isAdmin ? 'Administrator' : 'Valued Traveler',
           email: form.email || (isAdmin ? 'admin@samikaholidays.com' : 'traveler@samikaholidays.com'),
-          phone: form.phone || '9258677823',
+          phone: form.phone || '6284073623',
           role: isAdmin ? 'admin' : 'user',
           id: 'user_' + Date.now()
         };

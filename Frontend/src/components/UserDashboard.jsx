@@ -209,7 +209,7 @@ export default function UserDashboard({
               Our 24x7 local travel desk is ready to assist you with tour customization and hotel upgrades.
             </p>
             <a
-              href="https://wa.me/919258677823"
+              href="https://wa.me/916284073623"
               target="_blank"
               rel="noreferrer"
               className="bg-emerald-600 hover:bg-emerald-700 text-white py-2.5 px-4 rounded-xl text-xs font-bold flex items-center justify-center gap-2 shadow-sm transition-all"
@@ -550,8 +550,8 @@ export default function UserDashboard({
                     <Phone className="w-6 h-6 text-[#E11D48]" />
                     <h3 className="font-serif font-bold text-base text-[#0F172A]">Direct Phone Support</h3>
                     <p className="text-xs text-slate-600">Speak directly with our local tour managers.</p>
-                    <a href="tel:+919258677823" className="block text-sm font-extrabold text-[#E11D48]">
-                      +91 92586 77823 / +91 78199 13686
+                    <a href="tel:+916284073623" className="block text-sm font-extrabold text-[#E11D48]">
+                      +91 6284 073 623
                     </a>
                   </div>
 
@@ -560,7 +560,7 @@ export default function UserDashboard({
                     <h3 className="font-serif font-bold text-base text-emerald-950">WhatsApp Concierge</h3>
                     <p className="text-xs text-slate-600">Fast on-road assistance & live location sharing.</p>
                     <a 
-                      href="https://wa.me/919258677823" 
+                      href="https://wa.me/916284073623" 
                       target="_blank" 
                       rel="noreferrer"
                       className="inline-block bg-emerald-600 hover:bg-emerald-700 text-white px-4 py-2 rounded-xl text-xs font-bold"

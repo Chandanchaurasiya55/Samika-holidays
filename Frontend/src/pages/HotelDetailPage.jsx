@@ -209,7 +209,7 @@ export default function HotelDetailPage({
                 </button>
 
                 <a
-                  href={`https://wa.me/919258677823?text=${encodeURIComponent(`Hello Samika Holidays, I want to check room availability for: ${hotel.name}`)}`}
+                  href={`https://wa.me/916284073623?text=${encodeURIComponent(`Hello Samika Holidays, I want to check room availability for: ${hotel.name}`)}`}
                   target="_blank"
                   rel="noreferrer"
                   className="w-full bg-emerald-600 hover:bg-emerald-700 text-white py-3.5 rounded-2xl font-bold text-xs flex items-center justify-center gap-2 shadow-sm transition-all"
@@ -249,10 +249,10 @@ export default function HotelDetailPage({
                 </div>
               </div>
               <a 
-                href="tel:+919258677823"
+                href="tel:+916284073623"
                 className="block text-center bg-white/10 hover:bg-white/20 py-2.5 rounded-xl font-bold text-xs transition-colors"
               >
-                +91 92586 77823 / +91 78199 13686
+                +91 6284 073 623
               </a>
             </div>
 
