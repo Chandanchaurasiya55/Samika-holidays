@@ -10,7 +10,7 @@ export default function ContactUsPage({ onAddEnquiry }) {
     name: '',
     phone: '',
     email: '',
-    subject: 'General Inquiry',
+    subject: 'Tour Package Booking',
     message: ''
   });
 
@@ -39,303 +39,258 @@ export default function ContactUsPage({ onAddEnquiry }) {
     setFormSubmitted(true);
     setTimeout(() => {
       setFormSubmitted(false);
-      setFormData({ name: '', phone: '', email: '', subject: 'General Inquiry', message: '' });
+      setFormData({ name: '', phone: '', email: '', subject: 'Tour Package Booking', message: '' });
     }, 3500);
   };
 
   return (
-    <div className="space-y-16 pb-16 bg-stone-50">
+    <div className="space-y-16 pb-20 bg-[#F8FAFC] text-slate-900 min-h-screen">
       
       {/* Hero Header */}
-      <section className="relative bg-[#0F382C] text-white pt-14 pb-20 px-4 sm:px-6 lg:px-8 overflow-hidden">
+      <section className="relative bg-[#0F172A] text-white pt-20 pb-32 px-4 sm:px-6 lg:px-8 overflow-hidden min-h-[440px] flex flex-col justify-center">
         <div 
-          className="absolute inset-0 opacity-20 bg-cover bg-center mix-blend-overlay"
-          style={{ backgroundImage: `url('https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=1600&q=80')` }}
+          className="absolute inset-0 opacity-25 bg-cover bg-center mix-blend-overlay"
+          style={{ backgroundImage: `url('https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=1920&q=80')` }}
         />
-        <div className="relative max-w-7xl mx-auto text-center space-y-4">
-          <div className="inline-flex items-center gap-2 bg-[#C8933E]/20 text-[#C8933E] border border-[#C8933E]/40 px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider">
-            <Headphones className="w-4 h-4" />
-            <span>24x7 Customer Support Desk</span>
+        <div className="absolute inset-0 bg-gradient-to-t from-[#0F172A] via-transparent to-black/40" />
+
+        <div className="relative max-w-4xl mx-auto text-center space-y-4 z-10">
+          <div className="inline-flex items-center gap-2 bg-rose-500/20 text-[#FF6B35] border border-rose-500/40 px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider">
+            <Headphones className="w-3.5 h-3.5 text-[#E11D48]" />
+            <span>24/7 Dedicated Mountain Concierge</span>
           </div>
-          <h1 className="font-serif text-4xl sm:text-5xl lg:text-6xl font-bold">
-            Get in Touch With Us
+
+          <h1 className="font-serif text-4xl sm:text-6xl font-extrabold text-white tracking-tight leading-tight">
+            Connect With Samika Holidays <br />
+            <span className="bg-gradient-to-r from-[#FF6B35] via-[#FF385C] to-[#E11D48] bg-clip-text text-transparent italic">
+              Your Uttarakhand Specialists
+            </span>
           </h1>
-          <p className="text-stone-200 text-sm sm:text-base max-w-2xl mx-auto leading-relaxed">
-            Planning a trip, customized tour package, luxury resort stay, or destination wedding in Uttarakhand? Our travel experts are available 24x7 to assist you.
+
+          <p className="text-slate-200 text-xs sm:text-base max-w-2xl mx-auto font-normal leading-relaxed">
+            Planning a family tour, jungle safari, luxury resort stay, or destination wedding? Speak directly with our native destination managers.
           </p>
         </div>
       </section>
 
       {/* Main Contact Content */}
-      <section className="w-[90%] mx-auto  px-2 sm:px-4 lg:px-6">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10">
+      <section className="w-full max-w-[97%] 2xl:max-w-[1780px] mx-auto px-4 sm:px-6 lg:px-8 -mt-14 relative z-20">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
           
-          {/* Left Column: Office Contacts & Information (5 cols) */}
+          {/* Left Column: Office Contacts (5 cols) */}
           <div className="lg:col-span-5 space-y-6">
             
             <div>
-              <span className="text-xs uppercase font-bold text-[#C8933E] tracking-widest block">
-                OFFICIAL CONTACT DESK
+              <span className="text-xs uppercase font-extrabold text-[#E11D48] tracking-widest block">
+                LOCAL HELPDESK
               </span>
-              <h2 className="font-serif text-3xl font-bold text-[#0F382C] mt-1">
-                We're Here to Help
+              <h2 className="font-serif text-3xl font-bold text-slate-900 mt-1">
+                We're Here Whenever You Need Us
               </h2>
-              <p className="text-stone-600 text-xs sm:text-sm mt-1 leading-relaxed">
-                Connect with our local offices in Haldwani and Haridwar for immediate booking confirmations, pricing, and custom itineraries.
+              <p className="text-slate-500 text-xs sm:text-sm mt-1 leading-relaxed">
+                Connect with our local Uttarakhand team for immediate booking confirmations, seasonal discounts, and custom packages.
               </p>
             </div>
 
-            {/* Haldwani Office Card */}
-            <div className="bg-white rounded-3xl p-6 border border-stone-200 shadow-sm space-y-4">
-              <div className="flex items-center gap-3 pb-3 border-b border-stone-100">
-                <div className="w-11 h-11 rounded-2xl bg-[#0F382C] text-[#C8933E] flex items-center justify-center shrink-0 shadow-sm">
-                  <Building2 className="w-5 h-5" />
+            {/* Main Office Card */}
+            <div className="bg-white rounded-3xl p-6 sm:p-7 border border-slate-200/90 shadow-sm space-y-5">
+              <div className="flex items-center gap-3 pb-4 border-b border-slate-100">
+                <div className="w-12 h-12 rounded-2xl bg-rose-50 text-[#E11D48] flex items-center justify-center shrink-0 shadow-xs">
+                  <Building2 className="w-6 h-6" />
                 </div>
                 <div>
-                  <h3 className="font-serif text-lg font-bold text-stone-900 leading-tight">
-                    Haldwani Head Office
+                  <h3 className="font-serif text-lg font-bold text-slate-900 leading-tight">
+                    Uttarakhand Main Desk
                   </h3>
-                  <p className="text-xs text-stone-500 font-medium">Nainital Gateway • Main Booking Desk</p>
+                  <p className="text-xs text-slate-500 font-medium">Nainital & Corbett Gateway Hub</p>
                 </div>
               </div>
 
-              <div className="space-y-2.5 text-xs">
-                <div className="flex items-center gap-2 text-stone-500 font-bold uppercase text-[10px] tracking-wider">
-                  <Phone className="w-3.5 h-3.5 text-[#C8933E]" />
-                  <span>Call Lines:</span>
+              <div className="space-y-3 text-xs">
+                <div className="flex items-center gap-2 text-slate-400 font-bold uppercase text-[10px] tracking-wider">
+                  <Phone className="w-3.5 h-3.5 text-[#E11D48]" />
+                  <span>Call & WhatsApp Lines:</span>
                 </div>
-                <div className="grid grid-cols-2 gap-2">
-                  <a 
-                    href="tel:+916395643686" 
-                    className="p-2.5 rounded-xl bg-stone-50 hover:bg-emerald-50 hover:text-[#0F382C] border border-stone-200 font-bold text-stone-800 transition-colors flex items-center gap-2"
-                  >
-                    <Phone className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
-                    <span>6395643686</span>
-                  </a>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                   <a 
                     href="tel:+919258677823" 
-                    className="p-2.5 rounded-xl bg-stone-50 hover:bg-emerald-50 hover:text-[#0F382C] border border-stone-200 font-bold text-stone-800 transition-colors flex items-center gap-2"
+                    className="p-3 rounded-2xl bg-slate-50 hover:bg-rose-50 hover:text-[#E11D48] border border-slate-200 font-bold text-slate-800 transition-colors flex items-center gap-2"
                   >
-                    <Phone className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
-                    <span>9258677823</span>
+                    <Phone className="w-3.5 h-3.5 text-[#FF6B35] shrink-0" />
+                    <span>+91 92586 77823</span>
                   </a>
                   <a 
-                    href="tel:+917668284863" 
-                    className="p-2.5 rounded-xl bg-stone-50 hover:bg-emerald-50 hover:text-[#0F382C] border border-stone-200 font-bold text-stone-800 transition-colors flex items-center gap-2"
+                    href="tel:+917819913686" 
+                    className="p-3 rounded-2xl bg-slate-50 hover:bg-rose-50 hover:text-[#E11D48] border border-slate-200 font-bold text-slate-800 transition-colors flex items-center gap-2"
                   >
-                    <Phone className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
-                    <span>7668284863</span>
-                  </a>
-                  <a 
-                    href="tel:+916395865593" 
-                    className="p-2.5 rounded-xl bg-stone-50 hover:bg-emerald-50 hover:text-[#0F382C] border border-stone-200 font-bold text-stone-800 transition-colors flex items-center gap-2"
-                  >
-                    <Phone className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
-                    <span>6395865593</span>
+                    <Phone className="w-3.5 h-3.5 text-[#FF6B35] shrink-0" />
+                    <span>+91 78199 13686</span>
                   </a>
                 </div>
               </div>
 
-              {/* WhatsApp Quick Chat */}
-              <div className="pt-2 border-t border-stone-100 flex items-center justify-between">
+              <div className="pt-3 border-t border-slate-100 flex items-center justify-between">
                 <div className="flex items-center gap-2">
-                  <MapPin className="w-4 h-4 text-stone-400 shrink-0" />
-                  <span className="text-xs text-stone-600 font-medium">Haldwani, Nainital Dist., Uttarakhand</span>
+                  <MapPin className="w-4 h-4 text-[#FF6B35] shrink-0" />
+                  <span className="text-xs text-slate-600 font-medium">Uttarakhand, India</span>
                 </div>
                 <a
-                  href="https://wa.me/919258677823"
+                  href="https://wa.me/919258677823?text=Hello%20Samika%20Holidays%2C%20I%20need%20assistance."
                   target="_blank"
                   rel="noreferrer"
-                  className="bg-emerald-600 hover:bg-emerald-700 text-white px-3 py-1.5 rounded-xl text-xs font-bold flex items-center gap-1.5 shadow-sm transition-all"
+                  className="bg-emerald-600 hover:bg-emerald-700 text-white px-4 py-2 rounded-xl text-xs font-bold flex items-center gap-1.5 shadow-sm transition-all"
                 >
                   <MessageCircle className="w-3.5 h-3.5 fill-current" />
-                  <span>WhatsApp</span>
+                  <span>Chat on WhatsApp</span>
                 </a>
               </div>
             </div>
 
-            {/* Haridwar Office Card */}
-            <div className="bg-white rounded-3xl p-6 border border-stone-200 shadow-sm space-y-4">
-              <div className="flex items-center gap-3 pb-3 border-b border-stone-100">
-                <div className="w-11 h-11 rounded-2xl bg-[#FAF7F2] text-[#C8933E] border border-amber-200 flex items-center justify-center shrink-0 shadow-sm">
-                  <Building2 className="w-5 h-5" />
-                </div>
-                <div>
-                  <h3 className="font-serif text-lg font-bold text-stone-900 leading-tight">
-                    Haridwar Regional Office
-                  </h3>
-                  <p className="text-xs text-stone-500 font-medium">Chardham & Garhwal Operations</p>
-                </div>
-              </div>
-
-              <div className="flex flex-wrap items-center justify-between gap-3 text-xs">
-                <div className="space-y-1">
-                  <span className="text-stone-400 font-bold uppercase text-[10px] block">Direct Line:</span>
-                  <a 
-                    href="tel:+917819913686" 
-                    className="inline-flex items-center gap-2 p-2.5 rounded-xl bg-stone-50 hover:bg-emerald-50 hover:text-[#0F382C] border border-stone-200 font-extrabold text-stone-900 transition-colors"
-                  >
-                    <Phone className="w-3.5 h-3.5 text-[#C8933E]" />
-                    <span>+91 7819913686</span>
-                  </a>
-                </div>
-
-                <div className="space-y-1">
-                  <span className="text-stone-400 font-bold uppercase text-[10px] block">Location:</span>
-                  <div className="flex items-center gap-1.5 text-stone-700 font-semibold py-2">
-                    <MapPin className="w-3.5 h-3.5 text-stone-400 shrink-0" />
-                    <span>Haridwar, Uttarakhand</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-
             {/* Online Support & Email Details */}
-            <div className="bg-[#FAF7F2] rounded-3xl p-6 border border-stone-200/80 space-y-3">
-              <h4 className="font-serif text-base font-bold text-[#0F382C] flex items-center gap-2">
-                <Mail className="w-4 h-4 text-[#C8933E]" />
-                <span>Online & Reservations Desk</span>
+            <div className="bg-white rounded-3xl p-6 sm:p-7 border border-slate-200/90 shadow-sm space-y-4">
+              <h4 className="font-serif text-base font-bold text-[#0F172A] flex items-center gap-2">
+                <Mail className="w-4 h-4 text-[#FF6B35]" />
+                <span>Online Helpdesk & Reservations</span>
               </h4>
 
               <div className="space-y-2 text-xs">
-                <div className="flex items-center justify-between p-2.5 bg-white rounded-xl border border-stone-200">
-                  <span className="text-stone-500 font-medium">Official Reservations:</span>
-                  <a href="mailto:reservations@samikaholidays.com" className="font-extrabold text-[#0F382C] hover:underline">
+                <div className="flex items-center justify-between p-3 bg-slate-50 rounded-2xl border border-slate-200">
+                  <span className="text-slate-500 font-medium">Reservations:</span>
+                  <a href="mailto:reservations@samikaholidays.com" className="font-bold text-[#E11D48] hover:underline">
                     reservations@samikaholidays.com
                   </a>
                 </div>
 
-                <div className="flex items-center justify-between p-2.5 bg-white rounded-xl border border-stone-200">
-                  <span className="text-stone-500 font-medium">General Inquiries:</span>
-                  <a href="mailto:info@samikaholidays.com" className="font-extrabold text-[#0F382C] hover:underline">
+                <div className="flex items-center justify-between p-3 bg-slate-50 rounded-2xl border border-slate-200">
+                  <span className="text-slate-500 font-medium">General Inquiries:</span>
+                  <a href="mailto:info@samikaholidays.com" className="font-bold text-[#E11D48] hover:underline">
                     info@samikaholidays.com
                   </a>
                 </div>
 
-                <div className="flex items-center justify-between p-2.5 bg-white rounded-xl border border-stone-200">
-                  <span className="text-stone-500 font-medium">Official Website:</span>
-                  <a href="https://www.samikaholidays.com" target="_blank" rel="noreferrer" className="font-extrabold text-[#C8933E] hover:underline flex items-center gap-1">
+                <div className="flex items-center justify-between p-3 bg-slate-50 rounded-2xl border border-slate-200">
+                  <span className="text-slate-500 font-medium">Official Portal:</span>
+                  <span className="font-bold text-[#FF6B35] flex items-center gap-1">
                     <Globe className="w-3.5 h-3.5" />
                     <span>www.samikaholidays.com</span>
-                  </a>
+                  </span>
                 </div>
               </div>
             </div>
 
           </div>
 
-          {/* Right Column: Send Us a Message Form (7 cols) */}
-          <div className="lg:col-span-7 bg-white rounded-3xl p-8 sm:p-10 border border-stone-200 shadow-xl flex flex-col justify-between">
+          {/* Right Column: Direct Message Form (7 cols) */}
+          <div className="lg:col-span-7 bg-white rounded-3xl p-8 sm:p-10 border border-slate-200/90 shadow-xl flex flex-col justify-between">
             <div>
-              <div className="flex items-center gap-2 text-[#C8933E] text-xs font-bold uppercase tracking-wider mb-1">
+              <div className="flex items-center gap-2 text-[#E11D48] text-xs font-bold uppercase tracking-wider mb-1">
                 <Send className="w-4 h-4" />
-                <span>DIRECT INQUIRY</span>
+                <span>INSTANT INQUIRY</span>
               </div>
-              <h3 className="font-serif text-3xl font-bold text-[#0F382C]">
-                Send Us a Message
+              <h3 className="font-serif text-3xl font-bold text-slate-900">
+                Send Us a Direct Message
               </h3>
-              <p className="text-xs sm:text-sm text-stone-500 mt-1 mb-6">
-                Fill in your details below and our destination manager will connect with you within 15 minutes.
+              <p className="text-xs sm:text-sm text-slate-500 mt-1 mb-6">
+                Fill in your trip details and our native destination expert will connect with you promptly.
               </p>
 
               {formSubmitted ? (
-                <div className="py-16 text-center space-y-4 bg-emerald-50/60 rounded-3xl border border-emerald-200 p-8 animate-in fade-in">
-                  <div className="w-16 h-16 bg-[#0F382C] text-[#C8933E] rounded-full flex items-center justify-center mx-auto shadow-md">
+                <div className="py-16 text-center space-y-4 bg-rose-50 rounded-3xl border border-rose-200 p-8 animate-in fade-in">
+                  <div className="w-16 h-16 bg-[#E11D48] text-white rounded-full flex items-center justify-center mx-auto shadow-md">
                     <CheckCircle2 className="w-8 h-8" />
                   </div>
-                  <h4 className="font-serif text-2xl font-bold text-[#0F382C]">
-                    Thank You! Message Sent Successfully
+                  <h4 className="font-serif text-2xl font-bold text-[#0F172A]">
+                    Thank You! Message Received
                   </h4>
-                  <p className="text-xs sm:text-sm text-stone-600 max-w-md mx-auto">
-                    We have received your travel inquiry. Our dedicated Uttarakhand travel expert will call you shortly on your provided number.
+                  <p className="text-xs sm:text-sm text-slate-600 max-w-md mx-auto">
+                    We have received your travel inquiry. Our dedicated Uttarakhand travel expert will call you shortly on your provided contact number.
                   </p>
                 </div>
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-4 text-xs">
                   <div>
-                    <label className="block font-bold text-stone-700 mb-1">Your Full Name *</label>
+                    <label className="block font-bold text-slate-700 mb-1">Your Full Name *</label>
                     <input
                       type="text"
                       required
                       placeholder="e.g. Rahul Sharma"
                       value={formData.name}
                       onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                      className="w-full px-4 py-3 bg-stone-50 border border-stone-300 rounded-xl text-stone-800 font-semibold focus:ring-2 focus:ring-[#0F382C] focus:bg-white focus:outline-none transition-all"
+                      className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-2xl text-slate-800 font-semibold focus:border-[#E11D48] focus:bg-white focus:outline-none transition-all"
                     />
                   </div>
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                      <label className="block font-bold text-stone-700 mb-1">Phone Number (WhatsApp Preferred) *</label>
+                      <label className="block font-bold text-slate-700 mb-1">Phone Number (WhatsApp) *</label>
                       <input
                         type="tel"
                         required
                         placeholder="+91 98765 43210"
                         value={formData.phone}
                         onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                        className="w-full px-4 py-3 bg-stone-50 border border-stone-300 rounded-xl text-stone-800 font-semibold focus:ring-2 focus:ring-[#0F382C] focus:bg-white focus:outline-none transition-all"
+                        className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-2xl text-slate-800 font-semibold focus:border-[#E11D48] focus:bg-white focus:outline-none transition-all"
                       />
                     </div>
                     <div>
-                      <label className="block font-bold text-stone-700 mb-1">Email Address</label>
+                      <label className="block font-bold text-slate-700 mb-1">Email Address</label>
                       <input
                         type="email"
                         placeholder="name@example.com"
                         value={formData.email}
                         onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                        className="w-full px-4 py-3 bg-stone-50 border border-stone-300 rounded-xl text-stone-800 font-semibold focus:ring-2 focus:ring-[#0F382C] focus:bg-white focus:outline-none transition-all"
+                        className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-2xl text-slate-800 font-semibold focus:border-[#E11D48] focus:bg-white focus:outline-none transition-all"
                       />
                     </div>
                   </div>
 
                   <div>
-                    <label className="block font-bold text-stone-700 mb-1">Service / Destination Type</label>
+                    <label className="block font-bold text-slate-700 mb-1">Service / Experience Interest</label>
                     <select
                       value={formData.subject}
                       onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
-                      className="w-full px-4 py-3 bg-stone-50 border border-stone-300 rounded-xl text-stone-800 font-semibold focus:ring-2 focus:ring-[#0F382C] focus:bg-white focus:outline-none cursor-pointer"
+                      className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-2xl text-slate-800 font-semibold focus:border-[#E11D48] focus:bg-white focus:outline-none cursor-pointer"
                     >
                       <option value="Tour Package Booking">Tour Package Booking (Nainital, Corbett, Mussoorie, Auli)</option>
-                      <option value="Hotel & Resort Booking">Hotel & Resort Booking</option>
-                      <option value="Chardham Yatra Pilgrimage">Chardham Yatra Pilgrimage</option>
-                      <option value="Destination Wedding in Uttarakhand">Destination Wedding in Uttarakhand</option>
-                      <option value="Corporate Offsite & Retreat">Corporate Offsite & Retreat</option>
-                      <option value="General Inquiry">General Inquiry / Custom Itinerary</option>
+                      <option value="Hotel & Resort Booking">Luxury Hotel & Resort Booking</option>
+                      <option value="Chardham Yatra Pilgrimage">Kedarnath & Chardham Yatra Pilgrimage</option>
+                      <option value="Destination Wedding in Uttarakhand">Destination Wedding Planning</option>
+                      <option value="Corporate Offsite & Retreat">Corporate Retreat / MICE</option>
+                      <option value="General Inquiry">Custom Mountain Itinerary</option>
                     </select>
                   </div>
 
                   <div>
-                    <label className="block font-bold text-stone-700 mb-1">Your Travel Requirements / Message *</label>
+                    <label className="block font-bold text-slate-700 mb-1">Your Requirements / Dates / Message *</label>
                     <textarea
-                      rows="7"
+                      rows="6"
                       required
-                      placeholder="Please share travel dates, number of guests, destination preferences, or budget requirements..."
+                      placeholder="Please mention travel dates, number of travelers, preferred destinations, or hotel preferences..."
                       value={formData.message}
                       onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                      className="w-full min-h-[180px] px-4 py-3 bg-stone-50 border border-stone-300 rounded-xl text-stone-800 font-semibold focus:ring-2 focus:ring-[#0F382C] focus:bg-white focus:outline-none leading-relaxed transition-all resize-y"
+                      className="w-full min-h-[160px] px-4 py-3 bg-slate-50 border border-slate-200 rounded-2xl text-slate-800 font-semibold focus:border-[#E11D48] focus:bg-white focus:outline-none leading-relaxed transition-all resize-y"
                     />
                   </div>
 
                   <button
                     type="submit"
-                    className="w-full bg-[#0F382C] hover:bg-[#0C2D23] text-white py-4 rounded-xl font-bold text-sm flex items-center justify-center gap-2 shadow-md hover:shadow-lg transition-all mt-2 cursor-pointer"
+                    className="w-full bg-gradient-to-r from-[#E11D48] to-[#FF6B35] hover:from-[#BE123C] hover:to-[#EA580C] text-white py-4 rounded-2xl font-bold text-sm flex items-center justify-center gap-2 shadow-lg shadow-rose-900/20 transition-all mt-2 cursor-pointer hover:scale-[1.01]"
                   >
-                    <Send className="w-4 h-4 text-[#C8933E]" />
+                    <Send className="w-4 h-4" />
                     <span>Send Travel Inquiry Now</span>
                   </button>
                 </form>
               )}
             </div>
 
-            {/* Security Guarantee */}
-            <div className="pt-6 border-t border-stone-100 flex items-center justify-between text-[11px] text-stone-500 font-medium mt-6">
+            <div className="pt-6 border-t border-slate-100 flex items-center justify-between text-[11px] text-slate-500 font-medium mt-6">
               <div className="flex items-center gap-1.5">
                 <ShieldCheck className="w-4 h-4 text-emerald-600" />
                 <span>100% Privacy Protected</span>
               </div>
               <div className="flex items-center gap-1.5">
-                <Clock className="w-4 h-4 text-[#C8933E]" />
-                <span>Guaranteed Callback in 15 mins</span>
+                <Clock className="w-4 h-4 text-[#FF6B35]" />
+                <span>Fast Callback Guarantee</span>
               </div>
             </div>
 

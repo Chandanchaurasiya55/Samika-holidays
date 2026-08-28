@@ -19,7 +19,7 @@ export default function UserDashboard({
   // Load Logged-In User from localStorage
   const [currentUser, setCurrentUser] = useState(() => {
     try {
-      const saved = localStorage.getItem('samika_current_user') || localStorage.getItem('atithya_current_user');
+      const saved = localStorage.getItem('samika_current_user');
       return saved ? JSON.parse(saved) : null;
     } catch (e) {
       return null;
@@ -59,102 +59,101 @@ export default function UserDashboard({
     return emailMatches || phoneMatches;
   });
 
-  const handleProfileSave = (e) => {
+  // Handle Profile Update & sync to localStorage
+  const handleSaveProfile = (e) => {
     e.preventDefault();
-    const updated = {
-      ...(currentUser || {}),
+    const updatedUser = {
+      ...currentUser,
       name: profile.name,
       phone: profile.phone,
       email: profile.email,
       address: profile.address
     };
-    setCurrentUser(updated);
-    localStorage.setItem('samika_current_user', JSON.stringify(updated));
+
+    setCurrentUser(updatedUser);
+    localStorage.setItem('samika_current_user', JSON.stringify(updatedUser));
     setSaveSuccess(true);
     setTimeout(() => setSaveSuccess(false), 3000);
   };
 
-  const handlePrintInvoice = () => {
-    window.print();
-  };
-
   return (
-    <div className="w-full max-w-[97%] 2xl:max-w-[1780px] mx-auto px-2 sm:px-4 lg:px-6 py-8 space-y-8 min-h-screen">
+    <div className="w-full max-w-[97%] 2xl:max-w-[1780px] mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8 min-h-screen bg-[#F8FAFC]">
       
-      {/* Dashboard 2-Column Grid (25% Left Sidebar | 75% Right Main Area) */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-        
-        {/* ======================================================== */}
-        {/* LEFT COLUMN: 25% SIDEBAR (lg:col-span-3)                 */}
-        {/* ======================================================== */}
-        <div className="lg:col-span-3 space-y-6">
-          
-          {/* User Profile Summary Card */}
-          <div className="bg-white rounded-3xl p-6 border border-stone-200 shadow-sm text-center space-y-4">
-            <div className="relative inline-block">
-              <div className="w-20 h-20 rounded-full bg-[#0F382C] text-[#C8933E] flex items-center justify-center font-bold text-3xl mx-auto shadow-md border-2 border-[#C8933E]/40">
-                {(profile.name || 'U')[0].toUpperCase()}
-              </div>
-              <span className="absolute bottom-0 right-0 w-5 h-5 bg-emerald-500 border-2 border-white rounded-full" title="Active Traveler" />
-            </div>
-
-            <div>
-              <h2 className="font-serif text-lg font-bold text-[#0F382C]">{profile.name}</h2>
-              <p className="text-[11px] text-stone-500 font-semibold">{profile.email || 'Registered Member'}</p>
-              <div className="mt-2 inline-flex items-center gap-1.5 bg-[#C8933E]/15 text-[#C8933E] border border-[#C8933E]/30 px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider">
-                <Award className="w-3 h-3" />
-                <span>Prime Member</span>
-              </div>
-            </div>
-
-            <div className="pt-3 border-t border-stone-100 text-left text-xs space-y-2 text-stone-600">
-              {profile.phone && (
-                <div className="flex items-center gap-2">
-                  <Phone className="w-3.5 h-3.5 text-[#0F382C] shrink-0" />
-                  <span className="truncate">{profile.phone}</span>
-                </div>
-              )}
-              {profile.address && (
-                <div className="flex items-center gap-2">
-                  <MapPin className="w-3.5 h-3.5 text-[#0F382C] shrink-0" />
-                  <span className="line-clamp-1">{profile.address}</span>
-                </div>
-              )}
-            </div>
+      {/* ======================================================== */}
+      {/* TOP GREETING BANNER & USER METRICS                       */}
+      {/* ======================================================== */}
+      <div className="bg-[#0F172A] text-white rounded-3xl p-6 sm:p-8 shadow-xl border border-slate-800 flex flex-col md:flex-row items-start md:items-center justify-between gap-6 relative overflow-hidden">
+        <div className="relative z-10 space-y-2">
+          <div className="inline-flex items-center gap-1.5 bg-rose-500/20 text-[#FF6B35] border border-rose-500/40 px-3 py-1 rounded-full text-[11px] font-bold uppercase tracking-wider">
+            <Sparkles className="w-3.5 h-3.5 text-[#E11D48]" />
+            <span>Samika Holidays Guest Portal</span>
           </div>
 
-          {/* Left Vertical Navigation Menu */}
-          <div className="bg-white rounded-3xl p-3 border border-stone-200 shadow-sm space-y-1">
+          <h1 className="font-serif text-2xl sm:text-3xl lg:text-4xl font-bold">
+            Namaste, {profile.name}!
+          </h1>
+
+          <p className="text-slate-300 text-xs sm:text-sm max-w-xl">
+            Welcome to your personalized Himalayan travel hub. Track your confirmed bookings, download tour vouchers & manage receipts.
+          </p>
+        </div>
+
+        {/* Stats Strip */}
+        <div className="relative z-10 grid grid-cols-2 sm:grid-cols-3 gap-3 w-full md:w-auto">
+          <div className="bg-white/10 backdrop-blur-md rounded-2xl p-4 border border-white/15 text-center">
+            <div className="text-xl font-bold text-[#FF6B35]">{userBookings.length}</div>
+            <div className="text-[11px] text-slate-300 font-medium">My Bookings</div>
+          </div>
+
+          <div className="bg-white/10 backdrop-blur-md rounded-2xl p-4 border border-white/15 text-center">
+            <div className="text-xl font-bold text-emerald-400">
+              {userBookings.filter(b => (b.status || '').toLowerCase() === 'confirmed').length}
+            </div>
+            <div className="text-[11px] text-slate-300 font-medium">Confirmed</div>
+          </div>
+
+          <div className="bg-white/10 backdrop-blur-md rounded-2xl p-4 border border-white/15 text-center col-span-2 sm:col-span-1">
+            <div className="text-xl font-bold text-white">24/7</div>
+            <div className="text-[11px] text-slate-300 font-medium">Concierge Help</div>
+          </div>
+        </div>
+      </div>
+
+      {/* ======================================================== */}
+      {/* DASHBOARD 2-COLUMN LAYOUT: 25% SIDEBAR + 75% MAIN CONTENT */}
+      {/* ======================================================== */}
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        
+        {/* SIDEBAR NAVIGATION (lg:col-span-3) */}
+        <div className="lg:col-span-3 space-y-6">
+          
+          <div className="bg-white rounded-3xl p-5 border border-slate-200 shadow-sm space-y-2">
             
             <button
               onClick={() => setActiveTab('bookings')}
               className={`w-full flex items-center justify-between px-4 py-3 rounded-2xl text-xs font-bold transition-all cursor-pointer ${
                 activeTab === 'bookings'
-                  ? 'bg-[#0F382C] text-white shadow-md'
-                  : 'text-stone-700 hover:bg-stone-100'
+                  ? 'bg-gradient-to-r from-[#E11D48] to-[#FF6B35] text-white shadow-md'
+                  : 'text-slate-700 hover:bg-slate-100'
               }`}
             >
               <div className="flex items-center gap-3">
-                <Ticket className={`w-4 h-4 ${activeTab === 'bookings' ? 'text-[#C8933E]' : 'text-stone-500'}`} />
+                <Ticket className="w-4 h-4" />
                 <span>My Bookings</span>
               </div>
-              <span className={`px-2 py-0.5 rounded-full text-[10px] ${
-                activeTab === 'bookings' ? 'bg-[#C8933E] text-white' : 'bg-stone-100 text-stone-600'
-              }`}>
-                {userBookings.length}
-              </span>
+              <ChevronRight className="w-3.5 h-3.5 opacity-60" />
             </button>
 
             <button
               onClick={() => setActiveTab('billing')}
               className={`w-full flex items-center justify-between px-4 py-3 rounded-2xl text-xs font-bold transition-all cursor-pointer ${
                 activeTab === 'billing'
-                  ? 'bg-[#0F382C] text-white shadow-md'
-                  : 'text-stone-700 hover:bg-stone-100'
+                  ? 'bg-gradient-to-r from-[#E11D48] to-[#FF6B35] text-white shadow-md'
+                  : 'text-slate-700 hover:bg-slate-100'
               }`}
             >
               <div className="flex items-center gap-3">
-                <CreditCard className={`w-4 h-4 ${activeTab === 'billing' ? 'text-[#C8933E]' : 'text-stone-500'}`} />
+                <CreditCard className="w-4 h-4" />
                 <span>Billing & Invoices</span>
               </div>
               <ChevronRight className="w-3.5 h-3.5 opacity-60" />
@@ -164,13 +163,13 @@ export default function UserDashboard({
               onClick={() => setActiveTab('profile')}
               className={`w-full flex items-center justify-between px-4 py-3 rounded-2xl text-xs font-bold transition-all cursor-pointer ${
                 activeTab === 'profile'
-                  ? 'bg-[#0F382C] text-white shadow-md'
-                  : 'text-stone-700 hover:bg-stone-100'
+                  ? 'bg-gradient-to-r from-[#E11D48] to-[#FF6B35] text-white shadow-md'
+                  : 'text-slate-700 hover:bg-slate-100'
               }`}
             >
               <div className="flex items-center gap-3">
-                <Settings className={`w-4 h-4 ${activeTab === 'profile' ? 'text-[#C8933E]' : 'text-stone-500'}`} />
-                <span>Profile & Address</span>
+                <Settings className="w-4 h-4" />
+                <span>Profile & Details</span>
               </div>
               <ChevronRight className="w-3.5 h-3.5 opacity-60" />
             </button>
@@ -179,12 +178,12 @@ export default function UserDashboard({
               onClick={() => setActiveTab('support')}
               className={`w-full flex items-center justify-between px-4 py-3 rounded-2xl text-xs font-bold transition-all cursor-pointer ${
                 activeTab === 'support'
-                  ? 'bg-[#0F382C] text-white shadow-md'
-                  : 'text-stone-700 hover:bg-stone-100'
+                  ? 'bg-gradient-to-r from-[#E11D48] to-[#FF6B35] text-white shadow-md'
+                  : 'text-slate-700 hover:bg-slate-100'
               }`}
             >
               <div className="flex items-center gap-3">
-                <Headphones className={`w-4 h-4 ${activeTab === 'support' ? 'text-[#C8933E]' : 'text-stone-500'}`} />
+                <Headphones className="w-4 h-4" />
                 <span>Help & Support</span>
               </div>
               <ChevronRight className="w-3.5 h-3.5 opacity-60" />
@@ -192,7 +191,7 @@ export default function UserDashboard({
 
             <button
               onClick={onLogout}
-              className="w-full flex items-center gap-3 px-4 py-3 rounded-2xl text-xs font-bold text-red-600 hover:bg-red-50 transition-all cursor-pointer pt-2 border-t border-stone-100"
+              className="w-full flex items-center gap-3 px-4 py-3 rounded-2xl text-xs font-bold text-red-600 hover:bg-red-50 transition-all cursor-pointer pt-2 border-t border-slate-100"
             >
               <LogOut className="w-4 h-4" />
               <span>Sign Out</span>
@@ -200,20 +199,20 @@ export default function UserDashboard({
 
           </div>
 
-          {/* Quick Support Banner in Sidebar */}
-          <div className="bg-gradient-to-br from-[#0F382C] to-[#164e3e] text-white rounded-3xl p-5 shadow-sm space-y-3">
-            <div className="flex items-center gap-2 text-[#C8933E] font-bold text-xs">
-              <Sparkles className="w-4 h-4" />
+          {/* Quick Support Box */}
+          <div className="bg-[#0F172A] text-white rounded-3xl p-5 shadow-sm space-y-3 border border-slate-800">
+            <div className="flex items-center gap-2 text-[#FF6B35] font-bold text-xs">
+              <Sparkles className="w-4 h-4 text-[#E11D48]" />
               <span>Need Assistance?</span>
             </div>
-            <p className="text-xs text-stone-200 leading-relaxed">
-              Our 24x7 travel desk is ready to assist you with tour customized bookings & hotel upgrades.
+            <p className="text-xs text-slate-300 leading-relaxed">
+              Our 24x7 local travel desk is ready to assist you with tour customization and hotel upgrades.
             </p>
             <a
               href="https://wa.me/919258677823"
               target="_blank"
               rel="noreferrer"
-              className="bg-[#C8933E] hover:bg-[#B5812F] text-white py-2 px-4 rounded-xl text-xs font-bold flex items-center justify-center gap-2 shadow-sm transition-all"
+              className="bg-emerald-600 hover:bg-emerald-700 text-white py-2.5 px-4 rounded-xl text-xs font-bold flex items-center justify-center gap-2 shadow-sm transition-all"
             >
               <MessageCircle className="w-4 h-4 fill-current" />
               <span>Chat on WhatsApp</span>
@@ -222,37 +221,35 @@ export default function UserDashboard({
 
         </div>
 
-        {/* ======================================================== */}
-        {/* RIGHT COLUMN: 75% MAIN CONTENT AREA (lg:col-span-9)      */}
-        {/* ======================================================== */}
+        {/* MAIN CONTENT AREA (lg:col-span-9) */}
         <div className="lg:col-span-9 space-y-6">
           
           {/* TAB 1: MY BOOKINGS */}
           {activeTab === 'bookings' && (
             <div className="space-y-6">
-              <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 bg-white p-6 rounded-3xl border border-stone-200 shadow-xs">
+              <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 bg-white p-6 rounded-3xl border border-slate-200 shadow-xs">
                 <div>
-                  <h2 className="font-serif text-2xl font-bold text-[#0F382C]">My Booked Trips & Packages</h2>
-                  <p className="text-xs text-stone-500">Manage your active tour vouchers, itineraries, and booking requests.</p>
+                  <h2 className="font-serif text-2xl font-bold text-[#0F172A]">My Booked Trips & Packages</h2>
+                  <p className="text-xs text-slate-500">Manage your active tour vouchers, itineraries, and booking requests.</p>
                 </div>
                 <button
                   onClick={() => onOpenEnquiry && onOpenEnquiry('New Package Booking')}
-                  className="bg-[#C8933E] hover:bg-[#B5812F] text-white px-5 py-2.5 rounded-xl font-bold text-xs flex items-center gap-2 shadow-md transition-all shrink-0 cursor-pointer"
+                  className="bg-gradient-to-r from-[#E11D48] to-[#FF6B35] hover:from-[#BE123C] hover:to-[#EA580C] text-white px-5 py-2.5 rounded-xl font-bold text-xs flex items-center gap-2 shadow-md transition-all shrink-0 cursor-pointer"
                 >
                   <Sparkles className="w-4 h-4" />
                   <span>Book New Tour</span>
                 </button>
               </div>
 
-              {/* DYNAMIC LIST OF BOOKINGS FOR THIS USER */}
+              {/* LIST OF BOOKINGS */}
               {userBookings.length > 0 ? (
                 <div className="grid grid-cols-1 gap-6">
                   {userBookings.map((booking, idx) => {
-                    const bookingId = booking.id || booking._id || `AS-2026-${1000 + idx}`;
+                    const bookingId = booking.id || booking._id || `SMK-2026-${1000 + idx}`;
                     const title = booking.packageTitle || booking.title || 'Uttarakhand Custom Tour';
                     const destination = booking.destination || 'Uttarakhand, India';
                     const status = booking.status || 'Pending';
-                    const paymentStatus = booking.paymentStatus || 'Payment on Confirmation';
+                    const paymentStatus = booking.paymentStatus || 'Confirmed';
                     const date = booking.date || booking.dates || (booking.createdAt ? new Date(booking.createdAt).toLocaleDateString() : 'Upcoming');
                     const guests = booking.guests || booking.people || `${booking.guestsCount || 2} Guests`;
                     const amount = booking.amount || booking.total || booking.budget || 'Custom Quote';
@@ -261,10 +258,9 @@ export default function UserDashboard({
                     return (
                       <div 
                         key={bookingId} 
-                        className="bg-white rounded-3xl border border-stone-200 overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 grid grid-cols-1 md:grid-cols-12"
+                        className="bg-white rounded-3xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 grid grid-cols-1 md:grid-cols-12"
                       >
-                        {/* Image */}
-                        <div className="md:col-span-4 relative min-h-[200px] bg-stone-900">
+                        <div className="md:col-span-4 relative min-h-[200px] bg-slate-900">
                           <img src={image} alt={title} className="w-full h-full object-cover" />
                           <span className={`absolute top-4 left-4 text-white text-[10px] font-extrabold px-3 py-1 rounded-full uppercase shadow-md ${
                             status === 'Confirmed' 
@@ -277,59 +273,51 @@ export default function UserDashboard({
                           </span>
                         </div>
 
-                        {/* Content */}
                         <div className="md:col-span-8 p-6 flex flex-col justify-between space-y-4">
                           <div className="space-y-3">
                             <div className="flex items-start justify-between gap-4">
                               <div>
-                                <span className="text-[10px] font-bold uppercase text-stone-400 tracking-wider">REF ID: {bookingId}</span>
-                                <h3 className="font-serif text-xl font-bold text-[#0F382C]">{title}</h3>
-                                <p className="text-xs text-stone-500 flex items-center gap-1 mt-0.5">
-                                  <MapPin className="w-3.5 h-3.5 text-[#C8933E]" />
+                                <span className="text-[10px] font-bold uppercase text-slate-400 tracking-wider">REF ID: {bookingId}</span>
+                                <h3 className="font-serif text-xl font-bold text-[#0F172A]">{title}</h3>
+                                <p className="text-xs text-slate-500 flex items-center gap-1 mt-0.5">
+                                  <MapPin className="w-3.5 h-3.5 text-[#FF6B35]" />
                                   <span>{destination}</span>
                                 </p>
                               </div>
                               <div className="text-right shrink-0">
-                                <span className="text-[10px] uppercase font-bold text-stone-400 block">Total Amount</span>
-                                <div className="text-lg font-extrabold text-[#0F382C]">
+                                <span className="text-[10px] uppercase font-bold text-slate-400 block">Total Amount</span>
+                                <div className="text-lg font-extrabold text-[#0F172A]">
                                   {typeof amount === 'number' ? `₹${amount.toLocaleString('en-IN')}` : amount}
                                 </div>
                               </div>
                             </div>
 
-                            <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 p-3 bg-[#FAF7F2] rounded-2xl border border-stone-200/80 text-xs">
+                            <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 p-3 bg-slate-50 rounded-2xl border border-slate-200 text-xs">
                               <div>
-                                <span className="text-[10px] uppercase font-bold text-stone-400 block">Date</span>
-                                <span className="font-bold text-stone-800 flex items-center gap-1 mt-0.5 text-[11px]">
-                                  <Calendar className="w-3.5 h-3.5 text-[#0F382C]" />
+                                <span className="text-[10px] uppercase font-bold text-slate-400 block">Date</span>
+                                <span className="font-bold text-slate-800 flex items-center gap-1 mt-0.5 text-[11px]">
+                                  <Calendar className="w-3.5 h-3.5 text-[#0F172A]" />
                                   <span>{date}</span>
                                 </span>
                               </div>
                               <div>
-                                <span className="text-[10px] uppercase font-bold text-stone-400 block">Travelers</span>
-                                <span className="font-bold text-stone-800 flex items-center gap-1 mt-0.5 text-[11px]">
-                                  <User className="w-3.5 h-3.5 text-[#0F382C]" />
+                                <span className="text-[10px] uppercase font-bold text-slate-400 block">Travelers</span>
+                                <span className="font-bold text-slate-800 flex items-center gap-1 mt-0.5 text-[11px]">
+                                  <User className="w-3.5 h-3.5 text-[#0F172A]" />
                                   <span>{guests}</span>
                                 </span>
                               </div>
                               <div>
-                                <span className="text-[10px] uppercase font-bold text-stone-400 block">Status</span>
-                                <span className="font-bold text-stone-800 flex items-center gap-1 mt-0.5 text-[11px]">
-                                  <Clock className="w-3.5 h-3.5 text-[#C8933E]" />
+                                <span className="text-[10px] uppercase font-bold text-slate-400 block">Status</span>
+                                <span className="font-bold text-slate-800 flex items-center gap-1 mt-0.5 text-[11px]">
+                                  <Clock className="w-3.5 h-3.5 text-[#FF6B35]" />
                                   <span>{status}</span>
                                 </span>
                               </div>
                             </div>
-
-                            {booking.message && (
-                              <p className="text-xs text-stone-600 italic bg-stone-50 p-2.5 rounded-xl border border-stone-100">
-                                "{booking.message}"
-                              </p>
-                            )}
                           </div>
 
-                          {/* Action */}
-                          <div className="pt-3 border-t border-stone-100 flex items-center justify-between gap-4">
+                          <div className="pt-3 border-t border-slate-100 flex items-center justify-between gap-4">
                             <div className="flex items-center gap-1.5 text-xs font-bold text-emerald-700">
                               <ShieldCheck className="w-4 h-4" />
                               <span>{paymentStatus}</span>
@@ -346,10 +334,10 @@ export default function UserDashboard({
                                 paymentStatus,
                                 status
                               })}
-                              className="bg-stone-100 hover:bg-stone-200 text-stone-800 px-4 py-2 rounded-xl font-bold text-xs flex items-center gap-2 border border-stone-300 transition-all cursor-pointer"
+                              className="bg-slate-100 hover:bg-slate-200 text-slate-800 px-4 py-2 rounded-xl font-bold text-xs flex items-center gap-2 border border-slate-300 transition-all cursor-pointer"
                             >
-                              <FileText className="w-4 h-4 text-[#0F382C]" />
-                              <span>View Receipt</span>
+                              <FileText className="w-4 h-4 text-[#0F172A]" />
+                              <span>View Voucher</span>
                             </button>
                           </div>
                         </div>
@@ -359,17 +347,15 @@ export default function UserDashboard({
                   })}
                 </div>
               ) : (
-                /* EMPTY STATE: USER HAS NOT BOOKED ANYTHING YET */
-                <div className="bg-white rounded-3xl p-10 sm:p-14 border border-stone-200 shadow-sm text-center space-y-6">
-                  <div className="w-20 h-20 rounded-full bg-[#FAF7F2] text-[#0F382C] border border-[#E7DECD] flex items-center justify-center mx-auto shadow-inner">
-                    <Luggage className="w-10 h-10 text-[#C8933E]" />
+                <div className="bg-white rounded-3xl p-10 sm:p-14 border border-slate-200 shadow-sm text-center space-y-6">
+                  <div className="w-20 h-20 rounded-full bg-slate-100 text-[#0F172A] border border-slate-200 flex items-center justify-center mx-auto shadow-inner">
+                    <Luggage className="w-10 h-10 text-[#FF6B35]" />
                   </div>
 
                   <div className="space-y-2 max-w-md mx-auto">
-                    <h3 className="font-serif text-2xl font-bold text-[#0F382C]">No Trips Booked Yet</h3>
-                    <p className="text-xs sm:text-sm text-stone-500 leading-relaxed">
-                      You haven't booked any tour packages or hotel stays yet. 
-                      Explore our handpicked Uttarakhand tour itineraries and start your mountain adventure!
+                    <h3 className="font-serif text-2xl font-bold text-[#0F172A]">No Trips Booked Yet</h3>
+                    <p className="text-xs sm:text-sm text-slate-500 leading-relaxed">
+                      You haven't booked any tour packages or hotel stays yet. Explore our handpicked Uttarakhand tour itineraries and start your mountain adventure!
                     </p>
                   </div>
 
@@ -377,16 +363,16 @@ export default function UserDashboard({
                     {setGlobalActiveTab && (
                       <button
                         onClick={() => setGlobalActiveTab('packages')}
-                        className="bg-[#0F382C] hover:bg-[#0A261E] text-white px-6 py-3 rounded-xl font-bold text-xs shadow-md transition-all flex items-center gap-2 cursor-pointer"
+                        className="bg-[#0F172A] hover:bg-[#1E293B] text-white px-6 py-3 rounded-xl font-bold text-xs shadow-md transition-all flex items-center gap-2 cursor-pointer"
                       >
-                        <Compass className="w-4 h-4 text-[#C8933E]" />
+                        <Compass className="w-4 h-4 text-[#FF6B35]" />
                         <span>Explore Tour Packages</span>
                       </button>
                     )}
 
                     <button
                       onClick={() => onOpenEnquiry && onOpenEnquiry('Custom Holiday Plan')}
-                      className="bg-[#C8933E] hover:bg-[#B5812F] text-white px-6 py-3 rounded-xl font-bold text-xs shadow-md transition-all flex items-center gap-2 cursor-pointer"
+                      className="bg-gradient-to-r from-[#E11D48] to-[#FF6B35] hover:from-[#BE123C] hover:to-[#EA580C] text-white px-6 py-3 rounded-xl font-bold text-xs shadow-md transition-all flex items-center gap-2 cursor-pointer"
                     >
                       <Sparkles className="w-4 h-4" />
                       <span>Request Custom Itinerary</span>
@@ -401,16 +387,16 @@ export default function UserDashboard({
           {/* TAB 2: BILLING & INVOICES */}
           {activeTab === 'billing' && (
             <div className="space-y-6">
-              <div className="bg-white p-6 rounded-3xl border border-stone-200 shadow-xs">
-                <h2 className="font-serif text-2xl font-bold text-[#0F382C]">Billing Statements & Vouchers</h2>
-                <p className="text-xs text-stone-500">Download invoice receipts and tax invoices for your confirmed tour bookings.</p>
+              <div className="bg-white p-6 rounded-3xl border border-slate-200 shadow-xs">
+                <h2 className="font-serif text-2xl font-bold text-[#0F172A]">Billing Statements & Vouchers</h2>
+                <p className="text-xs text-slate-500">Download invoice receipts and tax invoices for your confirmed tour bookings.</p>
               </div>
 
               {userBookings.length > 0 ? (
-                <div className="bg-white rounded-3xl border border-stone-200 shadow-sm overflow-hidden">
+                <div className="bg-white rounded-3xl border border-slate-200 shadow-sm overflow-hidden">
                   <div className="overflow-x-auto">
                     <table className="w-full text-left text-xs">
-                      <thead className="bg-[#FAF7F2] text-stone-700 font-bold border-b border-stone-200 uppercase text-[10px] tracking-wider">
+                      <thead className="bg-slate-50 text-slate-700 font-bold border-b border-slate-200 uppercase text-[10px] tracking-wider">
                         <tr>
                           <th className="py-4 px-6">Booking Ref</th>
                           <th className="py-4 px-6">Package / Tour</th>
@@ -420,25 +406,25 @@ export default function UserDashboard({
                           <th className="py-4 px-6 text-right">Invoice Action</th>
                         </tr>
                       </thead>
-                      <tbody className="divide-y divide-stone-100 font-medium">
+                      <tbody className="divide-y divide-slate-100 font-medium">
                         {userBookings.map((b, idx) => {
-                          const bookingId = b.id || b._id || `AS-2026-${1000 + idx}`;
+                          const bookingId = b.id || b._id || `SMK-2026-${1000 + idx}`;
                           const title = b.packageTitle || b.title || 'Uttarakhand Custom Tour';
                           const date = b.date || b.dates || (b.createdAt ? new Date(b.createdAt).toLocaleDateString() : 'Recent');
-                          const paymentStatus = b.paymentStatus || 'Payment on Confirmation';
+                          const paymentStatus = b.paymentStatus || 'Confirmed';
                           const amount = b.amount || b.total || b.budget || 'Custom Quote';
 
                           return (
-                            <tr key={bookingId} className="hover:bg-stone-50 transition-colors">
-                              <td className="py-4 px-6 font-bold text-stone-900">{bookingId}</td>
-                              <td className="py-4 px-6 font-bold text-[#0F382C]">{title}</td>
-                              <td className="py-4 px-6 text-stone-600">{date}</td>
+                            <tr key={bookingId} className="hover:bg-slate-50 transition-colors">
+                              <td className="py-4 px-6 font-bold text-slate-900">{bookingId}</td>
+                              <td className="py-4 px-6 font-bold text-[#0F172A]">{title}</td>
+                              <td className="py-4 px-6 text-slate-600">{date}</td>
                               <td className="py-4 px-6">
                                 <span className="bg-emerald-50 text-emerald-800 border border-emerald-200 px-2.5 py-1 rounded-md text-[11px] font-bold">
                                   {paymentStatus}
                                 </span>
                               </td>
-                              <td className="py-4 px-6 font-extrabold text-stone-900 text-sm">
+                              <td className="py-4 px-6 font-extrabold text-slate-900 text-sm">
                                 {typeof amount === 'number' ? `₹${amount.toLocaleString('en-IN')}` : amount}
                               </td>
                               <td className="py-4 px-6 text-right">
@@ -448,14 +434,15 @@ export default function UserDashboard({
                                     title,
                                     destination: b.destination || 'Uttarakhand',
                                     date,
-                                    guests: b.guests || b.people || '2 Guests',
+                                    guests: b.guests || `${b.guestsCount || 2} Guests`,
                                     amount,
-                                    paymentStatus
+                                    paymentStatus,
+                                    status: b.status || 'Confirmed'
                                   })}
-                                  className="bg-[#0F382C] text-white hover:bg-[#0C2D23] px-3.5 py-2 rounded-lg font-bold text-xs inline-flex items-center gap-1.5 shadow-xs cursor-pointer"
+                                  className="bg-slate-100 hover:bg-slate-200 text-slate-800 px-3 py-1.5 rounded-lg font-bold text-xs inline-flex items-center gap-1.5 transition-colors cursor-pointer"
                                 >
-                                  <Download className="w-3.5 h-3.5" />
-                                  <span>Receipt</span>
+                                  <Download className="w-3.5 h-3.5 text-[#E11D48]" />
+                                  <span>Voucher</span>
                                 </button>
                               </td>
                             </tr>
@@ -466,121 +453,121 @@ export default function UserDashboard({
                   </div>
                 </div>
               ) : (
-                <div className="bg-white rounded-3xl p-10 border border-stone-200 shadow-sm text-center space-y-4">
-                  <div className="w-16 h-16 rounded-full bg-[#FAF7F2] text-[#0F382C] border border-[#E7DECD] flex items-center justify-center mx-auto">
-                    <FileText className="w-8 h-8 text-[#C8933E]" />
-                  </div>
-                  <h3 className="font-serif text-xl font-bold text-stone-900">No Invoices Available</h3>
-                  <p className="text-xs text-stone-500 max-w-sm mx-auto">
-                    Invoices and tax receipts are automatically generated once you book a package or resort with us.
-                  </p>
+                <div className="bg-white rounded-3xl p-12 text-center border border-slate-200 space-y-4">
+                  <CreditCard className="w-12 h-12 text-slate-300 mx-auto" />
+                  <h3 className="font-serif text-xl font-bold text-slate-800">No Billing History Found</h3>
+                  <p className="text-xs text-slate-500">Your receipts and tax invoices will appear here after booking a tour.</p>
                 </div>
               )}
             </div>
           )}
 
-          {/* TAB 3: PROFILE & ADDRESS */}
+          {/* TAB 3: PROFILE SETTINGS */}
           {activeTab === 'profile' && (
-            <div className="bg-white rounded-3xl p-6 sm:p-8 border border-stone-200 shadow-sm space-y-6">
-              <div>
-                <h2 className="font-serif text-2xl font-bold text-[#0F382C]">My Account Profile & Address</h2>
-                <p className="text-xs text-stone-500">Update your contact information for seamless hotel check-in and booking communications.</p>
-              </div>
-
-              {saveSuccess && (
-                <div className="p-4 bg-emerald-50 border border-emerald-200 rounded-2xl flex items-center gap-2 text-emerald-800 text-xs font-bold animate-in fade-in">
-                  <Check className="w-4 h-4 text-emerald-600" />
-                  <span>Profile details updated successfully!</span>
-                </div>
-              )}
-
-              <form onSubmit={handleProfileSave} className="space-y-4 text-xs">
+            <div className="space-y-6">
+              <div className="bg-white p-6 sm:p-8 rounded-3xl border border-slate-200 shadow-sm space-y-6">
                 <div>
-                  <label className="block font-bold text-stone-700 mb-1">Full Name</label>
-                  <input
-                    type="text"
-                    required
-                    value={profile.name}
-                    onChange={(e) => setProfile({ ...profile, name: e.target.value })}
-                    className="w-full px-4 py-3 bg-stone-50 border border-stone-200 rounded-xl text-stone-800 font-semibold focus:outline-none focus:border-[#0F382C]"
-                  />
+                  <h2 className="font-serif text-2xl font-bold text-[#0F172A]">Traveler Profile Settings</h2>
+                  <p className="text-xs text-slate-500">Update your contact details for future booking vouchers and emergency support.</p>
+                </div>
+
+                {saveSuccess && (
+                  <div className="bg-emerald-50 text-emerald-800 border border-emerald-200 p-4 rounded-2xl text-xs font-bold flex items-center gap-2">
+                    <CheckCircle2 className="w-4 h-4 shrink-0" />
+                    <span>Profile details successfully updated!</span>
+                  </div>
+                )}
+
+                <form onSubmit={handleSaveProfile} className="space-y-4 text-xs">
+                  <div>
+                    <label className="block font-bold text-slate-700 mb-1">Full Name</label>
+                    <input
+                      type="text"
+                      required
+                      value={profile.name}
+                      onChange={(e) => setProfile({ ...profile, name: e.target.value })}
+                      className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl font-semibold text-slate-800 focus:outline-none focus:border-[#E11D48]"
+                    />
+                  </div>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                      <label className="block font-bold text-slate-700 mb-1">Phone Number (WhatsApp)</label>
+                      <input
+                        type="tel"
+                        required
+                        value={profile.phone}
+                        onChange={(e) => setProfile({ ...profile, phone: e.target.value })}
+                        className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl font-semibold text-slate-800 focus:outline-none focus:border-[#E11D48]"
+                      />
+                    </div>
+                    <div>
+                      <label className="block font-bold text-slate-700 mb-1">Email Address</label>
+                      <input
+                        type="email"
+                        required
+                        value={profile.email}
+                        onChange={(e) => setProfile({ ...profile, email: e.target.value })}
+                        className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl font-semibold text-slate-800 focus:outline-none focus:border-[#E11D48]"
+                      />
+                    </div>
+                  </div>
+
+                  <div>
+                    <label className="block font-bold text-slate-700 mb-1">Billing City / Address</label>
+                    <input
+                      type="text"
+                      value={profile.address}
+                      onChange={(e) => setProfile({ ...profile, address: e.target.value })}
+                      className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl font-semibold text-slate-800 focus:outline-none focus:border-[#E11D48]"
+                    />
+                  </div>
+
+                  <div className="pt-2">
+                    <button
+                      type="submit"
+                      className="bg-[#0F172A] hover:bg-[#1E293B] text-white px-6 py-3 rounded-xl font-bold text-xs shadow-md transition-all cursor-pointer"
+                    >
+                      Save Profile Changes
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          )}
+
+          {/* TAB 4: SUPPORT DESK */}
+          {activeTab === 'support' && (
+            <div className="space-y-6">
+              <div className="bg-white p-6 sm:p-8 rounded-3xl border border-slate-200 shadow-sm space-y-6">
+                <div>
+                  <h2 className="font-serif text-2xl font-bold text-[#0F172A]">24/7 Traveler Helpdesk</h2>
+                  <p className="text-xs text-slate-500">Need emergency road assistance, itinerary modification, or resort check-in help?</p>
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <div>
-                    <label className="block font-bold text-stone-700 mb-1">Phone Number</label>
-                    <input
-                      type="tel"
-                      value={profile.phone}
-                      onChange={(e) => setProfile({ ...profile, phone: e.target.value })}
-                      placeholder="+91 9876543210"
-                      className="w-full px-4 py-3 bg-stone-50 border border-stone-200 rounded-xl text-stone-800 font-semibold focus:outline-none focus:border-[#0F382C]"
-                    />
+                  <div className="p-5 rounded-2xl bg-rose-50 border border-rose-200 space-y-3">
+                    <Phone className="w-6 h-6 text-[#E11D48]" />
+                    <h3 className="font-serif font-bold text-base text-[#0F172A]">Direct Phone Support</h3>
+                    <p className="text-xs text-slate-600">Speak directly with our local tour managers.</p>
+                    <a href="tel:+919258677823" className="block text-sm font-extrabold text-[#E11D48]">
+                      +91 92586 77823 / +91 78199 13686
+                    </a>
                   </div>
-                  <div>
-                    <label className="block font-bold text-stone-700 mb-1">Email Address</label>
-                    <input
-                      type="email"
-                      value={profile.email}
-                      onChange={(e) => setProfile({ ...profile, email: e.target.value })}
-                      placeholder="user@example.com"
-                      className="w-full px-4 py-3 bg-stone-50 border border-stone-200 rounded-xl text-stone-800 font-semibold focus:outline-none focus:border-[#0F382C]"
-                    />
+
+                  <div className="p-5 rounded-2xl bg-emerald-50 border border-emerald-200 space-y-3">
+                    <MessageCircle className="w-6 h-6 text-emerald-600" />
+                    <h3 className="font-serif font-bold text-base text-emerald-950">WhatsApp Concierge</h3>
+                    <p className="text-xs text-slate-600">Fast on-road assistance & live location sharing.</p>
+                    <a 
+                      href="https://wa.me/919258677823" 
+                      target="_blank" 
+                      rel="noreferrer"
+                      className="inline-block bg-emerald-600 hover:bg-emerald-700 text-white px-4 py-2 rounded-xl text-xs font-bold"
+                    >
+                      Open WhatsApp Chat
+                    </a>
                   </div>
-                </div>
-
-                <div>
-                  <label className="block font-bold text-stone-700 mb-1">Address / Location</label>
-                  <textarea
-                    rows={3}
-                    value={profile.address}
-                    onChange={(e) => setProfile({ ...profile, address: e.target.value })}
-                    placeholder="Your city / state / address"
-                    className="w-full px-4 py-3 bg-stone-50 border border-stone-200 rounded-xl text-stone-800 font-semibold focus:outline-none focus:border-[#0F382C]"
-                  />
-                </div>
-
-                <button
-                  type="submit"
-                  className="bg-[#0F382C] text-white px-6 py-3 rounded-xl font-bold text-xs flex items-center gap-2 shadow-md hover:bg-[#0C2D23] transition-all cursor-pointer"
-                >
-                  <Edit3 className="w-4 h-4 text-[#C8933E]" />
-                  <span>Save Profile Changes</span>
-                </button>
-              </form>
-            </div>
-          )}
-
-          {/* TAB 4: SUPPORT */}
-          {activeTab === 'support' && (
-            <div className="bg-white rounded-3xl p-6 sm:p-8 border border-stone-200 shadow-sm space-y-6">
-              <div>
-                <h2 className="font-serif text-2xl font-bold text-[#0F382C]">24x7 Customer Support Desk</h2>
-                <p className="text-xs text-stone-500">Contact our Himalayan tour team directly for booking queries, cab assistance, or hotel upgrades.</p>
-              </div>
-
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div className="p-6 rounded-2xl bg-emerald-50/50 border border-emerald-200/80 space-y-3">
-                  <Phone className="w-8 h-8 text-[#0F382C]" />
-                  <h3 className="font-bold text-stone-900 text-sm">Emergency Phone Line</h3>
-                  <p className="text-xs text-stone-600">Available 24 hours a day, 7 days a week for active trips.</p>
-                  <a href="tel:+919258677823" className="inline-block text-[#0F382C] font-extrabold text-sm hover:underline">
-                    +91 9258677823
-                  </a>
-                </div>
-
-                <div className="p-6 rounded-2xl bg-emerald-50/50 border border-emerald-200/80 space-y-3">
-                  <MessageCircle className="w-8 h-8 text-emerald-600 fill-current" />
-                  <h3 className="font-bold text-stone-900 text-sm">WhatsApp Live Chat</h3>
-                  <p className="text-xs text-stone-600">Instant assistance for booking vouchers & driver details.</p>
-                  <a 
-                    href="https://wa.me/919258677823" 
-                    target="_blank" 
-                    rel="noreferrer"
-                    className="inline-block text-emerald-700 font-extrabold text-sm hover:underline"
-                  >
-                    Chat Now on WhatsApp
-                  </a>
                 </div>
               </div>
             </div>
@@ -590,80 +577,63 @@ export default function UserDashboard({
 
       </div>
 
-      {/* BILLING INVOICE MODAL POPUP */}
+      {/* MODAL: INVOICE / VOUCHER VIEW */}
       {selectedInvoice && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/75 backdrop-blur-xs">
-          <div className="bg-white rounded-3xl max-w-xl w-full p-6 sm:p-8 shadow-2xl border border-stone-200 space-y-6 animate-in fade-in zoom-in-95">
-            
-            {/* Header */}
-            <div className="flex items-center justify-between border-b border-stone-200 pb-4">
-              <div className="flex items-center gap-3">
-                <img src="/logo.png" alt="Logo" className="h-10 w-auto object-contain" />
-                <div>
-                  <div className="font-serif text-lg font-bold text-[#0F382C]">Samika Holidays Booking Voucher</div>
-                  <div className="text-[10px] text-stone-400 font-bold">GSTIN: 05AAACA1234F1Z9</div>
-                </div>
+          <div className="bg-white rounded-3xl max-w-lg w-full p-6 sm:p-8 space-y-6 shadow-2xl border border-slate-200">
+            <div className="flex items-center justify-between border-b border-slate-100 pb-4">
+              <div>
+                <span className="text-[10px] uppercase font-bold text-slate-400">Samika Holidays Booking Voucher</span>
+                <h3 className="font-serif text-xl font-bold text-[#0F172A]">{selectedInvoice.bookingId}</h3>
               </div>
-
-              <button
+              <button 
                 onClick={() => setSelectedInvoice(null)}
-                className="bg-stone-100 hover:bg-stone-200 text-stone-700 rounded-full p-2 cursor-pointer"
+                className="text-slate-400 hover:text-slate-700 p-1.5 rounded-full hover:bg-slate-100 cursor-pointer"
               >
                 ✕
               </button>
             </div>
 
-            {/* Bill Details */}
-            <div className="space-y-4 text-xs">
-              <div className="grid grid-cols-2 gap-4 p-4 bg-[#FAF7F2] rounded-2xl border border-stone-200">
-                <div>
-                  <span className="text-[10px] uppercase font-bold text-stone-400 block">Booking Ref</span>
-                  <span className="font-bold text-stone-900">{selectedInvoice.bookingId}</span>
-                </div>
-                <div>
-                  <span className="text-[10px] uppercase font-bold text-stone-400 block">Travel Date</span>
-                  <span className="font-bold text-stone-900">{selectedInvoice.date}</span>
-                </div>
+            <div className="space-y-3 text-xs">
+              <div className="flex justify-between py-1 border-b border-slate-100">
+                <span className="text-slate-500">Package:</span>
+                <strong className="text-slate-900 text-right">{selectedInvoice.title}</strong>
               </div>
-
-              <div>
-                <span className="text-[10px] uppercase font-bold text-stone-400 block">Package / Stay</span>
-                <div className="font-serif text-lg font-bold text-[#0F382C]">{selectedInvoice.title}</div>
-                <div className="text-stone-500 text-[11px]">{selectedInvoice.destination} • {selectedInvoice.guests}</div>
+              <div className="flex justify-between py-1 border-b border-slate-100">
+                <span className="text-slate-500">Guest Name:</span>
+                <strong className="text-slate-900">{profile.name}</strong>
               </div>
-
-              {/* Status Info */}
-              <div className="border-t border-stone-200 pt-4 space-y-2">
-                <div className="flex justify-between text-stone-600">
-                  <span>Guest Name</span>
-                  <span className="font-bold text-stone-900">{profile.name}</span>
-                </div>
-                <div className="flex justify-between text-stone-600">
-                  <span>Booking Status</span>
-                  <span className="font-bold text-emerald-700">{selectedInvoice.status || 'Active'}</span>
-                </div>
-                <div className="flex justify-between text-stone-600">
-                  <span>Payment Status</span>
-                  <span className="font-bold text-emerald-700">{selectedInvoice.paymentStatus}</span>
-                </div>
-                <div className="flex justify-between text-sm font-extrabold text-[#0F382C] border-t border-stone-300 pt-2">
-                  <span>Total Package Value</span>
-                  <span>{typeof selectedInvoice.amount === 'number' ? `₹${selectedInvoice.amount.toLocaleString('en-IN')}` : selectedInvoice.amount}</span>
-                </div>
+              <div className="flex justify-between py-1 border-b border-slate-100">
+                <span className="text-slate-500">Travel Date:</span>
+                <strong className="text-slate-900">{selectedInvoice.date}</strong>
+              </div>
+              <div className="flex justify-between py-1 border-b border-slate-100">
+                <span className="text-slate-500">Travelers:</span>
+                <strong className="text-slate-900">{selectedInvoice.guests}</strong>
+              </div>
+              <div className="flex justify-between py-1 border-b border-slate-100">
+                <span className="text-slate-500">Amount Paid:</span>
+                <strong className="text-[#E11D48] text-sm">
+                  {typeof selectedInvoice.amount === 'number' ? `₹${selectedInvoice.amount.toLocaleString('en-IN')}` : selectedInvoice.amount}
+                </strong>
               </div>
             </div>
 
-            {/* Print / Download Button */}
             <div className="flex gap-3 pt-2">
               <button
-                onClick={handlePrintInvoice}
-                className="w-full bg-[#0F382C] hover:bg-[#0C2D23] text-white py-3 rounded-xl font-bold text-xs flex items-center justify-center gap-2 shadow-md cursor-pointer"
+                onClick={() => window.print()}
+                className="flex-1 bg-[#0F172A] hover:bg-[#1E293B] text-white py-3 rounded-xl font-bold text-xs flex items-center justify-center gap-2 cursor-pointer"
               >
-                <Download className="w-4 h-4 text-[#C8933E]" />
-                <span>Print / Download Voucher</span>
+                <Download className="w-4 h-4" />
+                <span>Print Voucher</span>
+              </button>
+              <button
+                onClick={() => setSelectedInvoice(null)}
+                className="px-5 py-3 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl font-bold text-xs cursor-pointer"
+              >
+                Close
               </button>
             </div>
-
           </div>
         </div>
       )}

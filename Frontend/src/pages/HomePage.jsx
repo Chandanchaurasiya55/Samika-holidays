@@ -3,7 +3,8 @@ import {
   MapPin, Calendar, Users, Search, Star, ShieldCheck, Tag, Headphones, 
   Car, Hotel, Compass, Award, Phone, MessageCircle, ChevronRight, ChevronLeft,
   Sparkles, Camera, Utensils, Wifi, Waves, Trees, CheckCircle2, LayoutGrid,
-  Luggage, Snowflake, Tent, Home, Leaf, Heart, BookOpen, Clock, X
+  Luggage, Snowflake, Tent, Home, Leaf, Heart, BookOpen, Clock, X, ArrowRight,
+  TrendingUp, Check, Eye, Flame, Mountain, Shield, ChevronDown, Play, Pause
 } from 'lucide-react';
 
 const stripHtml = (html) => {
@@ -24,376 +25,354 @@ export default function HomePage({
   blogsList = [],
   onNavigateToPackages
 }) {
-  const [activeResortImage, setActiveResortImage] = useState(0);
-  const [currentHeroIndex, setCurrentHeroIndex] = useState(0);
-  const [isTransitionEnabled, setIsTransitionEnabled] = useState(true);
+  // Slider Carousel State
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const [isAutoPlaying, setIsAutoPlaying] = useState(true);
+
+  // Search Engine Form State
   const [searchDest, setSearchDest] = useState('');
+  const [checkInDate, setCheckInDate] = useState('');
+  const [checkOutDate, setCheckOutDate] = useState('');
+  const [guestSelection, setGuestSelection] = useState('2 Guests, 1 Room');
   const [isDestOpen, setIsDestOpen] = useState(false);
-  const [isMobileSearchExpanded, setIsMobileSearchExpanded] = useState(false);
-
-  const heroImages = [
-    '/nainital_hero.png',
-    'https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1920&q=80',
-    'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1920&q=80'
-  ];
-
-  // Extended slides with cloned first slide for infinite seamless right-to-left loop
-  const extendedHeroImages = [...heroImages, heroImages[0]];
-
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setIsTransitionEnabled(true);
-      setCurrentHeroIndex((prev) => prev + 1);
-    }, 3000);
-    return () => clearInterval(timer);
-  }, []);
-
-  const handleHeroTransitionEnd = () => {
-    if (currentHeroIndex >= heroImages.length) {
-      setIsTransitionEnabled(false);
-      setCurrentHeroIndex(0);
-    }
-  };
-
-  useEffect(() => {
-    if (!isTransitionEnabled) {
-      const frame = requestAnimationFrame(() => {
-        requestAnimationFrame(() => {
-          setIsTransitionEnabled(true);
-        });
-      });
-      return () => cancelAnimationFrame(frame);
-    }
-  }, [isTransitionEnabled]);
-
-  const resortImages = [
-    'https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=800&q=80',
-    'https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=800&q=80',
-    'https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=800&q=80'
-  ];
+  const [isGuestsOpen, setIsGuestsOpen] = useState(false);
 
   const [activeDestCategory, setActiveDestCategory] = useState('All');
+
+  // Ultra HD Cinematic Slider Images & Captions
+  const heroSlides = [
+    {
+      id: 1,
+      image: 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=2400&q=90',
+      title: 'Nainital & Serene Lakes',
+      sub: 'Emerald Waters, Boating & Pine Forest Trails',
+      tag: 'Lakes & Mountain Retreats'
+    },
+    {
+      id: 2,
+      image: 'https://images.unsplash.com/photo-1561731216-c3a4d99437d5?auto=format&fit=crop&w=2400&q=90',
+      title: 'Jim Corbett Tiger Reserve',
+      imageAlt: 'Jim Corbett Wildlife Safari',
+      sub: 'Jungle Safaris, Sal Forests & Riverside Luxury Lodges',
+      tag: 'Wildlife Adventure'
+    },
+    {
+      id: 3,
+      image: 'https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=2400&q=90',
+      title: 'Rishikesh & Holy Ganga',
+      sub: 'White Water Rafting, Spiritual Aarti & Yoga Retreats',
+      tag: 'Adventure & Wellness'
+    },
+    {
+      id: 4,
+      image: 'https://images.unsplash.com/photo-1605649487212-47bdab064df7?auto=format&fit=crop&w=2400&q=90',
+      title: 'Kedarnath & Chardham Shrines',
+      sub: 'Sacred High-Altitude Yatra & VIP Helicopter Care',
+      tag: 'Divine Pilgrimage'
+    },
+    
+  ];
+
+  // Auto Slider Carousel Timer
+  useEffect(() => {
+    if (!isAutoPlaying) return;
+    const interval = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % heroSlides.length);
+    }, 4500);
+    return () => clearInterval(interval);
+  }, [isAutoPlaying, heroSlides.length]);
+
+  const nextSlide = () => {
+    setCurrentSlide((prev) => (prev + 1) % heroSlides.length);
+  };
+
+  const prevSlide = () => {
+    setCurrentSlide((prev) => (prev - 1 + heroSlides.length) % heroSlides.length);
+  };
 
   const allPackages = packagesList.length > 0 ? packagesList : featuredPackages;
   const allHotels = hotelsList || [];
 
+  // Curated popular destinations for Uttarakhand
   const defaultPopularDestinations = [
     { 
       id: 'dest-1',
       searchKey: 'Jim Corbett',
       name: 'Jim Corbett National Park', 
-      tag: 'Wildlife Adventure in Nainital District', 
+      tag: 'Tiger Safaris, Riverside Lodges & Dense Sal Forests', 
       category: 'Wildlife',
-      rating: '4.8',
-      iconType: 'paw',
-      nightInfo: 'Tour Package • 1 Night',
-      img: '/corbett_tiger.png' 
+      rating: '4.9',
+      nightInfo: 'From ₹4,500/night',
+      img: 'https://images.unsplash.com/photo-1561731216-c3a4d99437d5?auto=format&fit=crop&w=800&q=80' 
     },
     { 
       id: 'dest-2',
       searchKey: 'Nainital',
-      name: 'Nainital Lake City', 
-      tag: 'Emerald Lakes, Boating & Hill Views', 
+      name: 'Nainital & Lake District', 
+      tag: 'Boating on Naini Lake, Snow View & Mall Road', 
       category: 'Lakes',
       rating: '4.9',
-      iconType: 'waves',
-      nightInfo: 'Tour Package • 1 Night',
-      img: 'https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=800&q=80' 
+      nightInfo: 'From ₹3,800/night',
+      img: 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80' 
     },
     { 
       id: 'dest-3',
       searchKey: 'Kainchi Dham',
-      name: 'Kainchi Dham & Ashram', 
-      tag: 'Seek Peace & Blessings in Divine Abode', 
+      name: 'Kainchi Dham & Bhowali', 
+      tag: 'Neem Karoli Baba Sacred Ashram & Valley Views', 
       category: 'Spiritual',
       rating: '5.0',
-      iconType: 'temple',
-      nightInfo: 'Tour Package',
+      nightInfo: 'Spiritual Darshan Tour',
       img: '/kainchi_dham.png' 
     },
     { 
       id: 'dest-4',
-      searchKey: 'Mussoorie',
-      name: 'Mussoorie & Dhanaulti', 
-      tag: 'Clouds of Hills & Pure Relaxation', 
-      category: 'Hills',
-      rating: '4.8',
-      iconType: 'tent',
-      nightInfo: 'Tour Package • 1 Night',
-      img: 'https://images.unsplash.com/photo-1510312305653-8ed496efae75?auto=format&fit=crop&w=800&q=80' 
+      searchKey: 'Rishikesh',
+      name: 'Rishikesh & Ganga Valley', 
+      tag: 'White Water Rafting, Yoga & Divine Evening Aarti', 
+      category: 'Adventure',
+      rating: '4.9',
+      nightInfo: 'From ₹2,900/night',
+      img: 'https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=800&q=80' 
     },
     { 
       id: 'dest-5',
-      searchKey: 'Rishikesh',
-      name: 'Rishikesh Yoga Capital', 
-      tag: 'Ganga Aarti, River Rafting & Wellness', 
-      category: 'Spiritual',
-      rating: '4.7',
-      iconType: 'yoga',
-      nightInfo: 'Tour Package',
-      img: 'https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?auto=format&fit=crop&w=800&q=80' 
+      searchKey: 'Mussoorie',
+      name: 'Mussoorie Queen of Hills', 
+      tag: 'Kempty Falls, Colonial Charm & Himalayan Vistas', 
+      category: 'Hills',
+      rating: '4.8',
+      nightInfo: 'From ₹4,200/night',
+      img: 'https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?auto=format&fit=crop&w=800&q=80' 
     },
     { 
       id: 'dest-6',
-      searchKey: 'Auli',
-      name: 'Auli Snow & Ski Paradise', 
-      tag: '360° Nanda Devi Views & Snow Sports', 
-      category: 'Snow',
-      rating: '4.9',
-      iconType: 'snow',
-      nightInfo: 'Tour Package',
-      img: 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=800&q=80' 
+      searchKey: 'Bhimtal',
+      name: 'Bhimtal & Naukuchiatal', 
+      tag: 'Tranquil Nine-Cornered Lakes & Paragliding', 
+      category: 'Lakes',
+      rating: '4.8',
+      nightInfo: 'From ₹3,200/night',
+      img: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80' 
     },
     { 
       id: 'dest-7',
-      searchKey: 'Bhimtal',
-      name: 'Bhimtal & Naukuchiatal', 
-      tag: 'Serene Lakeside Life & Quiet Peace', 
-      category: 'Lakes',
-      rating: '4.8',
-      iconType: 'leaf',
-      nightInfo: 'Tour Package',
-      img: 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80' 
+      searchKey: 'Kedarnath',
+      name: 'Kedarnath & Chardham', 
+      tag: 'Sacred Himalayan Shrines & Helicopter Assistance', 
+      category: 'Spiritual',
+      rating: '5.0',
+      nightInfo: 'Pilgrimage Packages',
+      img: 'https://images.unsplash.com/photo-1605649487212-47bdab064df7?auto=format&fit=crop&w=800&q=80' 
     },
     { 
       id: 'dest-8',
-      searchKey: 'Mukteshwar',
-      name: 'Mukteshwar Dham', 
-      tag: 'Apple Orchards & Himalayan View Retreats', 
+      searchKey: 'Auli',
+      name: 'Auli Snow & Ski Slopes', 
+      tag: 'Nanda Devi Views, Ski Slopes & Gondola Rides', 
       category: 'Hills',
-      rating: '4.8',
-      iconType: 'home',
-      nightInfo: 'Tour Package',
-      img: 'https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=800&q=80' 
+      rating: '4.9',
+      nightInfo: 'Alpine Resort Stays',
+      img: 'https://images.unsplash.com/photo-1517824806704-9040b037703b?auto=format&fit=crop&w=800&q=80' 
     }
   ];
 
-  const renderDestIcon = (iconType) => {
-    switch (iconType) {
-      case 'paw':
-        return (
-          <svg className="w-4 h-4 text-emerald-300 fill-current" viewBox="0 0 24 24">
-            <circle cx="6" cy="7" r="2" />
-            <circle cx="11" cy="4" r="2" />
-            <circle cx="16" cy="6" r="2" />
-            <circle cx="19" cy="11" r="2" />
-            <path d="M14.5 14.5c-.8-.8-2.2-.8-3 0-1.8 1.8-4.5 1-4.5 3.5 0 2.2 2.8 4 6 4s6-1.8 6-4c0-2.5-2.7-1.7-4.5-3.5z" />
-          </svg>
-        );
-      case 'waves':
-        return <Waves className="w-4 h-4 text-emerald-300" />;
-      case 'temple':
-        return (
-          <svg className="w-4 h-4 text-emerald-300 fill-current" viewBox="0 0 24 24">
-            <path d="M12 2L4 7v2h16V7l-8-5zm6 9h-2v8h2v-8zm-5 0h-2v8h2v-8zm-5 0H6v8h2v-8zM2 21h20v2H2v-2z"/>
-          </svg>
-        );
-      case 'tent':
-        return <Tent className="w-4 h-4 text-emerald-300" />;
-      case 'yoga':
-        return <Sparkles className="w-4 h-4 text-emerald-300" />;
-      case 'snow':
-        return <Snowflake className="w-4 h-4 text-emerald-300" />;
-      case 'leaf':
-        return <Leaf className="w-4 h-4 text-emerald-300" />;
-      case 'home':
-        return <Home className="w-4 h-4 text-emerald-300" />;
-      default:
-        return <MapPin className="w-4 h-4 text-emerald-300" />;
+  const popularDestinations = destinationsList.length > 0 ? destinationsList : defaultPopularDestinations;
+
+  const filteredDestinations = activeDestCategory === 'All' 
+    ? popularDestinations 
+    : popularDestinations.filter(d => (d.category || '').toLowerCase() === activeDestCategory.toLowerCase());
+
+  const handleDestinationSelect = (destName) => {
+    setSearchDest(destName);
+    setIsDestOpen(false);
+    if (onNavigateToPackages) {
+      onNavigateToPackages(destName);
+    } else {
+      setActiveTab('packages');
     }
   };
 
-  const dynamicDestinations = (destinationsList && destinationsList.length > 0)
-    ? destinationsList
-    : defaultPopularDestinations;
-
-  const handleDestinationClick = (dest) => {
-    const k = (dest.searchKey || dest.name || '').toLowerCase();
-    const tokens = k.split(/[\s,-]+/).filter(t => t.length > 1);
-
-    // Look for matching package in allPackages
-    const matchedPkg = allPackages.find(p => {
-      const searchString = [
-        p.title || '',
-        p.subtitle || '',
-        p.category || '',
-        p.dest || '',
-        ...(Array.isArray(p.highlights) ? p.highlights : []),
-        ...(Array.isArray(p.specs) ? p.specs : [])
-      ].join(' ').toLowerCase();
-
-      return searchString.includes(k) || tokens.some(t => searchString.includes(t));
-    });
-
-    if (matchedPkg && onSelectPackage) {
-      onSelectPackage(matchedPkg);
-    } else if (onNavigateToPackages) {
-      onNavigateToPackages(dest.searchKey || dest.name);
+  const handleSearchSubmit = (e) => {
+    e.preventDefault();
+    if (searchDest.trim()) {
+      handleDestinationSelect(searchDest);
     } else {
       setActiveTab('packages');
     }
   };
 
   return (
-    <div className="space-y-6 lg:space-y-16 pb-16">
+    <div className="space-y-16 sm:space-y-24 bg-[#F8FAFC] text-slate-900 pb-20">
       
-      {/* Exact Home Page Hero Section */}
-      <section className="relative bg-stone-900 text-white min-h-[auto] lg:min-h-[640px] flex flex-col justify-between px-3 sm:px-6 lg:px-8 pt-8 sm:pt-10 pb-4 sm:pb-6 lg:pb-28 overflow-visible">
-        
-        {/* Infinite Seamless Carousel (Always Slides Right-to-Left) */}
-        <div className="absolute inset-0 overflow-hidden">
-          <div 
-            className={`flex w-full h-full ${
-              isTransitionEnabled ? 'transition-transform duration-1000 ease-in-out' : ''
-            }`}
-            style={{ transform: `translateX(-${currentHeroIndex * 100}%)` }}
-            onTransitionEnd={handleHeroTransitionEnd}
+      {/* ========================================================================= */}
+      {/* 🌟 1. HERO SECTION WITH DYNAMIC HD SLIDER & MODERN FLOATING BADGES        */}
+      {/* ========================================================================= */}
+      <section 
+        className="relative min-h-[580px] sm:min-h-[660px] lg:min-h-[720px] flex flex-col justify-between overflow-hidden pt-8 sm:pt-12 pb-36 sm:pb-48 lg:pb-52 px-4 sm:px-6 lg:px-8 bg-[#0F172A]"
+        onMouseEnter={() => setIsAutoPlaying(false)}
+        onMouseLeave={() => setIsAutoPlaying(true)}
+      >
+        {/* Background HD Carousel Slider */}
+        {heroSlides.map((slide, idx) => (
+          <div
+            key={slide.id}
+            className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${
+              idx === currentSlide ? 'opacity-100 scale-105' : 'opacity-0 scale-100 pointer-events-none'
+            } transition-transform duration-[6000ms]`}
           >
-            {extendedHeroImages.map((img, idx) => (
-              <div 
-                key={idx}
-                className="w-full h-full flex-shrink-0 bg-cover bg-center"
-                style={{ backgroundImage: `url('${img}')` }}
-              />
-            ))}
-          </div>
-        </div>
-        <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/55 to-black/30 pointer-events-none" />
-        <div className="absolute inset-0 bg-gradient-to-t from-stone-950/90 via-transparent to-black/40 pointer-events-none" />
-
-        {/* Slide Indicators */}
-        <div className="absolute right-6 sm:right-10 top-1/2 -translate-y-1/2 z-20 hidden sm:flex flex-col gap-2.5">
-          {heroImages.map((_, idx) => (
-            <button
-              key={idx}
-              onClick={() => {
-                setIsTransitionEnabled(true);
-                setCurrentHeroIndex(idx);
-              }}
-              className={`w-2.5 rounded-full transition-all duration-300 ${
-                (currentHeroIndex % heroImages.length) === idx 
-                  ? 'h-8 bg-[#D49E35]' 
-                  : 'h-2.5 bg-white/40 hover:bg-white/75'
-              }`}
-              title={`Slide ${idx + 1}`}
-              aria-label={`Slide ${idx + 1}`}
+            <img 
+              src={slide.image} 
+              alt={slide.title}
+              className="w-full h-full object-cover object-center"
             />
-          ))}
+            {/* Soft Ambient Overlay for maximum readability */}
+            <div className="absolute inset-0 bg-gradient-to-r from-white/95 via-white/70 to-black/40" />
+            <div className="absolute inset-0 bg-gradient-to-t from-slate-950/40 via-transparent to-black/20" />
+          </div>
+        ))}
+
+        {/* Decorative Top-Left Autumn Leaf Ornament */}
+        <div className="absolute top-0 left-0 w-36 sm:w-48 lg:w-60 h-36 sm:h-48 lg:h-60 pointer-events-none opacity-90 z-20">
+          <svg viewBox="0 0 200 200" fill="none" className="w-full h-full">
+            <path d="M-20 -20 Q40 40 80 10 Q120 -20 160 30" stroke="#E11D48" strokeWidth="3" fill="none" />
+            <path d="M30 20 C20 40, 50 60, 40 80 C60 70, 80 50, 60 30 Z" fill="#FF6B35" opacity="0.9" />
+            <path d="M70 15 C85 35, 115 30, 110 55 C125 40, 115 15, 95 10 Z" fill="#E11D48" opacity="0.85" />
+            <path d="M120 25 C140 45, 165 40, 160 65 C175 45, 160 20, 140 15 Z" fill="#F59E0B" opacity="0.85" />
+          </svg>
         </div>
 
-        {/* Hero Main Content Area */}
-        <div className="relative max-w-[1580px] mx-auto w-full my-auto pt-4 sm:pt-6 z-10 text-center sm:text-left px-2 sm:px-6 lg:px-8 xl:px-10">
+
+
+        {/* Main Hero Content Area */}
+        <div className="relative z-20 w-full max-w-[97%] 2xl:max-w-[1780px] mx-auto flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8 pt-4 sm:pt-8">
           
-          {/* Left Column Text & Action Buttons */}
-          <div className="max-w-3xl space-y-3 sm:space-y-4">
+          {/* Left Text Column */}
+          <div className="max-w-2xl space-y-2.5 text-left">
             
-            {/* Gold Script Heading */}
-            <div className="font-serif italic text-2xl sm:text-4xl text-[#C8933E] font-medium tracking-wide">
-              Discover The Beauty of
+            {/* Live Active Slide Badge */}
+            <div className="inline-flex items-center gap-2 bg-[#E11D48]/10 border border-[#E11D48]/20 px-3.5 py-1 rounded-full text-xs font-extrabold text-[#E11D48] shadow-2xs backdrop-blur-md">
+              <Sparkles className="w-3.5 h-3.5 text-[#FF6B35]" />
+              <span>{heroSlides[currentSlide].tag}</span>
             </div>
 
-            {/* Giant Title */}
-            <h1 className="font-serif text-4xl sm:text-6xl lg:text-7xl font-bold tracking-tight text-white leading-tight drop-shadow-md">
+            {/* Cursive Tagline */}
+            <p className="font-script text-3xl sm:text-4xl lg:text-5xl text-[#E11D48] font-bold tracking-wide leading-none">
+              Discover The Beauty of
+            </p>
+
+            {/* Main Bold Heading */}
+            <h1 className="font-serif text-5xl sm:text-7xl lg:text-8xl font-black text-[#0F172A] tracking-tight leading-[0.95] -mt-1">
               Uttarakhand
             </h1>
-            
-            <div className="font-serif text-2xl sm:text-4xl font-semibold text-white tracking-tight">
-              with Samika Holidays
-            </div>
 
-            {/* Category Bullets */}
-            <div className="flex flex-wrap items-center justify-center sm:justify-start gap-2 sm:gap-3 text-xs sm:text-sm font-semibold text-stone-100 pt-1 sm:pt-2">
+            {/* Subheading */}
+            <h2 className="font-serif text-2xl sm:text-3xl lg:text-4xl font-bold text-[#0F172A] pt-0.5">
+              with Samika Holidays
+            </h2>
+
+            {/* Offerings Bullet Line */}
+            <div className="flex flex-wrap items-center gap-x-2.5 gap-y-1 text-xs sm:text-sm font-semibold text-slate-700 pt-1">
               <span>Hotels</span>
-              <span className="text-[#C8933E] font-bold">•</span>
+              <span className="text-[#E11D48]">•</span>
               <span>Resorts</span>
-              <span className="text-[#C8933E] font-bold">•</span>
+              <span className="text-[#E11D48]">•</span>
               <span>Tour Packages</span>
-              <span className="text-[#C8933E] font-bold">•</span>
+              <span className="text-[#E11D48]">•</span>
               <span>Destination Weddings</span>
-              <span className="text-[#C8933E] font-bold">•</span>
+              <span className="text-[#E11D48]">•</span>
               <span>Corporate Tours</span>
             </div>
 
-            {/* CTA Buttons (Screenshot Match) */}
-            <div className="flex flex-wrap items-center justify-center sm:justify-start gap-3 sm:gap-4 pt-2 sm:pt-4">
+            {/* CTAs */}
+            <div className="flex flex-wrap items-center gap-3 pt-4">
               <button
-                onClick={() => onOpenEnquiry('Hotel & Trip Booking')}
-                className="bg-[#D49E35] hover:bg-[#B88628] text-white px-6 sm:px-7 py-3 sm:py-3.5 rounded-xl font-bold text-xs sm:text-sm shadow-xl flex items-center gap-2 sm:gap-2.5 transition-all cursor-pointer"
+                onClick={() => setActiveTab('packages')}
+                className="bg-gradient-to-r from-[#E11D48] to-[#FF6B35] hover:from-[#BE123C] hover:to-[#EA580C] text-white px-7 py-3.5 rounded-xl font-bold text-xs sm:text-sm flex items-center gap-2 shadow-lg shadow-rose-900/20 transition-all cursor-pointer hover:scale-105"
               >
-                <Calendar className="w-4 h-4 sm:w-4.5 sm:h-4.5" />
-                <span>Book Now</span>
+                <span>Explore Packages</span>
+                <ArrowRight className="w-4 h-4 text-white" />
               </button>
 
               <a
-                href="https://wa.me/919258677823"
+                href="https://wa.me/919258677823?text=Hello%20Samika%20Holidays%2C%20I%20want%20to%20plan%20a%20trip%20to%20Uttarakhand."
                 target="_blank"
                 rel="noreferrer"
-                className="bg-stone-900/50 hover:bg-stone-900/80 text-white border border-white/30 backdrop-blur-md px-5 sm:px-6 py-3 sm:py-3.5 rounded-xl font-bold text-xs sm:text-sm flex items-center gap-2 sm:gap-2.5 transition-all"
+                className="bg-white hover:bg-slate-50 text-slate-900 border border-slate-300 px-6 py-3.5 rounded-xl font-bold text-xs sm:text-sm flex items-center gap-2 shadow-xs transition-all hover:scale-105"
               >
-                <MessageCircle className="w-4 h-4 sm:w-4.5 sm:h-4.5 text-emerald-400 fill-current" />
+                <MessageCircle className="w-4 h-4 text-[#06B6D4] fill-[#06B6D4]" />
                 <span>WhatsApp Us</span>
               </a>
             </div>
 
           </div>
 
-        </div>
-
-        {/* ========================================================================= */}
-        {/* MOBILE SEARCH BAR: SINGLE COMPACT ROW (EXPANDS ON CLICK)                  */}
-        {/* ========================================================================= */}
-        <div className="lg:hidden relative mt-6 max-w-lg mx-auto w-full z-20">
-          {!isMobileSearchExpanded ? (
-            /* Single Compact Row (Default Collapsed) */
-            <div
-              onClick={() => setIsMobileSearchExpanded(true)}
-              className="bg-white rounded-2xl p-3 shadow-2xl border border-stone-200 text-stone-800 cursor-pointer flex items-center justify-between transition-all hover:border-[#0F382C] active:scale-[0.99]"
-            >
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-xl bg-[#0F382C] text-[#C8933E] flex items-center justify-center shrink-0 shadow-xs">
-                  <Search className="w-4 h-4" />
-                </div>
-                <div className="text-left">
-                  <div className="text-xs font-bold text-[#0F382C]">
-                    {searchDest || 'Where are you going?'}
-                  </div>
-                  <div className="text-[10px] text-stone-500 font-medium">
-                    Dates • Guests • Search Stays & Tours
-                  </div>
-                </div>
+          {/* Right Floating Trust Badge Card */}
+          <div className="bg-white/95 backdrop-blur-md rounded-2xl p-4 sm:p-5 shadow-2xl border border-white/80 space-y-3.5 max-w-[220px] self-end lg:self-center mr-2 sm:mr-6">
+            <div className="flex items-center gap-3">
+              <div className="w-9 h-9 rounded-xl bg-amber-50 border border-amber-200 text-amber-600 flex items-center justify-center shrink-0">
+                <Shield className="w-5 h-5 fill-amber-500/20 text-amber-600" />
               </div>
-              <div className="bg-[#0F382C] text-white px-3.5 py-2 rounded-xl text-xs font-bold flex items-center gap-1 shadow-xs">
-                <span>Search</span>
-                <ChevronRight className="w-3.5 h-3.5 text-[#C8933E]" />
+              <div className="text-left">
+                <div className="text-xs font-bold text-slate-900 leading-tight">Best Price</div>
+                <div className="text-[10px] text-slate-500 font-semibold">Guaranteed</div>
               </div>
             </div>
-          ) : (
-            /* Full Expanded Card on Mobile */
-            <div className="bg-white rounded-2xl p-4 shadow-2xl border border-stone-200 text-stone-800 space-y-3 animate-in fade-in zoom-in-95 duration-200">
-              <div className="flex items-center justify-between pb-2 border-b border-stone-100">
-                <div className="flex items-center gap-2 text-xs font-bold text-[#0F382C]">
-                  <Compass className="w-4 h-4 text-[#C8933E]" />
-                  <span>Search Stays & Tour Packages</span>
-                </div>
-                <button
-                  type="button"
-                  onClick={() => setIsMobileSearchExpanded(false)}
-                  className="p-1.5 rounded-full bg-stone-100 hover:bg-stone-200 text-stone-600 cursor-pointer"
-                >
-                  <X className="w-4 h-4" />
-                </button>
-              </div>
 
-              {/* Destination Input */}
-              <div className="relative">
-                <div className="flex items-center gap-3 p-3 bg-stone-50 rounded-xl border border-stone-200 focus-within:border-[#0F382C]">
-                  <MapPin className="w-4 h-4 text-[#0F382C] shrink-0" />
+            <div className="flex items-center gap-3 pt-2 border-t border-slate-100">
+              <div className="w-9 h-9 rounded-xl bg-cyan-50 border border-cyan-200 text-[#06B6D4] flex items-center justify-center shrink-0">
+                <Headphones className="w-5 h-5 text-[#06B6D4]" />
+              </div>
+              <div className="text-left">
+                <div className="text-xs font-bold text-slate-900 leading-tight">24x7 Customer</div>
+                <div className="text-[10px] text-slate-500 font-semibold">Support</div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        {/* Carousel Dots & Active Slide Name Bar */}
+        <div className="relative z-20 w-full max-w-[97%] 2xl:max-w-[1780px] mx-auto flex items-center justify-between pt-6">
+          <div className="flex items-center gap-2 text-xs font-bold text-slate-800 bg-white/80 backdrop-blur-md px-3.5 py-1.5 rounded-full border border-white/60 shadow-2xs">
+            <span className="w-2 h-2 rounded-full bg-[#E11D48] animate-pulse" />
+            <span>{heroSlides[currentSlide].title}</span>
+          </div>
+
+          <div className="flex items-center gap-2">
+            {heroSlides.map((s, i) => (
+              <button
+                key={s.id}
+                onClick={() => setCurrentSlide(i)}
+                className={`h-2 rounded-full transition-all cursor-pointer ${
+                  i === currentSlide ? 'w-8 bg-[#E11D48]' : 'w-2 bg-slate-400/60 hover:bg-slate-700'
+                }`}
+                aria-label={`Go to slide ${i + 1}`}
+              />
+            ))}
+          </div>
+        </div>
+
+      </section>
+
+      {/* ========================================================================= */}
+      {/* 🌟 2. BOTTOM FLOATING SEARCH BAR                                           */}
+      {/* ========================================================================= */}
+      <div className="relative -mt-44 sm:-mt-56 lg:-mt-64 z-30 w-full max-w-[97%] 2xl:max-w-[1780px] mx-auto px-4 sm:px-6 lg:px-8">
+        <form onSubmit={handleSearchSubmit} className="bg-white rounded-2xl sm:rounded-3xl p-3 sm:p-4 shadow-2xl border border-slate-100">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-3 items-center">
+            
+            {/* Field 1: DESTINATION */}
+            <div className="lg:col-span-3 relative">
+              <div className="flex items-center justify-between p-3 sm:p-3.5 bg-slate-50 rounded-2xl border border-slate-200 focus-within:border-[#E11D48] focus-within:bg-white transition-all">
+                <div className="flex items-center gap-3 w-full">
+                  <MapPin className="w-5 h-5 text-[#E11D48] shrink-0" />
                   <div className="w-full text-left">
-                    <label className="block text-[9px] font-bold uppercase text-stone-400">Destination</label>
+                    <label className="block text-[9px] sm:text-[10px] font-extrabold uppercase tracking-wider text-slate-400">DESTINATION</label>
                     <input
                       type="text"
                       autoComplete="off"
-                      placeholder="e.g. Nainital / Jim Corbett"
+                      placeholder="Where are you going?"
                       value={searchDest}
                       onFocus={() => setIsDestOpen(true)}
                       onBlur={() => setTimeout(() => setIsDestOpen(false), 200)}
@@ -401,698 +380,661 @@ export default function HomePage({
                         setSearchDest(e.target.value);
                         setIsDestOpen(true);
                       }}
-                      className="w-full bg-transparent text-xs font-bold text-stone-800 focus:outline-none placeholder:text-stone-400"
+                      className="w-full bg-transparent text-xs sm:text-sm font-semibold text-slate-800 focus:outline-none placeholder:text-slate-400"
                     />
                   </div>
                 </div>
-
-                {isDestOpen && (
-                  <div className="absolute top-full left-0 right-0 mt-2 bg-white rounded-2xl shadow-2xl border border-stone-200 py-2 z-50 max-h-48 overflow-y-auto divide-y divide-stone-100">
-                    {['Nainital', 'Jim Corbett', 'Mussoorie', 'Rishikesh', 'Bhimtal', 'Auli', 'Mukteshwar']
-                      .filter(d => !searchDest || d.toLowerCase().includes(searchDest.toLowerCase().trim()))
-                      .map((dest) => (
-                        <button
-                          key={dest}
-                          type="button"
-                          onMouseDown={() => {
-                            setSearchDest(dest);
-                            setIsDestOpen(false);
-                          }}
-                          className="w-full px-4 py-2 text-left text-xs font-bold text-stone-800 hover:bg-amber-50 hover:text-[#C8933E] flex items-center gap-2"
-                        >
-                          <MapPin className="w-3 h-3 text-[#C8933E]" />
-                          <span>{dest}</span>
-                        </button>
-                      ))}
-                  </div>
-                )}
+                <Calendar className="w-4 h-4 text-slate-400 shrink-0 ml-2" />
               </div>
 
-              {/* Dates */}
-              <div className="grid grid-cols-2 gap-2">
-                <div className="flex items-center gap-2 p-2.5 bg-stone-50 rounded-xl border border-stone-200">
-                  <Calendar className="w-4 h-4 text-[#0F382C] shrink-0" />
-                  <div className="text-left w-full">
-                    <label className="block text-[9px] font-bold uppercase text-stone-400">Check-in</label>
-                    <input
-                      type="date"
-                      className="w-full bg-transparent text-[11px] font-semibold text-stone-700 focus:outline-none"
-                    />
-                  </div>
-                </div>
-                <div className="flex items-center gap-2 p-2.5 bg-stone-50 rounded-xl border border-stone-200">
-                  <Calendar className="w-4 h-4 text-[#0F382C] shrink-0" />
-                  <div className="text-left w-full">
-                    <label className="block text-[9px] font-bold uppercase text-stone-400">Check-out</label>
-                    <input
-                      type="date"
-                      className="w-full bg-transparent text-[11px] font-semibold text-stone-700 focus:outline-none"
-                    />
-                  </div>
-                </div>
-              </div>
-
-              {/* Guests */}
-              <div className="flex items-center gap-2 p-2.5 bg-stone-50 rounded-xl border border-stone-200">
-                <Users className="w-4 h-4 text-[#0F382C] shrink-0" />
-                <div className="text-left w-full">
-                  <label className="block text-[9px] font-bold uppercase text-stone-400">Guests & Rooms</label>
-                  <select className="w-full bg-transparent text-xs font-semibold text-stone-800 focus:outline-none cursor-pointer">
-                    <option>2 Guests, 1 Room</option>
-                    <option>4 Guests, 2 Rooms</option>
-                    <option>Group / Wedding</option>
-                  </select>
-                </div>
-              </div>
-
-              {/* Search Button */}
-              <button
-                onClick={() => {
-                  setIsMobileSearchExpanded(false);
-                  setActiveTab('packages');
-                }}
-                className="w-full bg-[#0F382C] hover:bg-[#0C2D23] text-white py-3 rounded-xl font-bold text-xs flex items-center justify-center gap-2 shadow-md transition-all cursor-pointer"
-              >
-                <Search className="w-4 h-4 text-[#C8933E]" />
-                <span>Search Now</span>
-              </button>
-            </div>
-          )}
-        </div>
-
-        {/* ========================================================================= */}
-        {/* DESKTOP SEARCH BAR: EXACT ORIGINAL 5-COLUMN HORIZONTAL FLOATING BAR       */}
-        {/* ========================================================================= */}
-        <div className="hidden lg:block absolute -bottom-10 left-4 right-4 max-w-[1400px] mx-auto bg-white rounded-2xl sm:rounded-3xl p-4 sm:p-5 shadow-2xl border border-stone-200 text-stone-800 z-20">
-          <div className="grid grid-cols-5 gap-3 items-center">
-            
-            {/* Custom Destination Input */}
-            <div className="relative">
-              <div className="flex items-center gap-3 p-3 bg-stone-50 rounded-xl border border-stone-200 focus-within:border-[#0F382C] focus-within:ring-1 focus-within:ring-[#0F382C] transition-all">
-                <MapPin className="w-5 h-5 text-[#0F382C] shrink-0" />
-                <div className="w-full text-left">
-                  <label className="block text-[10px] font-bold uppercase text-stone-400">Destination</label>
-                  <input
-                    type="text"
-                    autoComplete="off"
-                    placeholder="Where are you going? (e.g. Nainital)"
-                    value={searchDest}
-                    onFocus={() => setIsDestOpen(true)}
-                    onBlur={() => setTimeout(() => setIsDestOpen(false), 200)}
-                    onChange={(e) => {
-                      setSearchDest(e.target.value);
-                      setIsDestOpen(true);
-                    }}
-                    className="w-full bg-transparent text-xs font-bold text-stone-800 focus:outline-none placeholder:text-stone-400"
-                  />
-                </div>
-              </div>
-
-              {/* Custom Clean Floating Dropdown */}
+              {/* Destination Dropdown */}
               {isDestOpen && (
-                <div className="absolute top-full left-0 right-0 mt-2 bg-white rounded-2xl shadow-2xl border border-stone-200/90 py-2 z-50 max-h-64 overflow-y-auto divide-y divide-stone-100 animate-in fade-in zoom-in-95 duration-150">
-                  <button
-                    type="button"
-                    onMouseDown={() => {
-                      setSearchDest('');
-                      setIsDestOpen(false);
-                    }}
-                    className="w-full px-4 py-2 text-left text-xs font-bold text-stone-700 hover:bg-emerald-50 hover:text-[#0F382C] flex items-center justify-between transition-colors"
-                  >
-                    <span>All Destinations in Uttarakhand</span>
-                  </button>
-                  {['Nainital', 'Jim Corbett', 'Mussoorie', 'Rishikesh', 'Bhimtal', 'Auli', 'Chopta', 'Ranikhet', 'Kausani', 'Dhanaulti', 'Haridwar']
-                    .filter(d => !searchDest || d.toLowerCase().includes(searchDest.toLowerCase().trim()))
+                <div className="absolute top-full left-0 right-0 mt-2 bg-white rounded-2xl shadow-2xl border border-slate-200 p-2 z-50 max-h-60 overflow-y-auto animate-in fade-in zoom-in-95">
+                  <div className="text-[10px] font-bold uppercase tracking-wider text-slate-400 px-3 py-1.5">
+                    Popular Uttarakhand Locations
+                  </div>
+                  {popularDestinations
+                    .filter(d => (d.name || d.searchKey || '').toLowerCase().includes(searchDest.toLowerCase()))
                     .map((dest) => (
-                      <button
-                        key={dest}
-                        type="button"
-                        onMouseDown={() => {
-                          setSearchDest(dest);
-                          setIsDestOpen(false);
-                        }}
-                        className="w-full px-4 py-2 text-left text-xs font-bold text-stone-800 hover:bg-amber-50 hover:text-[#C8933E] flex items-center gap-2 transition-colors"
+                      <div
+                        key={dest.id}
+                        onMouseDown={() => handleDestinationSelect(dest.searchKey || dest.name)}
+                        className="flex items-center justify-between px-3 py-2 rounded-xl hover:bg-rose-50 hover:text-[#E11D48] text-xs font-semibold cursor-pointer transition-colors"
                       >
-                        <MapPin className="w-3.5 h-3.5 text-[#C8933E]" />
-                        <span>{dest}</span>
-                      </button>
+                        <span className="flex items-center gap-2">
+                          <MapPin className="w-3.5 h-3.5 text-[#FF6B35]" />
+                          <span>{dest.name}</span>
+                        </span>
+                        <span className="text-[10px] text-slate-400 font-normal">{dest.category}</span>
+                      </div>
                     ))}
                 </div>
               )}
             </div>
 
-            {/* Check-in */}
-            <div className="flex items-center gap-3 p-3 bg-stone-50 rounded-xl border border-stone-200">
-              <Calendar className="w-5 h-5 text-[#0F382C] shrink-0" />
-              <div className="text-left w-full">
-                <label className="block text-[10px] font-bold uppercase text-stone-400">Check-in</label>
-                <input
-                  type="date"
-                  className="w-full bg-transparent text-xs font-semibold text-stone-700 focus:outline-none"
-                />
+            {/* Field 2: CHECK-IN */}
+            <div className="lg:col-span-2">
+              <div className="flex items-center justify-between p-3 sm:p-3.5 bg-slate-50 rounded-2xl border border-slate-200 focus-within:border-[#E11D48] focus-within:bg-white transition-all">
+                <div className="text-left w-full">
+                  <label className="block text-[9px] sm:text-[10px] font-extrabold uppercase tracking-wider text-slate-400">CHECK-IN</label>
+                  <input
+                    type="date"
+                    value={checkInDate}
+                    onChange={(e) => setCheckInDate(e.target.value)}
+                    className="w-full bg-transparent text-xs sm:text-sm font-semibold text-slate-800 focus:outline-none cursor-pointer"
+                  />
+                </div>
+                <Calendar className="w-4 h-4 text-slate-400 shrink-0 ml-1" />
               </div>
             </div>
 
-            {/* Check-out */}
-            <div className="flex items-center gap-3 p-3 bg-stone-50 rounded-xl border border-stone-200">
-              <Calendar className="w-5 h-5 text-[#0F382C] shrink-0" />
-              <div className="text-left w-full">
-                <label className="block text-[10px] font-bold uppercase text-stone-400">Check-out</label>
-                <input
-                  type="date"
-                  className="w-full bg-transparent text-xs font-semibold text-stone-700 focus:outline-none"
-                />
+            {/* Field 3: CHECK-OUT */}
+            <div className="lg:col-span-2">
+              <div className="flex items-center justify-between p-3 sm:p-3.5 bg-slate-50 rounded-2xl border border-slate-200 focus-within:border-[#E11D48] focus-within:bg-white transition-all">
+                <div className="text-left w-full">
+                  <label className="block text-[9px] sm:text-[10px] font-extrabold uppercase tracking-wider text-slate-400">CHECK-OUT</label>
+                  <input
+                    type="date"
+                    value={checkOutDate}
+                    onChange={(e) => setCheckOutDate(e.target.value)}
+                    className="w-full bg-transparent text-xs sm:text-sm font-semibold text-slate-800 focus:outline-none cursor-pointer"
+                  />
+                </div>
+                <Hotel className="w-4 h-4 text-slate-400 shrink-0 ml-1" />
               </div>
             </div>
 
-            {/* Guests */}
-            <div className="flex items-center gap-3 p-3 bg-stone-50 rounded-xl border border-stone-200">
-              <Users className="w-5 h-5 text-[#0F382C] shrink-0" />
-              <div className="text-left w-full">
-                <label className="block text-[10px] font-bold uppercase text-stone-400">Guests & Rooms</label>
-                <select className="w-full bg-transparent text-xs font-semibold text-stone-800 focus:outline-none cursor-pointer">
-                  <option>2 Guests, 1 Room</option>
-                  <option>4 Guests, 2 Rooms</option>
-                  <option>Group / Wedding</option>
-                </select>
+            {/* Field 4: GUESTS & ROOMS */}
+            <div className="lg:col-span-3 relative">
+              <div 
+                onClick={() => setIsGuestsOpen(!isGuestsOpen)}
+                className="flex items-center justify-between p-3 sm:p-3.5 bg-slate-50 rounded-2xl border border-slate-200 cursor-pointer hover:border-[#E11D48] transition-all"
+              >
+                <div className="text-left">
+                  <label className="block text-[9px] sm:text-[10px] font-extrabold uppercase tracking-wider text-slate-400">GUESTS & ROOMS</label>
+                  <div className="text-xs sm:text-sm font-semibold text-slate-800 truncate">
+                    {guestSelection}
+                  </div>
+                </div>
+                <ChevronDown className="w-4 h-4 text-slate-500 shrink-0 ml-1" />
               </div>
+
+              {isGuestsOpen && (
+                <div className="absolute top-full left-0 right-0 mt-2 bg-white rounded-2xl shadow-2xl border border-slate-200 p-2 z-50 animate-in fade-in zoom-in-95">
+                  {[
+                    '1 Guest, 1 Room',
+                    '2 Guests, 1 Room',
+                    '3 Guests, 1 Room',
+                    '4 Guests, 2 Rooms',
+                    'Family Suite (4+ Guests)',
+                    'Group Booking (5+ Rooms)'
+                  ].map((opt) => (
+                    <button
+                      key={opt}
+                      type="button"
+                      onClick={() => {
+                        setGuestSelection(opt);
+                        setIsGuestsOpen(false);
+                      }}
+                      className="w-full text-left px-3 py-2 text-xs font-semibold text-slate-800 hover:bg-slate-100 rounded-xl transition-colors cursor-pointer"
+                    >
+                      {opt}
+                    </button>
+                  ))}
+                </div>
+              )}
             </div>
 
-            {/* Search Button */}
-            <button
-              onClick={() => setActiveTab('packages')}
-              className="w-full bg-[#0F382C] hover:bg-[#0C2D23] text-white py-3.5 px-4 rounded-xl font-bold text-xs sm:text-sm flex items-center justify-center gap-2 shadow-md transition-all h-full cursor-pointer"
-            >
-              <Search className="w-4 h-4 text-[#C8933E]" />
-              <span>Search Now</span>
-            </button>
+            {/* Field 5: Search Button */}
+            <div className="lg:col-span-2">
+              <button
+                type="submit"
+                className="w-full bg-gradient-to-r from-[#E11D48] to-[#FF6B35] hover:from-[#BE123C] hover:to-[#EA580C] text-white py-3.5 sm:py-4 px-4 rounded-xl font-bold text-xs sm:text-sm flex items-center justify-center gap-2 shadow-lg shadow-rose-900/20 transition-all cursor-pointer hover:scale-[1.02]"
+              >
+                <Search className="w-4 h-4 text-white" />
+                <span>Search Now</span>
+              </button>
+            </div>
 
           </div>
-        </div>
+        </form>
+      </div>
 
+      {/* ========================================================================= */}
+      {/* 🌟 3. METRIC STATS TRUST STRIP                                            */}
+      {/* ========================================================================= */}
+      <section className="w-full max-w-[97%] 2xl:max-w-[1780px] mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200/90 shadow-sm grid grid-cols-2 md:grid-cols-4 gap-6 text-center divide-y md:divide-y-0 md:divide-x divide-slate-100">
+          
+          <div className="pt-2 md:pt-0 space-y-1">
+            <div className="font-serif text-3xl sm:text-4xl font-extrabold text-[#0F172A]">500+</div>
+            <div className="text-xs text-slate-500 font-medium">Audited & Verified Resorts</div>
+          </div>
+
+          <div className="pt-2 md:pt-0 space-y-1">
+            <div className="font-serif text-3xl sm:text-4xl font-extrabold text-[#E11D48]">4.9 ★</div>
+            <div className="text-xs text-slate-500 font-medium">Average Traveler Rating</div>
+          </div>
+
+          <div className="pt-2 md:pt-0 space-y-1">
+            <div className="font-serif text-3xl sm:text-4xl font-extrabold text-[#FF6B35]">10,000+</div>
+            <div className="text-xs text-slate-500 font-medium">Happy Travelers Hosted</div>
+          </div>
+
+          <div className="pt-2 md:pt-0 space-y-1">
+            <div className="font-serif text-3xl sm:text-4xl font-extrabold text-[#06B6D4]">24x7</div>
+            <div className="text-xs text-slate-500 font-medium">Dedicated On-Trip Care</div>
+          </div>
+
+        </div>
       </section>
 
-      {/* Spacer to prevent search bar overlap on Desktop */}
-      <div className="hidden lg:block h-10" />
-
-      {/* Popular Destinations (Exact Pixel-Perfect Match with User Screenshot) */}
-      <section className="w-full max-w-[97%] 2xl:max-w-[1780px] mx-auto px-2 sm:px-4 lg:px-6 space-y-6 pt-0 lg:pt-4">
+      {/* ========================================================================= */}
+      {/* 🌟 4. TOP TRENDING DESTINATIONS GRID                                     */}
+      {/* ========================================================================= */}
+      <section className="w-full max-w-[97%] 2xl:max-w-[1780px] mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
         
-        {/* Section Header & Category Filters */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-stone-200/80 pb-4">
-          <div className="space-y-1">
-            <span className="text-[11px] font-bold uppercase text-[#C8933E] tracking-widest flex items-center gap-1.5">
-              EXPLORE TOP PLACES 
-              <Leaf className="w-3.5 h-3.5 text-[#C8933E] fill-current" />
+        {/* Header */}
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
+          <div className="space-y-2">
+            <span className="text-xs font-extrabold uppercase tracking-widest text-[#E11D48] flex items-center gap-1.5">
+              <Compass className="w-4 h-4 text-[#FF6B35]" />
+              <span>EXPLORE BY REGION</span>
             </span>
-            <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-[#0F382C] tracking-tight">
-              Popular Destinations
+            <h2 className="font-serif text-3xl sm:text-4xl font-bold text-slate-900 leading-tight">
+              Top Trending Destinations in Uttarakhand
             </h2>
-            {/* Small Gold Decorative Flourish Line */}
-            <div className="flex items-center gap-1.5 py-1">
-              <div className="w-10 h-0.5 bg-[#C8933E]/50 rounded-full" />
-              <div className="w-2 h-2 rotate-45 border border-[#C8933E] bg-[#C8933E]/20" />
-              <div className="w-16 h-0.5 bg-[#C8933E]/50 rounded-full" />
-            </div>
-            <p className="text-xs sm:text-sm text-stone-500 font-medium">
-              Handpicked getaways across Uttarakhand's most loved locations
+            <p className="text-xs sm:text-sm text-slate-500 max-w-xl">
+              From Jim Corbett tiger reserves to Nainital lakes and high-altitude spiritual shrines.
             </p>
           </div>
 
-          {/* Interactive Filter Pills Capsule */}
-          <div className="flex flex-wrap items-center gap-1.5 bg-[#FAF7F2] p-1.5 rounded-2xl border border-stone-200 self-start md:self-auto">
-            {[
-              { label: 'All Destinations', value: 'All', icon: LayoutGrid },
-              { label: 'Lakes', value: 'Lakes' },
-              { label: 'Wildlife', value: 'Wildlife' },
-              { label: 'Spiritual', value: 'Spiritual' },
-              { label: 'Hills', value: 'Hills' },
-              { label: 'Snow & Ski', value: 'Snow' }
-            ].map((tab) => {
-              const TabIcon = tab.icon;
-              const isActive = activeDestCategory === tab.value;
-              return (
-                <button
-                  key={tab.value}
-                  onClick={() => setActiveDestCategory(tab.value)}
-                  className={`flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer ${
-                    isActive
-                      ? 'bg-[#0F382C] text-white shadow-sm'
-                      : 'text-stone-600 hover:text-stone-900 hover:bg-white/80'
-                  }`}
-                >
-                  {TabIcon && <TabIcon className={`w-3.5 h-3.5 ${isActive ? 'text-[#C8933E]' : 'text-stone-500'}`} />}
-                  <span>{tab.label}</span>
-                </button>
-              );
-            })}
-          </div>
-        </div>
-
-        {/* Dynamic 8-Card Grid (Exact Static Screenshot Layout - No Hover Movement) */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6">
-          {dynamicDestinations
-            .filter(dest => activeDestCategory === 'All' || dest.category === activeDestCategory)
-            .slice(0, 8)
-            .map((dest) => (
-              <div
-                key={dest.id}
-                onClick={() => handleDestinationClick(dest)}
-                className="bg-white rounded-3xl overflow-hidden border border-stone-200 shadow-sm flex flex-col justify-between cursor-pointer"
+          {/* Category Filter Pills */}
+          <div className="flex flex-wrap items-center gap-2">
+            {['All', 'Wildlife', 'Lakes', 'Spiritual', 'Hills', 'Adventure'].map((cat) => (
+              <button
+                key={cat}
+                onClick={() => setActiveDestCategory(cat)}
+                className={`px-4 py-2 rounded-full text-xs font-bold transition-all cursor-pointer ${
+                  activeDestCategory === cat
+                    ? 'bg-[#0F172A] text-white shadow-sm'
+                    : 'bg-white border border-slate-200 text-slate-600 hover:bg-slate-100 hover:text-[#E11D48]'
+                }`}
               >
-                {/* Image Container with Seamless SVG Wave Divider */}
-                <div className="relative h-52 sm:h-56 w-full overflow-hidden bg-white">
-                  <img
-                    src={dest.img}
-                    alt={dest.name}
-                    className="w-full h-full object-cover"
-                  />
-
-                  {/* SVG Wavy Bottom Divider (No gaps or line artifacts) */}
-                  <svg 
-                    className="absolute -bottom-1.5 left-0 right-0 w-full h-8 text-white fill-white pointer-events-none z-10" 
-                    viewBox="0 0 1440 320" 
-                    preserveAspectRatio="none"
-                  >
-                    <path d="M0,192L60,181.3C120,171,240,149,360,165.3C480,181,600,235,720,240C840,245,960,203,1080,176C1200,149,1320,139,1380,133.3L1440,128L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z"></path>
-                  </svg>
-
-                  {/* Top-Left Circular Category Icon */}
-                  <div className="absolute top-3.5 left-3.5 w-9 h-9 rounded-full bg-[#0A261E]/90 border border-emerald-500/40 text-emerald-300 flex items-center justify-center shadow-md backdrop-blur-xs z-20">
-                    {renderDestIcon(dest.iconType)}
-                  </div>
-
-                  {/* Top-Right Star Rating Badge */}
-                  <div className="absolute top-3.5 right-3.5 bg-black/60 backdrop-blur-md text-amber-300 border border-white/20 px-2.5 py-1 rounded-lg text-xs font-bold flex items-center gap-1 shadow-md z-20">
-                    <Star className="w-3.5 h-3.5 fill-current text-amber-400" />
-                    <span className="text-white font-extrabold">{dest.rating || '4.8'}</span>
-                  </div>
-                </div>
-
-                {/* Card Body */}
-                <div className="p-5 pt-2 flex-1 flex flex-col justify-between space-y-3 bg-white">
-                  <div>
-                    <h3 className="font-serif text-lg font-bold text-stone-900 leading-snug">
-                      {dest.name}
-                    </h3>
-                    <p className="text-xs text-stone-500 font-medium line-clamp-1 mt-1">
-                      {dest.tag}
-                    </p>
-                  </div>
-
-                  {/* Card Bottom Row */}
-                  <div className="pt-3 border-t border-stone-100 flex items-center justify-between text-xs">
-                    <div className="flex items-center gap-1.5 text-stone-600 font-semibold">
-                      <Luggage className="w-3.5 h-3.5 text-stone-400 shrink-0" />
-                      <span>{dest.nightInfo || 'Tour Package'}</span>
-                    </div>
-
-                    <span className="text-[#C8933E] font-bold inline-flex items-center gap-1">
-                      <span>Explore Tours</span>
-                      <ChevronRight className="w-3.5 h-3.5" />
-                    </span>
-                  </div>
-                </div>
-
-              </div>
+                {cat}
+              </button>
             ))}
+          </div>
         </div>
 
-        {/* View All Destinations Button if user wants to see more on Destinations Page */}
-        <div className="text-center pt-2">
+        {/* Destinations Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          {filteredDestinations.slice(0, 8).map((dest) => (
+            <div
+              key={dest.id}
+              onClick={() => handleDestinationSelect(dest.searchKey || dest.name)}
+              className="group relative rounded-3xl overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-300 cursor-pointer bg-slate-900 aspect-[4/5] flex flex-col justify-end p-6 border border-slate-200/50"
+            >
+              <img
+                src={dest.img}
+                alt={dest.name}
+                className="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent" />
+
+              {/* Category Pill Top */}
+              <div className="absolute top-4 left-4 z-10">
+                <span className="bg-black/60 backdrop-blur-md border border-white/20 text-white text-[10px] font-bold uppercase tracking-wider px-3 py-1 rounded-full">
+                  {dest.category || 'Uttarakhand'}
+                </span>
+              </div>
+
+              {/* Rating Top Right */}
+              {dest.rating && (
+                <div className="absolute top-4 right-4 z-10 bg-black/60 backdrop-blur-md text-amber-400 text-xs font-bold px-2.5 py-1 rounded-xl flex items-center gap-1 border border-white/10">
+                  <Star className="w-3.5 h-3.5 fill-amber-400" />
+                  <span>{dest.rating}</span>
+                </div>
+              )}
+
+              {/* Card Content */}
+              <div className="relative z-10 space-y-1.5 text-white">
+                <h3 className="font-serif text-xl sm:text-2xl font-bold leading-tight group-hover:text-[#FF6B35] transition-colors">
+                  {dest.name}
+                </h3>
+                <p className="text-xs text-slate-300 line-clamp-2 leading-relaxed font-normal">
+                  {dest.tag}
+                </p>
+                <div className="pt-2 flex items-center justify-between text-xs text-[#FF8A00] font-bold">
+                  <span>{dest.nightInfo || 'Explore Packages'}</span>
+                  <span className="w-7 h-7 rounded-full bg-white/20 flex items-center justify-center group-hover:translate-x-1 transition-transform">
+                    <ArrowRight className="w-3.5 h-3.5 text-white" />
+                  </span>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+
+      </section>
+
+      {/* ========================================================================= */}
+      {/* 🌟 5. HANDPICKED LUXURY HOTELS & RESORTS                                 */}
+      {/* ========================================================================= */}
+      <section className="w-full max-w-[97%] 2xl:max-w-[1780px] mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+        
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
+          <div className="space-y-2">
+            <span className="text-xs font-extrabold uppercase tracking-widest text-[#E11D48] flex items-center gap-1.5">
+              <Hotel className="w-4 h-4 text-[#FF6B35]" />
+              <span>HANDPICKED STAYS</span>
+            </span>
+            <h2 className="font-serif text-3xl sm:text-4xl font-bold text-slate-900 leading-tight">
+              Luxury Hotels & Boutique Mountain Resorts
+            </h2>
+            <p className="text-xs sm:text-sm text-slate-500 max-w-xl">
+              Personally inspected for scenic brilliance, top hygiene, swimming pools, Pahadi delicacies, and warm hospitality.
+            </p>
+          </div>
+
           <button
-            onClick={() => setActiveTab('destinations')}
-            className="inline-flex items-center gap-2 bg-[#FAF7F2] hover:bg-stone-100 text-[#0F382C] font-bold px-6 py-2.5 rounded-full border border-stone-200 text-xs transition-all shadow-xs"
+            onClick={() => setActiveTab('hotels')}
+            className="inline-flex items-center gap-2 text-xs font-bold text-[#E11D48] hover:text-[#FF6B35] transition-colors cursor-pointer"
           >
-            <span>Explore All {dynamicDestinations.length}+ Uttarakhand Destinations</span>
-            <ChevronRight className="w-3.5 h-3.5 text-[#C8933E]" />
-          </button>
-        </div>
-
-      </section>
-
-      {/* 5-Stats Icon Row (Exact Screenshot Match with Laurel Borders) */}
-      <section className="w-full max-w-[97%] 2xl:max-w-[1780px] mx-auto px-2 sm:px-4 lg:px-6">
-        <div className="bg-[#FAF7F2] rounded-3xl p-6 sm:p-8 border border-stone-200/80 shadow-xs flex items-center justify-between gap-4">
-          
-          {/* Left Laurel Branch Illustration */}
-          <div className="hidden xl:block text-[#C8933E] opacity-70 shrink-0 select-none">
-            <svg className="w-7 h-18 fill-current" viewBox="0 0 100 200">
-              <path d="M50 180 Q30 140 25 100 Q20 60 40 20 Q45 50 35 90 Q30 130 50 180 Z" />
-              <circle cx="30" cy="50" r="7" />
-              <circle cx="20" cy="90" r="7" />
-              <circle cx="25" cy="130" r="7" />
-            </svg>
-          </div>
-
-          {/* 5 Columns */}
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 text-center divide-y sm:divide-y-0 md:divide-x divide-stone-200 flex-1">
-            
-            {/* Stat 1 */}
-            <div className="p-2 space-y-1.5">
-              <div className="w-12 h-12 rounded-full bg-[#0F382C] text-[#C8933E] flex items-center justify-center mx-auto shadow-sm border border-emerald-800">
-                <Hotel className="w-5 h-5" />
-              </div>
-              <div className="font-serif text-2xl font-bold text-stone-900">500+</div>
-              <div className="text-xs font-bold text-stone-800">Hotels & Resorts</div>
-              <div className="text-[11px] text-stone-500">Across Uttarakhand</div>
-            </div>
-
-            {/* Stat 2 */}
-            <div className="p-2 space-y-1.5 pt-4 sm:pt-2">
-              <div className="w-12 h-12 rounded-full bg-[#C8933E] text-stone-950 flex items-center justify-center mx-auto shadow-sm border border-amber-600/30">
-                <MapPin className="w-5 h-5" />
-              </div>
-              <div className="font-serif text-2xl font-bold text-stone-900">25+</div>
-              <div className="text-xs font-bold text-stone-800">Top Destinations</div>
-              <div className="text-[11px] text-stone-500">To Explore</div>
-            </div>
-
-            {/* Stat 3 */}
-            <div className="p-2 space-y-1.5 pt-4 md:pt-2">
-              <div className="w-12 h-12 rounded-full bg-[#0F382C] text-[#C8933E] flex items-center justify-center mx-auto shadow-sm border border-emerald-800">
-                <Users className="w-5 h-5" />
-              </div>
-              <div className="font-serif text-2xl font-bold text-stone-900">10K+</div>
-              <div className="text-xs font-bold text-stone-800">Happy Travelers</div>
-              <div className="text-[11px] text-stone-500">Every Year</div>
-            </div>
-
-            {/* Stat 4 */}
-            <div className="p-2 space-y-1.5 pt-4 md:pt-2">
-              <div className="w-12 h-12 rounded-full bg-[#C8933E] text-stone-950 flex items-center justify-center mx-auto shadow-sm border border-amber-600/30">
-                <Headphones className="w-5 h-5" />
-              </div>
-              <div className="font-serif text-2xl font-bold text-stone-900">24x7</div>
-              <div className="text-xs font-bold text-stone-800">Customer Support</div>
-              <div className="text-[11px] text-stone-500">Always Here to Help</div>
-            </div>
-
-            {/* Stat 5 */}
-            <div className="p-2 space-y-1.5 pt-4 lg:pt-2 col-span-2 sm:col-span-1">
-              <div className="w-12 h-12 rounded-full bg-[#0F382C] text-emerald-400 flex items-center justify-center mx-auto shadow-sm border border-emerald-800">
-                <ShieldCheck className="w-5 h-5" />
-              </div>
-              <div className="font-serif text-2xl font-bold text-stone-900">100%</div>
-              <div className="text-xs font-bold text-stone-800">Secure & Safe</div>
-              <div className="text-[11px] text-stone-500">Booking</div>
-            </div>
-
-          </div>
-
-          {/* Right Laurel Branch Illustration */}
-          <div className="hidden xl:block text-[#C8933E] opacity-70 shrink-0 select-none scale-x-[-1]">
-            <svg className="w-7 h-18 fill-current" viewBox="0 0 100 200">
-              <path d="M50 180 Q30 140 25 100 Q20 60 40 20 Q45 50 35 90 Q30 130 50 180 Z" />
-              <circle cx="30" cy="50" r="7" />
-              <circle cx="20" cy="90" r="7" />
-              <circle cx="25" cy="130" r="7" />
-            </svg>
-          </div>
-
-        </div>
-      </section>
-
-      {/* Featured Tour Packages Section */}
-      <section className="w-full max-w-[97%] 2xl:max-w-[1780px] mx-auto px-2 sm:px-4 lg:px-6 space-y-6">
-        <div className="flex items-center justify-between">
-          <div>
-            <span className="text-[11px] uppercase font-bold text-[#C8933E] tracking-wider">POPULAR PACKAGES</span>
-            <h2 className="font-serif text-3xl font-bold text-[#0F382C]">Featured Packages</h2>
-          </div>
-          <button 
-            onClick={() => setActiveTab('packages')}
-            className="text-xs font-bold text-stone-600 hover:text-[#0F382C] flex items-center gap-1"
-          >
-            <span>View All Packages</span>
+            <span>View All Resorts ({allHotels.length})</span>
             <ChevronRight className="w-4 h-4" />
           </button>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-5 lg:gap-6">
-          {featuredPackages.map((pkg) => (
-            <div 
-              key={pkg.id} 
-              onClick={() => onSelectPackage && onSelectPackage(pkg)}
-              className="bg-white rounded-2xl border border-stone-200 overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between group cursor-pointer"
+        {/* Hotels Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {allHotels.slice(0, 6).map((hotel) => (
+            <div
+              key={hotel.id}
+              onClick={() => onSelectHotel && onSelectHotel(hotel)}
+              className="bg-white rounded-3xl overflow-hidden border border-slate-200/90 shadow-sm hover:shadow-2xl transition-all duration-300 group flex flex-col justify-between cursor-pointer"
             >
-              <div>
-                <div className="relative h-52 overflow-hidden bg-stone-100">
-                  <img src={pkg.image} alt={pkg.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-                  <span className={`absolute top-3 left-3 ${pkg.badgeColor} text-white text-[10px] font-bold px-3 py-1 rounded-md uppercase`}>
-                    {pkg.badge}
-                  </span>
+              {/* Hotel Image */}
+              <div className="relative aspect-[16/10] overflow-hidden bg-slate-100">
+                <img
+                  src={hotel.image || hotel.images?.[0] || 'https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=800&q=80'}
+                  alt={hotel.name}
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                />
+                
+                <div className="absolute top-3.5 left-3.5 bg-black/65 backdrop-blur-md text-white text-[11px] font-bold px-3 py-1 rounded-full flex items-center gap-1 border border-white/20">
+                  <MapPin className="w-3 h-3 text-[#FF6B35]" />
+                  <span>{hotel.location}</span>
                 </div>
 
-                <div className="p-5 space-y-3">
-                  <div className="flex items-center justify-between text-xs text-stone-500">
-                    <span>{pkg.duration}</span>
-                    <div className="flex items-center gap-1 text-amber-500 font-bold">
-                      <Star className="w-3.5 h-3.5 fill-current" />
-                      <span>{pkg.rating}</span>
+                <div className="absolute top-3.5 right-3.5 bg-white/95 backdrop-blur-md text-slate-900 text-xs font-extrabold px-2.5 py-1 rounded-xl flex items-center gap-1 shadow-sm">
+                  <Star className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
+                  <span>{hotel.rating || '4.9'}</span>
+                </div>
+              </div>
+
+              {/* Hotel Details */}
+              <div className="p-6 space-y-4 flex-1 flex flex-col justify-between">
+                <div>
+                  <div className="text-[10px] font-extrabold text-[#E11D48] uppercase tracking-wider mb-1">
+                    {hotel.category || 'Luxury Resort & Spa'}
+                  </div>
+                  <h3 className="font-serif text-xl font-bold text-slate-900 group-hover:text-[#E11D48] transition-colors leading-snug">
+                    {hotel.name}
+                  </h3>
+                  <p className="text-xs text-slate-500 line-clamp-2 mt-1.5 leading-relaxed font-normal">
+                    {hotel.description || 'Surrounded by lush forests with panoramic mountain view balconies, dining, and bonfire nights.'}
+                  </p>
+
+                  {/* Amenity Pills */}
+                  <div className="flex flex-wrap items-center gap-2 mt-3 text-[11px] text-slate-600 font-semibold">
+                    <span className="bg-slate-50 border border-slate-200 px-2.5 py-1 rounded-lg flex items-center gap-1">
+                      <Wifi className="w-3 h-3 text-cyan-600" /> Free WiFi
+                    </span>
+                    <span className="bg-slate-50 border border-slate-200 px-2.5 py-1 rounded-lg flex items-center gap-1">
+                      <Utensils className="w-3 h-3 text-orange-600" /> Multi-Cuisine
+                    </span>
+                    <span className="bg-slate-50 border border-slate-200 px-2.5 py-1 rounded-lg flex items-center gap-1">
+                      <Mountain className="w-3 h-3 text-purple-600" /> Mountain View
+                    </span>
+                  </div>
+                </div>
+
+                {/* Price & Book Button */}
+                <div className="pt-4 border-t border-slate-100 flex items-center justify-between gap-3">
+                  <div>
+                    <span className="text-[10px] uppercase font-bold text-slate-400 block">Starting From</span>
+                    <div className="text-lg font-extrabold text-slate-900">
+                      ₹{hotel.price || '4,500'} <span className="text-xs font-normal text-slate-500">/night</span>
                     </div>
                   </div>
 
-                  <h3 className="font-serif text-lg font-bold text-stone-900 group-hover:text-[#0F382C] transition-colors leading-snug">
-                    {pkg.title}
-                  </h3>
-
-                  <div className="flex flex-wrap gap-2 text-[11px] text-stone-600">
-                    {(Array.isArray(pkg.specs) && pkg.specs.length > 0
-                      ? pkg.specs
-                      : (Array.isArray(pkg.inclusions) ? pkg.inclusions : ['Verified Hotels', 'Sightseeing', 'Meals', 'Transport'])
-                    ).slice(0, 3).map((sp, i) => (
-                      <span key={i} className="bg-stone-100 px-2.5 py-1 rounded-md border border-stone-200/60 font-medium">
-                        {sp}
-                      </span>
-                    ))}
-                  </div>
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      onOpenEnquiry(`Booking Enquiry: ${hotel.name}`);
+                    }}
+                    className="bg-[#0F172A] hover:bg-[#E11D48] text-white px-4 py-2.5 rounded-xl text-xs font-bold flex items-center gap-1 shadow-sm transition-all cursor-pointer"
+                  >
+                    <span>Reserve</span>
+                    <ChevronRight className="w-3.5 h-3.5" />
+                  </button>
                 </div>
               </div>
-
-              <div className="p-5 pt-0 flex items-center justify-between border-t border-stone-100 mt-4">
-                <div>
-                  <span className="text-[10px] text-stone-400 font-bold uppercase block">Starting</span>
-                  <div className="text-lg font-extrabold text-stone-900">₹{pkg.price} <span className="text-xs font-normal text-stone-500">/Person</span></div>
-                </div>
-                <button
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    onSelectPackage ? onSelectPackage(pkg) : onOpenEnquiry(pkg.title);
-                  }}
-                  className="bg-[#0F382C] hover:bg-[#0C2D23] text-white px-4 py-2.5 rounded-lg text-xs font-bold transition-all shadow-sm"
-                >
-                  View Details
-                </button>
-              </div>
-
             </div>
           ))}
         </div>
+
       </section>
 
-      {/* Corbett Fun Resort Spotlight */}
-      <section className="w-full max-w-[97%] 2xl:max-w-[1780px] mx-auto px-2 sm:px-4 lg:px-6">
-        <div className="bg-[#FAF7F2] rounded-3xl p-6 sm:p-8 border border-stone-200 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+      {/* ========================================================================= */}
+      {/* 🌟 6. BEST-SELLING TOUR PACKAGES                                          */}
+      {/* ========================================================================= */}
+      <section className="w-full max-w-[97%] 2xl:max-w-[1780px] mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+        
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
+          <div className="space-y-2">
+            <span className="text-xs font-extrabold uppercase tracking-widest text-[#E11D48] flex items-center gap-1.5">
+              <Luggage className="w-4 h-4 text-[#FF6B35]" />
+              <span>POPULAR ITINERARIES</span>
+            </span>
+            <h2 className="font-serif text-3xl sm:text-4xl font-bold text-slate-900 leading-tight">
+              Best-Selling Uttarakhand Tour Packages
+            </h2>
+            <p className="text-xs sm:text-sm text-slate-500 max-w-xl">
+              Carefully planned itineraries featuring private sanitized cabs, top hotel stays, sightseeing entry, and local guides.
+            </p>
+          </div>
+
+          <button
+            onClick={() => setActiveTab('packages')}
+            className="inline-flex items-center gap-2 text-xs font-bold text-[#E11D48] hover:text-[#FF6B35] transition-colors cursor-pointer"
+          >
+            <span>View All Packages ({allPackages.length})</span>
+            <ChevronRight className="w-4 h-4" />
+          </button>
+        </div>
+
+        {/* Packages Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {allPackages.slice(0, 6).map((pkg) => (
+            <div
+              key={pkg.id}
+              onClick={() => onSelectPackage && onSelectPackage(pkg)}
+              className="bg-white rounded-3xl overflow-hidden border border-slate-200/90 shadow-sm hover:shadow-2xl transition-all duration-300 group flex flex-col justify-between cursor-pointer"
+            >
+              {/* Package Image */}
+              <div className="relative aspect-[16/10] overflow-hidden bg-slate-100">
+                <img
+                  src={pkg.image || pkg.images?.[0] || 'https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=800&q=80'}
+                  alt={pkg.title}
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                />
+
+                <div className="absolute top-3.5 left-3.5 bg-[#0F172A]/90 backdrop-blur-md text-white text-[11px] font-bold px-3 py-1 rounded-full flex items-center gap-1.5 border border-white/20">
+                  <Clock className="w-3 h-3 text-[#FF6B35]" />
+                  <span>{pkg.duration || '3 Days / 2 Nights'}</span>
+                </div>
+
+                <div className="absolute top-3.5 right-3.5 bg-white/95 backdrop-blur-md text-slate-900 text-xs font-extrabold px-2.5 py-1 rounded-xl flex items-center gap-1 shadow-sm">
+                  <Star className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
+                  <span>{pkg.rating || '4.9'}</span>
+                </div>
+              </div>
+
+              {/* Content */}
+              <div className="p-6 space-y-4 flex-1 flex flex-col justify-between">
+                <div>
+                  <div className="text-[10px] font-extrabold text-[#E11D48] uppercase tracking-wider mb-1">
+                    {pkg.category || 'Uttarakhand Tour'}
+                  </div>
+                  <h3 className="font-serif text-xl font-bold text-slate-900 group-hover:text-[#E11D48] transition-colors leading-snug">
+                    {pkg.title}
+                  </h3>
+                  <p className="text-xs text-slate-500 line-clamp-2 mt-1.5 leading-relaxed font-normal">
+                    {pkg.subtitle || pkg.description || 'Experience the beauty of Uttarakhand with handpicked stays and expert drivers.'}
+                  </p>
+
+                  {Array.isArray(pkg.specs) && pkg.specs.length > 0 && (
+                    <div className="flex flex-wrap items-center gap-1.5 mt-3">
+                      {pkg.specs.slice(0, 3).map((spec, i) => (
+                        <span key={i} className="text-[10px] bg-slate-100 text-slate-700 font-semibold px-2 py-0.5 rounded-md">
+                          ✓ {spec}
+                        </span>
+                      ))}
+                    </div>
+                  )}
+                </div>
+
+                {/* Price & Actions */}
+                <div className="pt-4 border-t border-slate-100 flex items-center justify-between gap-2">
+                  <div>
+                    <span className="text-[10px] uppercase font-bold text-slate-400 block">Package From</span>
+                    <div className="text-lg font-extrabold text-slate-900">
+                      ₹{pkg.price || '6,999'} <span className="text-xs font-normal text-slate-500">/{pkg.priceUnit || 'person'}</span>
+                    </div>
+                  </div>
+
+                  <div className="flex items-center gap-2">
+                    <a
+                      href={`https://wa.me/919258677823?text=${encodeURIComponent(`Hello Samika Holidays, I want to inquire about: ${pkg.title}`)}`}
+                      target="_blank"
+                      rel="noreferrer"
+                      onClick={(e) => e.stopPropagation()}
+                      className="w-9 h-9 rounded-xl bg-emerald-50 hover:bg-emerald-100 text-emerald-700 flex items-center justify-center border border-emerald-200 transition-colors"
+                      title="Chat on WhatsApp"
+                    >
+                      <MessageCircle className="w-4 h-4 fill-current" />
+                    </a>
+
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        onSelectPackage(pkg);
+                      }}
+                      className="bg-gradient-to-r from-[#E11D48] to-[#FF6B35] text-white px-4 py-2 rounded-xl text-xs font-bold flex items-center gap-1 transition-all shadow-md shadow-rose-900/10 hover:scale-105 cursor-pointer"
+                    >
+                      <span>Details</span>
+                      <ChevronRight className="w-3.5 h-3.5" />
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+
+      </section>
+
+      {/* ========================================================================= */}
+      {/* 🌟 7. DESTINATION WEDDINGS & CORPORATE SHOWCASE BANNER                    */}
+      {/* ========================================================================= */}
+      <section className="w-full max-w-[97%] 2xl:max-w-[1780px] mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           
-          <div className="lg:col-span-6 relative rounded-2xl overflow-hidden h-72 sm:h-80 shadow-lg">
+          {/* Weddings Showcase Card */}
+          <div className="relative rounded-3xl overflow-hidden bg-[#0F172A] p-8 sm:p-12 text-white border border-rose-500/30 shadow-xl flex flex-col justify-between min-h-[380px] group">
             <img
-              src={resortImages[activeResortImage]}
-              alt="Corbett Fun Resort"
-              className="w-full h-full object-cover transition-all duration-500"
+              src="/wedding_hero.png"
+              alt="Destination Weddings in Uttarakhand"
+              className="absolute inset-0 w-full h-full object-cover opacity-35 group-hover:scale-105 transition-transform duration-700"
             />
-            <div className="absolute bottom-4 left-4 flex gap-2">
+            <div className="absolute inset-0 bg-gradient-to-r from-[#0F172A] via-[#0F172A]/80 to-transparent" />
+
+            <div className="relative z-10 space-y-3 max-w-md">
+              <div className="inline-flex items-center gap-1.5 bg-rose-500/20 text-[#FF6B35] border border-rose-500/40 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider">
+                <Heart className="w-3.5 h-3.5 fill-current text-[#E11D48]" />
+                <span>Royal Himalayan Celebrations</span>
+              </div>
+              <h3 className="font-serif text-3xl sm:text-4xl font-bold leading-tight">
+                Destination Weddings in Uttarakhand
+              </h3>
+              <p className="text-xs sm:text-sm text-slate-200 leading-relaxed font-normal">
+                Exchange vows amidst mist-covered peaks, lush pine lawns, and riverside resorts in Jim Corbett, Nainital, Mussoorie & Rishikesh.
+              </p>
+            </div>
+
+            <div className="relative z-10 pt-6">
               <button
-                onClick={() => setActiveResortImage((prev) => (prev > 0 ? prev - 1 : resortImages.length - 1))}
-                className="w-8 h-8 rounded-full bg-white/80 hover:bg-white text-stone-800 flex items-center justify-center shadow"
+                onClick={() => setActiveTab('weddings')}
+                className="bg-gradient-to-r from-[#E11D48] to-[#FF6B35] hover:from-[#BE123C] hover:to-[#EA580C] text-white font-bold text-xs sm:text-sm px-6 py-3.5 rounded-2xl inline-flex items-center gap-2 shadow-lg shadow-rose-900/30 transition-all hover:scale-105 cursor-pointer"
               >
-                <ChevronLeft className="w-4 h-4" />
-              </button>
-              <button
-                onClick={() => setActiveResortImage((prev) => (prev < resortImages.length - 1 ? prev + 1 : 0))}
-                className="w-8 h-8 rounded-full bg-white/80 hover:bg-white text-stone-800 flex items-center justify-center shadow"
-              >
-                <ChevronRight className="w-4 h-4" />
+                <span>Explore Wedding Venues</span>
+                <ArrowRight className="w-4 h-4" />
               </button>
             </div>
           </div>
 
-          <div className="lg:col-span-6 space-y-4">
-            <span className="text-xs uppercase font-bold text-[#C8933E] tracking-wider">Luxury Stays</span>
-            
-            <div className="flex items-center justify-between">
-              <h3 className="font-serif text-3xl font-bold text-[#0F382C]">Corbett Fun Resort</h3>
-              <div className="flex items-center gap-1 text-amber-500 font-bold text-xs">
-                {[...Array(5)].map((_, i) => (
-                  <Star key={i} className="w-4 h-4 fill-current" />
-                ))}
-                <span className="text-stone-700 ml-1">4.8 (750 Reviews)</span>
+          {/* Corporate Retreats Showcase Card */}
+          <div className="relative rounded-3xl overflow-hidden bg-[#1E293B] p-8 sm:p-12 text-white border border-cyan-500/30 shadow-xl flex flex-col justify-between min-h-[380px] group">
+            <img
+              src="https://images.unsplash.com/photo-1511578314322-379afb476865?auto=format&fit=crop&w=1200&q=80"
+              alt="Corporate Tours and Conferences"
+              className="absolute inset-0 w-full h-full object-cover opacity-30 group-hover:scale-105 transition-transform duration-700"
+            />
+            <div className="absolute inset-0 bg-gradient-to-r from-[#1E293B] via-[#1E293B]/80 to-transparent" />
+
+            <div className="relative z-10 space-y-3 max-w-md">
+              <div className="inline-flex items-center gap-1.5 bg-cyan-500/20 text-cyan-300 border border-cyan-500/40 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider">
+                <Users className="w-3.5 h-3.5" />
+                <span>Executive Outings & Conferences</span>
               </div>
+              <h3 className="font-serif text-3xl sm:text-4xl font-bold leading-tight">
+                Corporate Tours & Offsite Retreats
+              </h3>
+              <p className="text-xs sm:text-sm text-slate-200 leading-relaxed font-normal">
+                Inspire your teams with state-of-the-art conference resorts, riverside bonfires, jungle safaris, and team-building adventure activities.
+              </p>
             </div>
 
-            <p className="text-xs sm:text-sm text-stone-600 leading-relaxed">
-              Experience luxury amidst the wilderness, premium rooms, delicious cuisine, and world-class hospitality in the heart of Jim Corbett National Park.
-            </p>
-
-            <div className="grid grid-cols-3 gap-3 pt-2">
-              <div className="flex items-center gap-2 text-xs text-stone-700 font-medium p-2 bg-white rounded-lg border border-stone-200">
-                <Waves className="w-4 h-4 text-[#0F382C]" />
-                <span>Swimming Pool</span>
-              </div>
-              <div className="flex items-center gap-2 text-xs text-stone-700 font-medium p-2 bg-white rounded-lg border border-stone-200">
-                <Utensils className="w-4 h-4 text-[#0F382C]" />
-                <span>Restaurant</span>
-              </div>
-              <div className="flex items-center gap-2 text-xs text-stone-700 font-medium p-2 bg-white rounded-lg border border-stone-200">
-                <Wifi className="w-4 h-4 text-[#0F382C]" />
-                <span>Free WiFi</span>
-              </div>
-            </div>
-
-            <div className="pt-4 border-t border-stone-200 flex items-center justify-between">
-              <div>
-                <span className="text-[10px] uppercase font-bold text-stone-400 block">Prices start from</span>
-                <div className="text-2xl font-bold text-[#0F382C]">₹5,499 <span className="text-xs font-normal text-stone-500">/Night</span></div>
-              </div>
-
-              <div className="flex items-center gap-2.5">
-                <button
-                  onClick={() => onSelectHotel && onSelectHotel({
-                    id: 'htl-1',
-                    name: 'Corbett Fun Resort',
-                    location: 'Jim Corbett, Uttarakhand',
-                    dest: 'Jim Corbett',
-                    rating: '4.8 (750 Reviews)',
-                    price: '5,499',
-                    image: 'https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=800&q=80',
-                    tag: 'Luxury Jungle Resort',
-                    amenities: ['Pool', 'Restaurant', 'WiFi', 'Parking', 'Spa', 'Jungle View']
-                  })}
-                  className="bg-[#0F382C] hover:bg-[#0C2D23] text-white px-5 py-3 rounded-xl font-bold text-xs shadow-md transition-all"
-                >
-                  View Resort Details
-                </button>
-              </div>
+            <div className="relative z-10 pt-6">
+              <button
+                onClick={() => setActiveTab('corporate')}
+                className="bg-white hover:bg-slate-100 text-[#0F172A] font-bold text-xs sm:text-sm px-6 py-3.5 rounded-2xl inline-flex items-center gap-2 shadow-lg transition-all hover:scale-105 cursor-pointer"
+              >
+                <span>Plan Corporate Offsite</span>
+                <ArrowRight className="w-4 h-4 text-[#E11D48]" />
+              </button>
             </div>
           </div>
 
         </div>
       </section>
 
-      {/* Travel Blogs & Guides Showcase (Shown when Admin publishes blogs) */}
-      {blogsList && blogsList.length > 0 && (
-        <section className="w-full max-w-[97%] 2xl:max-w-[1780px] mx-auto px-2 sm:px-4 lg:px-6 space-y-6">
-          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
-            <div>
-              <div className="inline-flex items-center gap-1.5 text-xs font-extrabold uppercase tracking-widest text-[#C8933E] mb-1">
-                <BookOpen className="w-3.5 h-3.5" />
-                <span>Travel Guides & Stories</span>
-              </div>
-              <h2 className="font-serif text-2xl sm:text-3xl lg:text-4xl font-bold text-stone-900">
-                Latest From Our Travel Desk
-              </h2>
-            </div>
-
-            <button
-              onClick={() => setActiveTab && setActiveTab('blogs')}
-              className="inline-flex items-center gap-1.5 text-xs font-bold text-[#0F382C] hover:text-[#C8933E] transition-colors cursor-pointer group"
-            >
-              <span>View All Articles</span>
-              <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-            </button>
+      {/* ========================================================================= */}
+      {/* 🌟 8. WHY BOOK WITH SAMIKA HOLIDAYS / ADVANTAGE                           */}
+      {/* ========================================================================= */}
+      <section className="bg-white py-16 border-y border-slate-200">
+        <div className="w-full max-w-[97%] 2xl:max-w-[1780px] mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+          
+          <div className="text-center space-y-2 max-w-2xl mx-auto">
+            <span className="text-xs uppercase font-extrabold tracking-widest text-[#E11D48]">THE SAMIKA ADVANTAGE</span>
+            <h2 className="font-serif text-3xl sm:text-4xl font-bold text-slate-900">Why Travelers Trust Samika Holidays</h2>
+            <div className="w-16 h-1 bg-[#E11D48] mx-auto rounded-full mt-2" />
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {blogsList.slice(0, 3).map((blog) => {
-              const targetId = blog.id || blog._id;
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-6">
+            {[
+              { title: 'Audited Stays', desc: '100% physically vetted boutique resorts & hotels.', icon: Hotel, color: 'text-rose-600 bg-rose-50' },
+              { title: 'Curated Trails', desc: 'Hidden waterfalls, sacred temples & jungle safaris.', icon: Sparkles, color: 'text-amber-600 bg-amber-50' },
+              { title: 'Sanitized Cabs', desc: 'Experienced mountain drivers & on-time transfers.', icon: Car, color: 'text-cyan-600 bg-cyan-50' },
+              { title: 'Custom Itineraries', desc: 'Flexible packages built around your family & dates.', icon: Compass, color: 'text-purple-600 bg-purple-50' },
+              { title: '24x7 Assistance', desc: 'Dedicated trip manager assigned to every booking.', icon: Headphones, color: 'text-emerald-600 bg-emerald-50' },
+              { title: 'Best Value Guarantee', desc: 'Direct resort contracts ensure unbeatable prices.', icon: Award, color: 'text-orange-600 bg-orange-50' },
+            ].map((diff, idx) => {
+              const Icon = diff.icon;
               return (
-                <div
-                  key={targetId}
-                  onClick={() => {
-                    if (onSelectBlog) onSelectBlog(blog);
-                    else if (setActiveTab) setActiveTab('blogs');
-                  }}
-                  className="bg-white rounded-3xl overflow-hidden border border-stone-200 shadow-xs hover:shadow-lg transition-all duration-300 cursor-pointer flex flex-col justify-between group"
-                >
-                  <div>
-                    <div className="relative h-48 w-full overflow-hidden bg-stone-900">
-                      <img
-                        src={blog.image || 'https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=800&q=80'}
-                        alt={blog.title}
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                      />
-                      <span className="absolute top-3.5 left-3.5 bg-[#0F382C]/90 backdrop-blur-xs text-emerald-200 text-[10px] font-bold px-3 py-1 rounded-full uppercase">
-                        {blog.category || 'Travel Guide'}
-                      </span>
-                      <div className="absolute top-3.5 right-3.5 bg-black/60 backdrop-blur-xs text-white text-[10px] font-semibold px-2 py-0.5 rounded-lg flex items-center gap-1">
-                        <Clock className="w-3 h-3 text-[#C8933E]" />
-                        <span>{blog.readTime || '5 min'}</span>
-                      </div>
-                    </div>
-
-                    <div className="p-5 space-y-2.5">
-                      <span className="text-[10px] text-stone-400 font-bold uppercase tracking-wider block">
-                        By {blog.author || 'Samika Holiday Travel Desk'} {blog.location && `• ${blog.location}`}
-                      </span>
-                      <h3 className="font-serif text-lg font-bold text-stone-900 group-hover:text-[#0F382C] transition-colors line-clamp-2 leading-snug">
-                        {blog.title}
-                      </h3>
-                      <p className="text-xs text-stone-500 line-clamp-2 leading-relaxed">
-                        {stripHtml(blog.subtitle || blog.content)}
-                      </p>
-                    </div>
+                <div key={idx} className="bg-[#F8FAFC] rounded-2xl p-5 border border-slate-200/80 shadow-2xs hover:shadow-md transition-all space-y-3">
+                  <div className={`w-11 h-11 rounded-xl ${diff.color} shadow-2xs flex items-center justify-center`}>
+                    <Icon className="w-5 h-5" />
                   </div>
-
-                  <div className="px-5 py-3.5 border-t border-stone-100 flex items-center justify-between text-xs bg-stone-50/50">
-                    <span className="text-[#C8933E] font-bold inline-flex items-center gap-1 group-hover:translate-x-1 transition-transform">
-                      <span>Read Story</span>
-                      <ChevronRight className="w-3.5 h-3.5" />
-                    </span>
-                    <span className="text-[10px] text-stone-400 font-medium">
-                      {blog.createdAt ? new Date(blog.createdAt).toLocaleDateString() : 'Recent'}
-                    </span>
-                  </div>
+                  <h4 className="font-serif font-bold text-sm text-slate-900">{diff.title}</h4>
+                  <p className="text-xs text-slate-500 leading-relaxed">{diff.desc}</p>
                 </div>
               );
             })}
           </div>
-        </section>
-      )}
 
-      {/* Ready For Your Next Adventure? Banner CTA */}
-      <section className="w-full max-w-[97%] 2xl:max-w-[1780px] mx-auto px-2 sm:px-4 lg:px-6">
-        <div className="bg-[#0F382C] rounded-2xl p-8 text-white flex flex-col md:flex-row items-center justify-between gap-6 shadow-xl">
-          <div>
-            <h3 className="font-serif text-2xl sm:text-3xl font-bold">Ready For Your Next Adventure?</h3>
-            <p className="text-stone-300 text-xs sm:text-sm mt-1">Let's explore the beauty of Uttarakhand together.</p>
-          </div>
-
-          <div className="flex flex-wrap items-center gap-3">
-            <button
-              onClick={() => onOpenEnquiry('Next Adventure Booking')}
-              className="bg-[#C8933E] hover:bg-[#B5812F] text-white px-6 py-3 rounded-xl font-bold text-xs shadow-md transition-all"
-            >
-              Book Now
-            </button>
-            <a
-              href="https://wa.me/919258677823"
-              target="_blank"
-              rel="noreferrer"
-              className="bg-emerald-700 hover:bg-emerald-600 text-white px-5 py-3 rounded-xl font-bold text-xs flex items-center gap-2 transition-all"
-            >
-              <MessageCircle className="w-4 h-4 fill-white" />
-              <span>WhatsApp</span>
-            </a>
-            <a
-              href="tel:+919258677823"
-              className="bg-white/10 hover:bg-white/20 text-white border border-white/20 px-4 py-3 rounded-xl font-bold text-xs flex items-center gap-2 transition-all"
-            >
-              <Phone className="w-4 h-4" />
-              <span>Call Now</span>
-            </a>
-          </div>
         </div>
       </section>
+
+      {/* ========================================================================= */}
+      {/* 🌟 9. TRAVEL JOURNAL & BLOGS PREVIEW                                      */}
+      {/* ========================================================================= */}
+      {blogsList && blogsList.length > 0 && (
+        <section className="w-full max-w-[97%] 2xl:max-w-[1780px] mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+          
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
+            <div className="space-y-2">
+              <span className="text-xs font-extrabold uppercase tracking-widest text-[#E11D48] flex items-center gap-1.5">
+                <BookOpen className="w-4 h-4 text-[#FF6B35]" />
+                <span>HIMALAYAN TRAVEL JOURNAL</span>
+              </span>
+              <h2 className="font-serif text-3xl sm:text-4xl font-bold text-slate-900 leading-tight">
+                Latest Travel Guides & Insider Stories
+              </h2>
+              <p className="text-xs sm:text-sm text-slate-500 max-w-xl">
+                Tips, weather guides, best times to visit, and offbeat scenic destinations curated by our local explorers.
+              </p>
+            </div>
+
+            <button
+              onClick={() => setActiveTab('blogs')}
+              className="inline-flex items-center gap-2 text-xs font-bold text-[#E11D48] hover:text-[#FF6B35] transition-colors cursor-pointer"
+            >
+              <span>View All Articles ({blogsList.length})</span>
+              <ChevronRight className="w-4 h-4" />
+            </button>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {blogsList.slice(0, 3).map((blog) => (
+              <div
+                key={blog.id}
+                onClick={() => onSelectBlog && onSelectBlog(blog)}
+                className="bg-white rounded-3xl overflow-hidden border border-slate-200 shadow-sm hover:shadow-xl transition-all duration-300 group flex flex-col justify-between cursor-pointer"
+              >
+                <div>
+                  <div className="relative aspect-[16/10] overflow-hidden bg-slate-100">
+                    <img
+                      src={blog.image || 'https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=800&q=80'}
+                      alt={blog.title}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    />
+                    <span className="absolute top-3.5 left-3.5 bg-[#0F172A]/90 backdrop-blur-xs text-[#FF6B35] text-[10px] font-bold px-3 py-1 rounded-full uppercase">
+                      {blog.category || 'Travel Guide'}
+                    </span>
+                    <div className="absolute top-3.5 right-3.5 bg-black/60 backdrop-blur-xs text-white text-[10px] font-semibold px-2 py-0.5 rounded-lg flex items-center gap-1">
+                      <Clock className="w-3 h-3 text-[#FF6B35]" />
+                      <span>{blog.readTime || '5 min'}</span>
+                    </div>
+                  </div>
+
+                  <div className="p-5 space-y-2.5">
+                    <span className="text-[10px] text-slate-400 font-bold uppercase tracking-wider block">
+                      By {blog.author || 'Samika Holiday Travel Desk'} {blog.location && `• ${blog.location}`}
+                    </span>
+                    <h3 className="font-serif text-lg font-bold text-slate-900 group-hover:text-[#E11D48] transition-colors line-clamp-2 leading-snug">
+                      {blog.title}
+                    </h3>
+                    <p className="text-xs text-slate-500 line-clamp-2 leading-relaxed">
+                      {stripHtml(blog.subtitle || blog.content)}
+                    </p>
+                  </div>
+                </div>
+
+                <div className="px-5 py-3.5 border-t border-slate-100 flex items-center justify-between text-xs bg-slate-50/50">
+                  <span className="text-[#E11D48] font-bold inline-flex items-center gap-1 group-hover:translate-x-1 transition-transform">
+                    <span>Read Article</span>
+                    <ChevronRight className="w-3.5 h-3.5" />
+                  </span>
+                </div>
+              </div>
+            ))}
+          </div>
+
+        </section>
+      )}
 
     </div>
   );

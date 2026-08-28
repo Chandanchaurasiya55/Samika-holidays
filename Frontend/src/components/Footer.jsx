@@ -1,4 +1,5 @@
-import { MapPin, Phone, Mail, Globe } from 'lucide-react';
+import React from 'react';
+import { MapPin, Phone, Mail, Globe, MessageCircle, Heart, Sparkles, ShieldCheck, ArrowRight } from 'lucide-react';
 
 export default function Footer({ setActiveTab }) {
   const handleNavClick = (tabId) => {
@@ -7,16 +8,56 @@ export default function Footer({ setActiveTab }) {
   };
 
   return (
-    <footer className="bg-[#0A261E] text-stone-300 pt-14 pb-8 border-t border-emerald-950">
-      <div className="w-full max-w-[97%] 2xl:max-w-[1780px] mx-auto px-2 sm:px-4 lg:px-6">
+    <footer className="bg-[#0B1120] text-slate-300 pt-16 pb-10 border-t border-slate-800 relative overflow-hidden">
+      {/* Ambient gradient glows matching logo petals */}
+      <div className="absolute top-0 left-1/4 w-96 h-96 bg-rose-600/10 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute bottom-0 right-10 w-96 h-96 bg-orange-500/10 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute top-1/2 left-10 w-72 h-72 bg-cyan-500/10 rounded-full blur-3xl pointer-events-none" />
+
+      <div className="w-full max-w-[97%] 2xl:max-w-[1780px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
+        {/* Top Consultation Card */}
+        <div className="bg-gradient-to-r from-[#0F172A] via-[#1E293B] to-[#0F172A] rounded-3xl p-6 sm:p-8 lg:p-10 mb-14 border border-slate-700/80 shadow-2xl flex flex-col lg:flex-row items-center justify-between gap-6">
+          <div className="space-y-2 text-center lg:text-left max-w-2xl">
+            <div className="inline-flex items-center gap-1.5 bg-rose-500/20 text-[#FF6B35] border border-rose-500/30 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider">
+              <Sparkles className="w-3.5 h-3.5 text-[#E11D48]" />
+              <span>Bespoke Himalayan Escapes & Events</span>
+            </div>
+            <h3 className="font-serif text-2xl sm:text-3xl lg:text-4xl font-bold text-white leading-tight">
+              Ready to Plan Your Dream Uttarakhand Journey?
+            </h3>
+            <p className="text-xs sm:text-sm text-slate-300">
+              Speak directly with our local tour specialists for customized itineraries, boutique resort deals & verified bookings.
+            </p>
+          </div>
+
+          <div className="flex flex-wrap items-center justify-center gap-3">
+            <a
+              href="https://wa.me/919258677823?text=Hello%20Samika%20Holidays%2C%20I%20want%20to%20plan%20my%20trip."
+              target="_blank"
+              rel="noreferrer"
+              className="bg-gradient-to-r from-[#E11D48] to-[#FF6B35] hover:from-[#BE123C] hover:to-[#EA580C] text-white font-bold text-xs sm:text-sm px-6 py-3.5 rounded-2xl flex items-center gap-2 shadow-lg shadow-rose-900/30 transition-all hover:scale-105"
+            >
+              <MessageCircle className="w-4 h-4 fill-current" />
+              <span>Instant WhatsApp Inquiry</span>
+            </a>
+            <a
+              href="tel:+919258677823"
+              className="bg-white/10 hover:bg-white/20 text-white border border-white/20 font-bold text-xs sm:text-sm px-6 py-3.5 rounded-2xl flex items-center gap-2 transition-all"
+            >
+              <Phone className="w-4 h-4 text-[#FF6B35]" />
+              <span>Call Us Now</span>
+            </a>
+          </div>
+        </div>
+
         {/* Direct Footer Columns Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-12 gap-8 lg:gap-8 pb-12 border-b border-emerald-900/60">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-8 pb-12 border-b border-slate-800">
           
-          {/* Col 1: Brand & Bio (3 cols) */}
-          <div className="lg:col-span-3 space-y-4">
+          {/* Col 1: Brand & Bio (4 cols) */}
+          <div className="lg:col-span-4 space-y-4">
             <div 
-              className="inline-flex items-center cursor-pointer bg-white rounded-2xl p-2.5 shadow-md hover:opacity-95 transition-opacity" 
+              className="inline-flex items-center cursor-pointer bg-white rounded-2xl p-2.5 shadow-md hover:opacity-95 transition-all hover:scale-[1.02]" 
               onClick={() => handleNavClick('home')}
             >
               <img 
@@ -25,52 +66,50 @@ export default function Footer({ setActiveTab }) {
                 className="h-14 sm:h-16 w-auto object-contain" 
               />
             </div>
-            <p className="text-xs text-stone-400 leading-relaxed">
-              Your trusted travel partner for hotels, resorts, tour packages, destination weddings and unforgettable experiences across Uttarakhand.
+            <p className="text-xs text-slate-400 leading-relaxed pr-4">
+              Samika Holidays is your premier hospitality partner across Uttarakhand. Specializing in verified luxury resorts, curated wildlife safaris, pilgrimage tours, destination weddings, and corporate offsite retreats.
             </p>
             <div className="flex items-center space-x-3 pt-2">
               {/* Facebook */}
-              <a href="https://www.facebook.com/samikaholidays" target='blank' className="w-8 h-8 rounded-full bg-emerald-900/80 border border-emerald-800 flex items-center justify-center text-stone-300 hover:text-[#C8933E] hover:border-[#C8933E] transition-all">
+              <a href="https://www.facebook.com/samikaholidays" target='_blank' rel="noreferrer" className="w-9 h-9 rounded-xl bg-slate-800 border border-slate-700 flex items-center justify-center text-slate-300 hover:text-[#FF6B35] hover:border-[#FF6B35] transition-all">
                 <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
                   <path d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H7.5v-3H10V9.5C10 7.01 11.49 5.6 13.78 5.6c1.1 0 2.25.2 2.25.2v2.47h-1.27c-1.23 0-1.62.77-1.62 1.56V12h2.78l-.44 3h-2.34v6.8c4.56-.93 8-4.96 8-9.8z"/>
                 </svg>
               </a>
               {/* Instagram */}
-              <a href="https://www.instagram.com/Samikaholidays" target='blank' className="w-8 h-8 rounded-full bg-emerald-900/80 border border-emerald-800 flex items-center justify-center text-stone-300 hover:text-[#C8933E] hover:border-[#C8933E] transition-all">
+              <a href="https://www.instagram.com/Samikaholidays" target='_blank' rel="noreferrer" className="w-9 h-9 rounded-xl bg-slate-800 border border-slate-700 flex items-center justify-center text-slate-300 hover:text-[#E11D48] hover:border-[#E11D48] transition-all">
                 <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
                   <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
                 </svg>
               </a>
               {/* WhatsApp */}
-              <a href="https://wa.me/919258677823" target="_blank" rel="noreferrer" title="Chat on WhatsApp" className="w-8 h-8 rounded-full bg-emerald-900/80 border border-emerald-800 flex items-center justify-center text-emerald-400 hover:text-[#C8933E] hover:border-[#C8933E] transition-all">
-                <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
-                  <path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2zm.01 1.67c2.2 0 4.26.86 5.82 2.42a8.225 8.225 0 0 1 2.41 5.83c0 4.54-3.7 8.24-8.24 8.24-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.196 8.196 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.24-8.24zm-3.6 4.19c-.2 0-.44.07-.67.33-.23.26-.88.86-.88 2.1 0 1.24.9 2.44 1.03 2.61.13.17 1.77 2.7 4.29 3.79.6.26 1.07.41 1.44.53.6.19 1.15.16 1.58.1.48-.07 1.48-.6 1.69-1.18.21-.58.21-1.07.15-1.18-.06-.1-.23-.17-.48-.29-.25-.13-1.48-.73-1.71-.81-.23-.09-.4-.13-.57.13-.17.26-.66.81-.81.98-.15.17-.3.19-.55.07-.25-.13-1.06-.39-2.02-1.24-.75-.67-1.25-1.5-1.4-1.75-.15-.26-.02-.4.11-.53.11-.11.25-.29.38-.44.13-.15.17-.26.25-.43.08-.17.04-.33-.02-.46-.06-.13-.57-1.37-.78-1.88-.2-.5-.41-.43-.57-.44l-.49-.01z"/>
-                </svg>
+              <a href="https://wa.me/919258677823" target="_blank" rel="noreferrer" title="Chat on WhatsApp" className="w-9 h-9 rounded-xl bg-slate-800 border border-slate-700 flex items-center justify-center text-emerald-400 hover:text-emerald-300 hover:border-emerald-500 transition-all">
+                <MessageCircle className="w-4 h-4 fill-current" />
               </a>
             </div>
           </div>
 
-          {/* Col 2: Quick Links (2 cols) */}
-          <div className="lg:col-span-2">
-            <h4 className="font-semibold text-white text-sm tracking-wide uppercase mb-4 border-b border-emerald-800/50 pb-2 inline-block">
-              Quick Links
+          {/* Col 2: Quick Links (2.5 cols) */}
+          <div className="lg:col-span-2 space-y-3">
+            <h4 className="font-semibold text-white text-xs tracking-wider uppercase mb-3 border-b border-slate-800 pb-2 inline-block">
+              Quick Explore
             </h4>
             <ul className="space-y-2 text-xs font-medium">
               {[
-                { name: 'Home', tab: 'home' },
-                { name: 'Hotels', tab: 'hotels' },
-                { name: 'Destinations', tab: 'destinations' },
-                { name: 'Tour Packages', tab: 'packages' },
-                { name: 'Weddings', tab: 'weddings' },
-                { name: 'Corporate', tab: 'corporate' },
-                { name: 'Travel Blogs', tab: 'blogs' },
-                { name: 'About Us', tab: 'about' },
-                { name: 'Contact Us', tab: 'contact' }
+                { name: 'Home Experience', tab: 'home' },
+                { name: 'Luxury Hotels & Resorts', tab: 'hotels' },
+                { name: 'Curated Tour Packages', tab: 'packages' },
+                { name: 'Top Destinations', tab: 'destinations' },
+                { name: 'Destination Weddings', tab: 'weddings' },
+                { name: 'Corporate Retreats', tab: 'corporate' },
+                { name: 'Travel Journal / Blogs', tab: 'blogs' },
+                { name: 'Our Heritage & Story', tab: 'about' },
+                { name: 'Contact & Support', tab: 'contact' }
               ].map((item) => (
                 <li key={item.name}>
                   <button
                     onClick={() => handleNavClick(item.tab)}
-                    className="text-stone-400 hover:text-[#C8933E] transition-colors"
+                    className="text-slate-400 hover:text-[#FF6B35] transition-colors cursor-pointer text-left"
                   >
                     {item.name}
                   </button>
@@ -79,53 +118,100 @@ export default function Footer({ setActiveTab }) {
             </ul>
           </div>
 
-          {/* Col 3: Top Destinations (2 cols) */}
-          <div className="lg:col-span-2">
-            <h4 className="font-semibold text-white text-sm tracking-wide uppercase mb-4 border-b border-emerald-800/50 pb-2 inline-block">
-              Destinations
+          {/* Col 3: Top Destinations (2.5 cols) */}
+          <div className="lg:col-span-3 space-y-3">
+            <h4 className="font-semibold text-white text-xs tracking-wider uppercase mb-3 border-b border-slate-800 pb-2 inline-block">
+              Trending Destinations
             </h4>
-            <ul className="grid grid-cols-2 lg:grid-cols-1 gap-2 text-xs font-medium">
-              {['Jim Corbett', 'Nainital', 'Bhimtal', 'Mukteshwar', 'Rishikesh', 'Mussoorie', 'Auli', 'Chardham Yatra'].map((item) => (
+            <ul className="grid grid-cols-2 gap-2 text-xs font-medium">
+              {[
+                'Jim Corbett Safari',
+                'Nainital Lake City',
+                'Bhimtal & Naukuchiatal',
+                'Mukteshwar Orchards',
+                'Rishikesh Rafting',
+                'Mussoorie Queen of Hills',
+                'Kainchi Dham Ashram',
+                'Kedarnath Yatra',
+                'Auli Snow Slopes',
+                'Kausani Himalayan View'
+              ].map((item) => (
                 <li key={item}>
                   <button
                     onClick={() => handleNavClick('destinations')}
-                    className="text-stone-400 hover:text-[#C8933E] transition-colors text-left"
+                    className="text-slate-400 hover:text-[#FF6B35] transition-colors text-left truncate max-w-[150px] cursor-pointer"
                   >
-                    {item}
+                    • {item}
                   </button>
                 </li>
               ))}
             </ul>
           </div>
 
+          {/* Col 4: Direct Reservations Desk (3 cols) */}
+          <div className="lg:col-span-3 space-y-3">
+            <h4 className="font-semibold text-white text-xs tracking-wider uppercase mb-3 border-b border-slate-800 pb-2 inline-block">
+              Reservations & Help Desk
+            </h4>
+            <ul className="space-y-3 text-xs text-slate-300">
+              <li className="flex items-start gap-2.5">
+                <MapPin className="w-4 h-4 text-[#FF6B35] shrink-0 mt-0.5" />
+                <span className="text-slate-400">Headquarters in Uttarakhand with local hubs in Nainital, Corbett & Haridwar.</span>
+              </li>
+              <li className="flex items-center gap-2.5">
+                <Phone className="w-4 h-4 text-[#FF6B35] shrink-0" />
+                <a href="tel:+919258677823" className="hover:text-white transition-colors font-semibold">
+                  +91 92586 77823 / +91 78199 13686
+                </a>
+              </li>
+              <li className="flex items-center gap-2.5">
+                <Mail className="w-4 h-4 text-[#FF6B35] shrink-0" />
+                <a href="mailto:reservations@samikaholidays.com" className="hover:text-white transition-colors font-medium">
+                  reservations@samikaholidays.com
+                </a>
+              </li>
+              <li className="flex items-center gap-2.5">
+                <Globe className="w-4 h-4 text-[#FF6B35] shrink-0" />
+                <span className="text-slate-400">www.samikaholidays.com</span>
+              </li>
+            </ul>
+          </div>
+
         </div>
 
-      
+        {/* Tagline Strip */}
+        <div className="py-6 flex items-center justify-center gap-3 text-center border-b border-slate-800/80">
+          <span className="text-[#FF6B35] text-lg">☀️</span>
+          <span className="font-serif italic text-base sm:text-xl text-[#FF8A00] font-medium tracking-wide">
+            Samika Holidays – Crafting Timeless Mountain Memories Across Uttarakhand
+          </span>
+          <span className="text-[#FF6B35] text-lg">☀️</span>
+        </div>
 
         {/* Bottom Bar */}
-        <div className="pt-6 flex flex-col md:flex-row items-center justify-between text-xs text-stone-500 gap-4">
+        <div className="pt-6 flex flex-col md:flex-row items-center justify-between text-xs text-slate-500 gap-4">
           <div>
             © 2026 Samika Holidays. All Rights Reserved.
           </div>
 
-          <div className="text-center text-stone-400">
-            <span>Developed by </span>
+          <div className="text-center text-slate-400">
+            <span>Developed with care by </span>
             <a 
               href="https://buimbdigital.com" 
               target="_blank" 
               rel="noreferrer"
-              className="text-[#C8933E] hover:text-[#E8C280] font-semibold hover:underline transition-colors"
+              className="text-[#FF6B35] hover:text-[#FFA07A] font-semibold hover:underline transition-colors"
             >
               Buimb Research and LLP
             </a>
           </div>
 
-          <div className="flex items-center space-x-6">
-            <a href="#" className="hover:text-stone-300 transition-colors">Privacy Policy</a>
-            <span>|</span>
-            <a href="#" className="hover:text-stone-300 transition-colors">Terms & Conditions</a>
-            <span>|</span>
-            <a href="#" className="hover:text-stone-300 transition-colors">Refund Policy</a>
+          <div className="flex items-center space-x-4 text-[11px]">
+            <a href="#" className="hover:text-slate-300 transition-colors">Privacy Policy</a>
+            <span>•</span>
+            <a href="#" className="hover:text-slate-300 transition-colors">Terms of Service</a>
+            <span>•</span>
+            <a href="#" className="hover:text-slate-300 transition-colors">Guest Safety & Refund</a>
           </div>
         </div>
       </div>
