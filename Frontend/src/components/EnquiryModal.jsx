@@ -5,6 +5,8 @@ import {
   RefreshCw, Zap, CreditCard, Smartphone, Building2
 } from 'lucide-react';
 
+import { API_BASE_URL } from '../config.js';
+
 // Dynamically load Razorpay Checkout SDK
 const loadRazorpayScript = () => {
   return new Promise((resolve) => {
@@ -149,10 +151,8 @@ export default function EnquiryModal({
     }
 
     try {
-      const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:3000';
-
       // Step 1: Create Razorpay Order via Backend
-      const orderRes = await fetch(`${API_BASE}/api/payment/create-order`, {
+      const orderRes = await fetch(`${API_BASE_URL}/payment/create-order`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -178,10 +178,14 @@ export default function EnquiryModal({
         throw new Error(orderData.message || 'Failed to create Razorpay order');
       }
 
-      // Step 2: Get Razorpay Key from Backend
-      const keyRes = await fetch(`${API_BASE}/api/payment/key`);
+      // Step 2: Get Razorpay Key dynamically from Backend
+      const keyRes = await fetch(`${API_BASE_URL}/payment/key`);
       const keyData = await keyRes.json();
-      const razorpayKey = keyData.key || import.meta.env.VITE_RAZORPAY_KEY_ID || 'rzp_test_placeholder';
+      const razorpayKey = keyData.key;
+
+      if (!razorpayKey) {
+        throw new Error('Razorpay Key ID is not configured in backend .env');
+      }
 
       // Step 3: Open Razorpay Checkout
       const options = {
@@ -195,7 +199,7 @@ export default function EnquiryModal({
         handler: async function (response) {
           // Step 4: Verify Payment Signature via Backend
           try {
-            const verifyRes = await fetch(`${API_BASE}/api/payment/verify`, {
+            const verifyRes = await fetch(`${API_BASE_URL}/payment/verify`, {
               method: 'POST',
               headers: { 'Content-Type': 'application/json' },
               body: JSON.stringify({
