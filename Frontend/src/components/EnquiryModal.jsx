@@ -240,10 +240,9 @@ export default function EnquiryModal({
 
       razorpayInstance.open();
     } catch (err) {
-      console.log('Razorpay checkout error:', err);
-      // Fallback: if backend is down, still allow demo flow
-      const fallbackTxn = `pay_demo_${Date.now()}`;
-      finalizeConfirmedBooking(fallbackTxn);
+      console.error('Razorpay checkout error:', err);
+      setIsProcessingRazorpay(false);
+      alert('Payment could not be initiated. Please ensure Razorpay credentials are configured or try again later.');
     }
   };
 
