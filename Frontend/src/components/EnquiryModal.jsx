@@ -66,7 +66,7 @@ export default function EnquiryModal({
 
   useEffect(() => {
     try {
-      const savedUser = localStorage.getItem('atithya_current_user');
+      const savedUser = localStorage.getItem('samika_current_user') || localStorage.getItem('atithya_current_user');
       if (savedUser) {
         const u = JSON.parse(savedUser);
         setFormData(prev => ({
@@ -131,9 +131,9 @@ export default function EnquiryModal({
     }
 
     // Ensure current user in localStorage has this phone/email if not logged in
-    const currentUserStr = localStorage.getItem('atithya_current_user');
+    const currentUserStr = localStorage.getItem('samika_current_user') || localStorage.getItem('atithya_current_user');
     if (!currentUserStr && (formData.email || formData.phone)) {
-      localStorage.setItem('atithya_current_user', JSON.stringify({
+      localStorage.setItem('samika_current_user', JSON.stringify({
         name: formData.name,
         email: formData.email,
         phone: formData.phone,
@@ -166,7 +166,7 @@ export default function EnquiryModal({
         key: razorpayKey,
         amount: payableAmount * 100, // Amount in paise (INR)
         currency: 'INR',
-        name: 'Atithya Stay',
+        name: 'Samika Holidays',
         description: `Booking for ${packageTitle}`,
         image: '/logo.png',
         handler: function (response) {

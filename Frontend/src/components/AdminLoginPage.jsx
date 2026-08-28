@@ -25,6 +25,7 @@ export default function AdminLoginPage({ onAdminLoginSuccess }) {
           setHasExistingAdmin(exists);
           if (!exists) {
             setIsRegister(true);
+            localStorage.removeItem('samika_admins');
             localStorage.removeItem('atithya_admins');
           } else {
             setIsRegister(false);
@@ -76,7 +77,7 @@ export default function AdminLoginPage({ onAdminLoginSuccess }) {
 
         const data = await res.json();
         if (res.ok && data.success) {
-          localStorage.setItem('atithya_current_user', JSON.stringify(data.user));
+          localStorage.setItem('samika_current_user', JSON.stringify(data.user));
           setHasExistingAdmin(true);
           setSuccess(true);
           setTimeout(() => {
@@ -111,7 +112,7 @@ export default function AdminLoginPage({ onAdminLoginSuccess }) {
 
         const data = await res.json();
         if (res.ok && data.success) {
-          localStorage.setItem('atithya_current_user', JSON.stringify(data.user));
+          localStorage.setItem('samika_current_user', JSON.stringify(data.user));
           setSuccess(true);
           setTimeout(() => {
             onAdminLoginSuccess(data.user);
@@ -195,7 +196,7 @@ export default function AdminLoginPage({ onAdminLoginSuccess }) {
                 <input
                   type="email"
                   required
-                  placeholder="admin@atithya.com"
+                  placeholder="admin@samikaholidays.com"
                   value={credentials.email}
                   onChange={(e) => setCredentials({ ...credentials, email: e.target.value })}
                   className="w-full pl-10 pr-3 py-2.5 bg-stone-50 border border-stone-200 rounded-xl text-stone-800 font-semibold focus:outline-none focus:border-[#0F382C]"

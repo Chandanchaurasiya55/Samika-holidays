@@ -16,13 +16,13 @@ export default function Footer({ setActiveTab }) {
           {/* Col 1: Brand & Bio (3 cols) */}
           <div className="lg:col-span-3 space-y-4">
             <div 
-              className="flex items-center gap-3 cursor-pointer" 
+              className="inline-flex items-center cursor-pointer bg-white rounded-2xl p-2.5 shadow-md hover:opacity-95 transition-opacity" 
               onClick={() => handleNavClick('home')}
             >
               <img 
                 src="/logo.png" 
-                alt="Atithya Stay Logo" 
-                className="h-16 w-auto object-contain" 
+                alt="Samika Holidays Logo" 
+                className="h-14 sm:h-16 w-auto object-contain" 
               />
             </div>
             <p className="text-xs text-stone-400 leading-relaxed">
@@ -30,13 +30,13 @@ export default function Footer({ setActiveTab }) {
             </p>
             <div className="flex items-center space-x-3 pt-2">
               {/* Facebook */}
-              <a href="https://www.facebook.com/mdhotelsofficial" target='blank' className="w-8 h-8 rounded-full bg-emerald-900/80 border border-emerald-800 flex items-center justify-center text-stone-300 hover:text-[#C8933E] hover:border-[#C8933E] transition-all">
+              <a href="https://www.facebook.com/samikaholidays" target='blank' className="w-8 h-8 rounded-full bg-emerald-900/80 border border-emerald-800 flex items-center justify-center text-stone-300 hover:text-[#C8933E] hover:border-[#C8933E] transition-all">
                 <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
                   <path d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H7.5v-3H10V9.5C10 7.01 11.49 5.6 13.78 5.6c1.1 0 2.25.2 2.25.2v2.47h-1.27c-1.23 0-1.62.77-1.62 1.56V12h2.78l-.44 3h-2.34v6.8c4.56-.93 8-4.96 8-9.8z"/>
                 </svg>
               </a>
               {/* Instagram */}
-              <a href="https://www.instagram.com/mdhotels_official?igsi=MnVzeHhzbGF3OTVw" target='blank' className="w-8 h-8 rounded-full bg-emerald-900/80 border border-emerald-800 flex items-center justify-center text-stone-300 hover:text-[#C8933E] hover:border-[#C8933E] transition-all">
+              <a href="https://www.instagram.com/Samikaholidays" target='blank' className="w-8 h-8 rounded-full bg-emerald-900/80 border border-emerald-800 flex items-center justify-center text-stone-300 hover:text-[#C8933E] hover:border-[#C8933E] transition-all">
                 <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
                   <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
                 </svg>
@@ -98,98 +98,14 @@ export default function Footer({ setActiveTab }) {
             </ul>
           </div>
 
-          {/* Col 4: Haldwani Office (2.5 cols) */}
-          <div className="lg:col-span-2 space-y-3">
-            <h4 className="font-semibold text-white text-sm tracking-wide uppercase mb-4 border-b border-emerald-800/50 pb-2 inline-flex items-center gap-1.5">
-              <MapPin className="w-3.5 h-3.5 text-[#C8933E]" />
-              <span>Haldwani Office</span>
-            </h4>
-            <ul className="space-y-2.5 text-xs font-medium text-stone-300">
-              <li>
-                <a href="tel:+916395643686" className="flex items-center gap-2 hover:text-[#C8933E] transition-colors">
-                  <Phone className="w-3.5 h-3.5 text-[#C8933E] shrink-0" />
-                  <span>6395643686</span>
-                </a>
-              </li>
-              <li>
-                <a href="tel:+919258677823" className="flex items-center gap-2 hover:text-[#C8933E] transition-colors">
-                  <Phone className="w-3.5 h-3.5 text-[#C8933E] shrink-0" />
-                  <span>9258677823</span>
-                </a>
-              </li>
-              <li>
-                <a href="tel:+917668284863" className="flex items-center gap-2 hover:text-[#C8933E] transition-colors">
-                  <Phone className="w-3.5 h-3.5 text-[#C8933E] shrink-0" />
-                  <span>7668284863</span>
-                </a>
-              </li>
-              <li>
-                <a href="tel:+916395865593" className="flex items-center gap-2 hover:text-[#C8933E] transition-colors">
-                  <Phone className="w-3.5 h-3.5 text-[#C8933E] shrink-0" />
-                  <span>6395865593</span>
-                </a>
-              </li>
-            </ul>
-          </div>
-
-          {/* Col 5: Haridwar Office & Online Contacts (3 cols) */}
-          <div className="lg:col-span-3 space-y-3">
-            <h4 className="font-semibold text-white text-sm tracking-wide uppercase mb-4 border-b border-emerald-800/50 pb-2 inline-flex items-center gap-1.5">
-              <MapPin className="w-3.5 h-3.5 text-[#C8933E]" />
-              <span>Haridwar Office</span>
-            </h4>
-            
-            <ul className="space-y-3 text-xs font-medium text-stone-300">
-              <li>
-                <a href="tel:+917819913686" className="flex items-center gap-2 hover:text-[#C8933E] transition-colors">
-                  <Phone className="w-3.5 h-3.5 text-[#C8933E] shrink-0" />
-                  <span>7819913686</span>
-                </a>
-              </li>
-
-              <li className="pt-2 border-t border-emerald-900/60">
-                <a 
-                  href="mailto:reservations@atithyastay.com" 
-                  className="flex items-center gap-2.5 hover:text-[#C8933E] transition-colors break-all"
-                >
-                  <span className="w-5 h-5 rounded-full bg-emerald-950 border border-[#C8933E]/70 flex items-center justify-center text-[#C8933E] shrink-0">
-                    <Mail className="w-2.5 h-2.5" />
-                  </span>
-                  <span>reservations@atithyastay.com</span>
-                </a>
-              </li>
-
-              <li>
-                <a 
-                  href="https://www.atithyastay.com" 
-                  target="_blank" 
-                  rel="noreferrer"
-                  className="flex items-center gap-2.5 hover:text-[#C8933E] transition-colors"
-                >
-                  <span className="w-5 h-5 rounded-full bg-emerald-950 border border-[#C8933E]/70 flex items-center justify-center text-[#C8933E] shrink-0">
-                    <Globe className="w-2.5 h-2.5" />
-                  </span>
-                  <span>www.atithyastay.com</span>
-                </a>
-              </li>
-            </ul>
-          </div>
-
         </div>
 
-        {/* Script Tagline Banner with Leaves */}
-        <div className="py-6 flex items-center justify-center gap-3 text-center border-b border-emerald-950">
-          <span className="text-[#C8933E] text-base sm:text-xl">🌿</span>
-          <span className="font-serif italic text-lg sm:text-2xl text-[#E8C280] font-medium tracking-wide drop-shadow-sm">
-            Atithya Stay – Your Hospitality Partner
-          </span>
-          <span className="text-[#C8933E] text-base sm:text-xl">🌿</span>
-        </div>
+      
 
         {/* Bottom Bar */}
         <div className="pt-6 flex flex-col md:flex-row items-center justify-between text-xs text-stone-500 gap-4">
           <div>
-            © 2026 Atithya Stay. All Rights Reserved.
+            © 2026 Samika Holidays. All Rights Reserved.
           </div>
 
           <div className="text-center text-stone-400">

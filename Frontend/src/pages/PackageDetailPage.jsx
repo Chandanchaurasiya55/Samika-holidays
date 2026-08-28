@@ -34,8 +34,8 @@ export default function PackageDetailPage({
   const handleShare = () => {
     if (navigator.share) {
       navigator.share({
-        title: `${pkg.title} | Atithya Stay`,
-        text: `Check out ${pkg.title} on Atithya Stay!`,
+        title: `${pkg.title} | Samika Holidays`,
+        text: `Check out ${pkg.title} on Samika Holidays!`,
         url: window.location.href,
       }).catch(() => {});
     } else {
@@ -314,7 +314,7 @@ export default function PackageDetailPage({
                 </button>
 
                 <a
-                  href={`https://wa.me/919258677823?text=${encodeURIComponent(`Hello Atithya Stay, I want to book the package: ${pkg.title} (Price: ₹${pkg.price})`)}`}
+                  href={`https://wa.me/919258677823?text=${encodeURIComponent(`Hello Samika Holidays, I want to book the package: ${pkg.title} (Price: ₹${pkg.price})`)}`}
                   target="_blank"
                   rel="noreferrer"
                   className="w-full bg-emerald-600 hover:bg-emerald-700 text-white py-3.5 rounded-xl font-bold text-sm shadow-md flex items-center justify-center gap-2 transition-all"

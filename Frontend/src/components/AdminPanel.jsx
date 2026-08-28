@@ -128,7 +128,7 @@ export default function AdminPanel({
     category: 'Travel Guide',
     location: '',
     readTime: '5 min read',
-    author: 'Atithya Travel Desk',
+    author: 'Samika Holiday Travel Desk',
     bestTimeToVisit: '',
     idealDuration: '',
     howToReach: '',
@@ -293,7 +293,7 @@ export default function AdminPanel({
       category: 'Travel Guide',
       location: '',
       readTime: '5 min read',
-      author: 'Atithya Travel Desk',
+      author: 'Samika Holiday Travel Desk',
       bestTimeToVisit: '',
       idealDuration: '',
       howToReach: '',
@@ -339,10 +339,10 @@ export default function AdminPanel({
   // Stored Admin Details
   const currentUser = (() => {
     try {
-      const stored = localStorage.getItem('atithya_current_user');
-      return stored ? JSON.parse(stored) : { name: 'Super Admin', username: 'admin', email: 'admin@atithya.com' };
+      const stored = localStorage.getItem('samika_current_user') || localStorage.getItem('atithya_current_user');
+      return stored ? JSON.parse(stored) : { name: 'Super Admin', username: 'admin', email: 'admin@samikaholidays.com' };
     } catch {
-      return { name: 'Super Admin', username: 'admin', email: 'admin@atithya.com' };
+      return { name: 'Super Admin', username: 'admin', email: 'admin@samikaholidays.com' };
     }
   })();
 
@@ -841,7 +841,7 @@ export default function AdminPanel({
                 {activeNav === 'blogs' && 'Blog Articles & Stories'}
               </h1>
               <p className="text-xs text-slate-400 font-medium mt-0.5">
-                Atithya Stay • Uttarakhand Luxury Tourism & Hospitality Management
+                Samika Holidays • Uttarakhand Luxury Tourism & Hospitality Management
               </p>
             </div>
           </div>
@@ -2731,7 +2731,7 @@ export default function AdminPanel({
                           <label className="block font-bold text-slate-700 mb-1">Author Name</label>
                           <input
                             type="text"
-                            placeholder="e.g. Atithya Stay Travel Desk"
+                            placeholder="e.g. Samika Holiday Travel Desk"
                             value={blogForm.author}
                             onChange={(e) => setBlogForm({ ...blogForm, author: e.target.value })}
                             className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl font-semibold focus:outline-none focus:border-emerald-600"
@@ -2876,10 +2876,10 @@ export default function AdminPanel({
                             <span>Google Search Result Snippet Preview</span>
                           </div>
                           <div className="text-[11px] text-slate-500 truncate">
-                            https://www.atithyastay.com &gt; blogs &gt; {blogForm.title ? blogForm.title.toLowerCase().replace(/[^a-z0-9]+/g, '-') : 'article-slug'}
+                            https://www.samikaholidays.com &gt; blogs &gt; {blogForm.title ? blogForm.title.toLowerCase().replace(/[^a-z0-9]+/g, '-') : 'article-slug'}
                           </div>
                           <h4 className="text-base font-semibold text-blue-800 hover:underline cursor-pointer leading-tight truncate">
-                            {blogForm.metaTitle || blogForm.title || 'Enter your blog title here | Atithya Stay Travel Guide'}
+                            {blogForm.metaTitle || blogForm.title || 'Enter your blog title here | Samika Holidays Travel Guide'}
                           </h4>
                           <p className="text-xs text-slate-600 line-clamp-2 leading-relaxed">
                             {blogForm.metaDescription || blogForm.subtitle || 'Add a compelling meta description to describe your blog post content to search engine users and improve click-through rates.'}
@@ -2914,7 +2914,7 @@ export default function AdminPanel({
                           </div>
                           <input
                             type="text"
-                            placeholder="e.g. 10 Best Things to Do in Nainital (2026 Guide) | Atithya Stay"
+                            placeholder="e.g. 10 Best Things to Do in Nainital (2026 Guide) | Samika Holidays"
                             value={blogForm.metaTitle}
                             onChange={(e) => setBlogForm({ ...blogForm, metaTitle: e.target.value })}
                             className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl font-semibold focus:outline-none focus:border-blue-500"
@@ -3089,7 +3089,7 @@ export default function AdminPanel({
                             <div className="p-5 space-y-3 flex-1 flex flex-col justify-between">
                               <div>
                                 <span className="text-[10px] text-[#C8933E] font-bold block uppercase tracking-wider">
-                                  By {blog.author || 'Atithya Travel Desk'} {blog.location && `• ${blog.location}`}
+                                  By {blog.author || 'Samika Holiday Travel Desk'} {blog.location && `• ${blog.location}`}
                                 </span>
                                 <h4 className="font-serif text-base font-bold text-slate-900 leading-snug mt-1 line-clamp-2">
                                   {blog.title}

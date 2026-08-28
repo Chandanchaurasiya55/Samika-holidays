@@ -323,7 +323,7 @@ export default function TourPackagesPage({ onOpenEnquiry, onSelectPackage, packa
                         {pkg.title}
                       </h3>
                       <p className="text-xs font-medium text-stone-500 mt-1 line-clamp-2">
-                        {pkg.subtitle || 'Experience the beauty of Uttarakhand with Atithya Stay'}
+                        {pkg.subtitle || 'Experience the beauty of Uttarakhand with Samika Holidays'}
                       </p>
 
                       {/* Specs Icons */}
@@ -365,13 +365,13 @@ export default function TourPackagesPage({ onOpenEnquiry, onSelectPackage, packa
         )}
       </section>
 
-      {/* Why Book With Atithya Stay? */}
+      {/* Why Book With Samika Holidays? */}
       <section className="bg-white py-16 border-y border-stone-200">
         <div className="w-full max-w-[97%] 2xl:max-w-[1780px] mx-auto px-2 sm:px-4 lg:px-6 text-center space-y-12">
           
           <div className="space-y-2">
             <h2 className="font-serif text-3xl font-bold text-[#0F382C]">
-              Why Book With Atithya Stay?
+              Why Book With Samika Holidays?
             </h2>
             <div className="w-16 h-0.5 bg-[#C8933E] mx-auto rounded-full" />
           </div>

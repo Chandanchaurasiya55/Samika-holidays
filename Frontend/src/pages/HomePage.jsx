@@ -298,7 +298,7 @@ export default function HomePage({
             </h1>
             
             <div className="font-serif text-2xl sm:text-4xl font-semibold text-white tracking-tight">
-              with Atithya Stay
+              with Samika Holidays
             </div>
 
             {/* Category Bullets */}
@@ -1032,7 +1032,7 @@ export default function HomePage({
 
                     <div className="p-5 space-y-2.5">
                       <span className="text-[10px] text-stone-400 font-bold uppercase tracking-wider block">
-                        By {blog.author || 'Atithya Travel Desk'} {blog.location && `• ${blog.location}`}
+                        By {blog.author || 'Samika Holiday Travel Desk'} {blog.location && `• ${blog.location}`}
                       </span>
                       <h3 className="font-serif text-lg font-bold text-stone-900 group-hover:text-[#0F382C] transition-colors line-clamp-2 leading-snug">
                         {blog.title}

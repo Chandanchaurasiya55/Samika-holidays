@@ -200,23 +200,23 @@ export default function ContactUsPage({ onAddEnquiry }) {
               <div className="space-y-2 text-xs">
                 <div className="flex items-center justify-between p-2.5 bg-white rounded-xl border border-stone-200">
                   <span className="text-stone-500 font-medium">Official Reservations:</span>
-                  <a href="mailto:reservations@atithyastay.com" className="font-extrabold text-[#0F382C] hover:underline">
-                    reservations@atithyastay.com
+                  <a href="mailto:reservations@samikaholidays.com" className="font-extrabold text-[#0F382C] hover:underline">
+                    reservations@samikaholidays.com
                   </a>
                 </div>
 
                 <div className="flex items-center justify-between p-2.5 bg-white rounded-xl border border-stone-200">
                   <span className="text-stone-500 font-medium">General Inquiries:</span>
-                  <a href="mailto:info@atithyastay.com" className="font-extrabold text-[#0F382C] hover:underline">
-                    info@atithyastay.com
+                  <a href="mailto:info@samikaholidays.com" className="font-extrabold text-[#0F382C] hover:underline">
+                    info@samikaholidays.com
                   </a>
                 </div>
 
                 <div className="flex items-center justify-between p-2.5 bg-white rounded-xl border border-stone-200">
                   <span className="text-stone-500 font-medium">Official Website:</span>
-                  <a href="https://www.atithyastay.com" target="_blank" rel="noreferrer" className="font-extrabold text-[#C8933E] hover:underline flex items-center gap-1">
+                  <a href="https://www.samikaholidays.com" target="_blank" rel="noreferrer" className="font-extrabold text-[#C8933E] hover:underline flex items-center gap-1">
                     <Globe className="w-3.5 h-3.5" />
-                    <span>www.atithyastay.com</span>
+                    <span>www.samikaholidays.com</span>
                   </a>
                 </div>
               </div>

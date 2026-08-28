@@ -43,8 +43,8 @@ export default function BlogDetailPage({
   const handleShare = () => {
     if (navigator.share) {
       navigator.share({
-        title: `${blog.metaTitle || blog.title} | Atithya Stay`,
-        text: `Read "${blog.title}" on Atithya Stay Travel Journal!`,
+        title: `${blog.metaTitle || blog.title} | Samika Holidays`,
+        text: `Read "${blog.title}" on Samika Holidays Travel Journal!`,
         url: window.location.href,
       }).catch(() => {});
     } else {
@@ -147,7 +147,7 @@ export default function BlogDetailPage({
                 {(blog.author || 'A')[0]}
               </div>
               <div>
-                <span className="font-bold text-stone-900 block text-sm">{blog.author || 'Atithya Stay Travel Desk'}</span>
+                <span className="font-bold text-stone-900 block text-sm">{blog.author || 'Samika Holiday Travel Desk'}</span>
                 <span className="text-[11px] text-stone-400 font-medium">Uttarakhand Hospitality & Tourism Specialist</span>
               </div>
             </div>
@@ -242,7 +242,7 @@ export default function BlogDetailPage({
                   <div className="space-y-2 flex-1">
                     <div>
                       <span className="text-[10px] uppercase font-bold text-[#C8933E] tracking-widest block">Written by</span>
-                      <h4 className="font-serif text-lg font-bold text-stone-900">{blog.author || 'Atithya Stay Travel Desk'}</h4>
+                      <h4 className="font-serif text-lg font-bold text-stone-900">{blog.author || 'Samika Holiday Travel Desk'}</h4>
                       <p className="text-xs text-stone-500 font-medium">Local Explorer & Uttarakhand Tour Specialist</p>
                     </div>
                     <p className="text-xs text-stone-600 leading-relaxed">

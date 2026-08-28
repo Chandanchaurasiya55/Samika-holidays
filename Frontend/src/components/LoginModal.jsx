@@ -50,7 +50,7 @@ export default function LoginModal({ isOpen, onClose, onLoginSuccess, onAdminLog
           setLoggedIn(true);
           setLoading(false);
 
-          localStorage.setItem('atithya_current_user', JSON.stringify(user));
+          localStorage.setItem('samika_current_user', JSON.stringify(user));
 
           setTimeout(() => {
             setLoggedIn(false);
@@ -94,7 +94,7 @@ export default function LoginModal({ isOpen, onClose, onLoginSuccess, onAdminLog
           setLoggedIn(true);
           setLoading(false);
 
-          localStorage.setItem('atithya_current_user', JSON.stringify(user));
+          localStorage.setItem('samika_current_user', JSON.stringify(user));
 
           setTimeout(() => {
             setLoggedIn(false);
@@ -133,7 +133,7 @@ export default function LoginModal({ isOpen, onClose, onLoginSuccess, onAdminLog
 
           <div className="inline-flex items-center gap-1.5 bg-[#C8933E]/20 text-[#C8933E] border border-[#C8933E]/40 px-3 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider mb-2">
             <Sparkles className="w-3 h-3" />
-            <span>Atithya Stay Portal</span>
+            <span>Samika Holidays Portal</span>
           </div>
 
           <h3 className="font-serif text-2xl font-bold">
@@ -141,7 +141,7 @@ export default function LoginModal({ isOpen, onClose, onLoginSuccess, onAdminLog
           </h3>
           <p className="text-stone-300 text-xs mt-1">
             {isRegister 
-              ? 'Fill in your details to create a new Atithya Stay account.' 
+              ? 'Fill in your details to create a new Samika Holidays account.' 
               : 'Sign in to access your dashboard, bookings & management.'}
           </p>
         </div>

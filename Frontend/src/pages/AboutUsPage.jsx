@@ -40,7 +40,7 @@ export default function AboutUsPage({ onOpenEnquiry }) {
 
           {/* Sub-headline */}
           <p className="text-stone-200 text-sm sm:text-lg max-w-3xl mx-auto leading-relaxed font-normal">
-            More than just a travel brand, Atithya Stay is your trusted mountain companion. 
+            More than just a travel brand, Samika Holidays is your trusted mountain companion. 
             We blend authentic Pahadi warmth with handpicked luxury resorts, bespoke itineraries, and 24/7 dedicated on-trip care.
           </p>
 
@@ -182,7 +182,7 @@ export default function AboutUsPage({ onOpenEnquiry }) {
             
             <p className="text-stone-600 text-sm sm:text-base leading-relaxed">
               Founded with an intimate love for the mountains and a mission to elevate Himalayan travel, 
-              <strong> Atithya Stay</strong> was born out of a desire to connect discerning travelers with authentic hospitality.
+              <strong> Samika Holidays</strong> was born out of a desire to connect discerning travelers with authentic hospitality.
             </p>
 
             <p className="text-stone-600 text-sm sm:text-base leading-relaxed">
@@ -270,8 +270,8 @@ export default function AboutUsPage({ onOpenEnquiry }) {
         <div className="w-full max-w-[97%] 2xl:max-w-[1780px] mx-auto px-2 sm:px-4 lg:px-6 space-y-12">
           
           <div className="text-center space-y-2 max-w-2xl mx-auto">
-            <span className="text-xs uppercase font-extrabold tracking-widest text-[#C8933E]">THE ATITHYA ADVANTAGE</span>
-            <h2 className="font-serif text-3xl sm:text-4xl font-bold text-stone-900">Why Travelers Choose Atithya Stay</h2>
+            <span className="text-xs uppercase font-extrabold tracking-widest text-[#C8933E]">THE SAMIKA ADVANTAGE</span>
+            <h2 className="font-serif text-3xl sm:text-4xl font-bold text-stone-900">Why Travelers Choose Samika Holidays</h2>
             <div className="w-16 h-1 bg-[#C8933E] mx-auto rounded-full mt-2" />
           </div>
 

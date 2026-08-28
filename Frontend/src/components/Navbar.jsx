@@ -25,19 +25,19 @@ export default function Navbar({ activeTab, setActiveTab, onOpenLogin, isLoggedI
   };
 
   return (
-    <header className="sticky top-0 z-50 bg-white border-b border-stone-200 shadow-2xs px-[5px]">
+    <header className="sticky top-0 z-50 bg-white border-b border-stone-200 shadow-2xs">
       {/* Main Header Bar */}
-      <div className="w-full max-w-[98%] 2xl:max-w-[1800px] mx-auto px-[5px] sm:px-[5px] lg:px-[5px] h-20 lg:h-22 flex items-center justify-between gap-4">
+      <div className="w-full max-w-[97%] 2xl:max-w-[1780px] mx-auto px-4 sm:px-6 lg:px-8 h-20 lg:h-22 flex items-center justify-between gap-4">
         
         {/* Brand Logo */}
         <div 
           onClick={() => handleNavClick('home')}
-          className="flex items-center cursor-pointer shrink-0 py-1.5 ml-[17px] transition-transform duration-200 hover:scale-[1.02]"
+          className="flex items-center cursor-pointer shrink-0 py-1 pl-2 sm:pl-4 lg:pl-6 transition-transform duration-200 hover:scale-[1.02]"
         >
           <img 
             src="/logo.png" 
-            alt="Atithya Stay Logo" 
-            className="h-14 sm:h-16 lg:h-[72px] max-h-[74px] w-auto object-contain drop-shadow-2xs" 
+            alt="Samika Holidays Logo" 
+            className="h-14 sm:h-16 lg:h-18 max-h-[76px] w-auto object-contain" 
           />
         </div>
 

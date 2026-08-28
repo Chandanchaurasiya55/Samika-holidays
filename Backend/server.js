@@ -42,13 +42,13 @@ app.get('/api/health', (req, res) => {
     status: 'ok',
     port: PORT,
     timestamp: new Date().toISOString(),
-    message: 'Atithya Stay Backend API is running smoothly'
+    message: 'Samika Holiday Backend API is running smoothly'
   });
 });
 
 // Start Server & Connect MongoDB
 app.listen(PORT, async () => {
-  console.log(`🚀 Atithya Stay Backend API server running on http://localhost:${PORT}`);
+  console.log(`🚀 Samika Holiday Backend API server running on http://localhost:${PORT}`);
   const conn = await connectDB();
   if (!conn) {
     console.log('⚠️ Running backend with in-memory persistence fallback');

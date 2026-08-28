@@ -34,7 +34,7 @@ function PageLoader() {
       </div>
       <div className="text-center space-y-1">
         <p className="font-serif text-base font-bold text-[#0F382C] tracking-wide">
-          Atithya Stay
+          Samika Holidays
         </p>
         <p className="text-xs text-stone-500 font-medium tracking-wider uppercase">
           Loading Experiences...
@@ -59,22 +59,22 @@ export const createSlug = (text) => {
 export default function App() {
   // Modals & Auth State with localStorage Persistence
   const [isLoggedIn, setIsLoggedIn] = useState(() => {
-    return localStorage.getItem('atithya_is_user_logged_in') === 'true';
+    return (localStorage.getItem('samika_is_user_logged_in') || localStorage.getItem('atithya_is_user_logged_in')) === 'true';
   });
 
   const [isAdminAuthenticated, setIsAdminAuthenticated] = useState(() => {
-    return localStorage.getItem('atithya_is_admin_auth') === 'true';
+    return (localStorage.getItem('samika_is_admin_auth') || localStorage.getItem('atithya_is_admin_auth')) === 'true';
   });
 
   // Navigation tab state ('home' default)
   const [activeTab, setActiveTab] = useState(() => {
-    const isAuth = localStorage.getItem('atithya_is_admin_auth') === 'true';
+    const isAuth = (localStorage.getItem('samika_is_admin_auth') || localStorage.getItem('atithya_is_admin_auth')) === 'true';
     const path = window.location.pathname.toLowerCase();
     const hash = window.location.hash.toLowerCase();
     if (hash.includes('admin') || path.includes('/admin')) {
       return isAuth ? 'admin' : 'admin-login';
     }
-    const saved = localStorage.getItem('atithya_active_tab');
+    const saved = localStorage.getItem('samika_active_tab') || localStorage.getItem('atithya_active_tab');
     if (saved === 'admin' && !isAuth) return 'admin-login';
     return saved || 'home';
   });
@@ -88,86 +88,86 @@ export default function App() {
 
   // Sync auth & tab state to localStorage
   useEffect(() => {
-    localStorage.setItem('atithya_is_user_logged_in', isLoggedIn ? 'true' : 'false');
+    localStorage.setItem('samika_is_user_logged_in', isLoggedIn ? 'true' : 'false');
   }, [isLoggedIn]);
 
   useEffect(() => {
-    localStorage.setItem('atithya_is_admin_auth', isAdminAuthenticated ? 'true' : 'false');
+    localStorage.setItem('samika_is_admin_auth', isAdminAuthenticated ? 'true' : 'false');
   }, [isAdminAuthenticated]);
 
   useEffect(() => {
-    localStorage.setItem('atithya_active_tab', activeTab);
+    localStorage.setItem('samika_active_tab', activeTab);
     const titles = {
-      home: 'Atithya Stay | Luxury Hotels, Resorts & Tour Packages in Uttarakhand',
-      hotels: 'Luxury Hotels & Resorts in Uttarakhand | Atithya Stay',
-      packages: 'Tour Packages in Uttarakhand | Atithya Stay',
-      destinations: 'Popular Destinations in Uttarakhand | Atithya Stay',
-      weddings: 'Destination Weddings in Uttarakhand | Atithya Stay',
-      corporate: 'Corporate Tours & Retreats | Atithya Stay',
-      blogs: 'Travel Blogs & Guides | Atithya Stay',
-      'blog-detail': 'Blog Article | Atithya Stay',
-      about: 'About Us | Atithya Stay',
-      contact: 'Contact Us | Atithya Stay',
-      admin: 'Admin Panel | Atithya Stay',
-      'admin-login': 'Admin Login | Atithya Stay'
+      home: 'Samika Holidays | Luxury Hotels, Resorts & Tour Packages in Uttarakhand',
+      hotels: 'Luxury Hotels & Resorts in Uttarakhand | Samika Holidays',
+      packages: 'Tour Packages in Uttarakhand | Samika Holidays',
+      destinations: 'Popular Destinations in Uttarakhand | Samika Holidays',
+      weddings: 'Destination Weddings in Uttarakhand | Samika Holidays',
+      corporate: 'Corporate Tours & Retreats | Samika Holidays',
+      blogs: 'Travel Blogs & Guides | Samika Holidays',
+      'blog-detail': 'Blog Article | Samika Holidays',
+      about: 'About Us | Samika Holidays',
+      contact: 'Contact Us | Samika Holidays',
+      admin: 'Admin Panel | Samika Holidays',
+      'admin-login': 'Admin Login | Samika Holidays'
     };
-    document.title = titles[activeTab] || 'Atithya Stay | Luxury Travel Partner in Uttarakhand';
+    document.title = titles[activeTab] || 'Samika Holidays | Luxury Travel Partner in Uttarakhand';
   }, [activeTab]);
 
   // --- DYNAMIC DATA STATES (Managed 100% via Admin Panel & Backend) ---
   const [blogs, setBlogs] = useState(() => {
-    const local = localStorage.getItem('atithya_blogs');
+    const local = localStorage.getItem('samika_blogs') || localStorage.getItem('atithya_blogs');
     return local ? JSON.parse(local) : [];
   });
 
   const [enquiries, setEnquiries] = useState(() => {
-    const local = localStorage.getItem('atithya_enquiries');
+    const local = localStorage.getItem('samika_enquiries') || localStorage.getItem('atithya_enquiries');
     return local ? JSON.parse(local) : [];
   });
 
   const [packages, setPackages] = useState(() => {
-    const local = localStorage.getItem('atithya_packages');
+    const local = localStorage.getItem('samika_packages') || localStorage.getItem('atithya_packages');
     return local ? JSON.parse(local) : [];
   });
 
   const [hotels, setHotels] = useState(() => {
-    const local = localStorage.getItem('atithya_hotels');
+    const local = localStorage.getItem('samika_hotels') || localStorage.getItem('atithya_hotels');
     return local ? JSON.parse(local) : [];
   });
 
   const [posts, setPosts] = useState(() => {
-    const local = localStorage.getItem('atithya_posts');
+    const local = localStorage.getItem('samika_posts') || localStorage.getItem('atithya_posts');
     return local ? JSON.parse(local) : [];
   });
 
   const [destinations, setDestinations] = useState(() => {
-    const local = localStorage.getItem('atithya_destinations');
+    const local = localStorage.getItem('samika_destinations') || localStorage.getItem('atithya_destinations');
     return local ? JSON.parse(local) : [];
   });
 
   // Sync to localStorage
   useEffect(() => {
-    localStorage.setItem('atithya_enquiries', JSON.stringify(enquiries));
+    localStorage.setItem('samika_enquiries', JSON.stringify(enquiries));
   }, [enquiries]);
 
   useEffect(() => {
-    localStorage.setItem('atithya_packages', JSON.stringify(packages));
+    localStorage.setItem('samika_packages', JSON.stringify(packages));
   }, [packages]);
 
   useEffect(() => {
-    localStorage.setItem('atithya_hotels', JSON.stringify(hotels));
+    localStorage.setItem('samika_hotels', JSON.stringify(hotels));
   }, [hotels]);
 
   useEffect(() => {
-    localStorage.setItem('atithya_posts', JSON.stringify(posts));
+    localStorage.setItem('samika_posts', JSON.stringify(posts));
   }, [posts]);
 
   useEffect(() => {
-    localStorage.setItem('atithya_destinations', JSON.stringify(destinations));
+    localStorage.setItem('samika_destinations', JSON.stringify(destinations));
   }, [destinations]);
 
   useEffect(() => {
-    localStorage.setItem('atithya_blogs', JSON.stringify(blogs));
+    localStorage.setItem('samika_blogs', JSON.stringify(blogs));
   }, [blogs]);
 
   // Fetch initial data from Express Backend API
@@ -420,7 +420,7 @@ export default function App() {
       const rawPath = window.location.pathname.toLowerCase();
       const rawHash = window.location.hash.toLowerCase().replace(/^#\/?/, '');
       const path = rawHash || rawPath;
-      const isStoredAdmin = localStorage.getItem('atithya_is_admin_auth') === 'true';
+      const isStoredAdmin = (localStorage.getItem('samika_is_admin_auth') || localStorage.getItem('atithya_is_admin_auth')) === 'true';
 
       // Check /package/:slug
       if (path.includes('/package/') || path.startsWith('package/')) {
@@ -559,33 +559,35 @@ export default function App() {
 
   const handleLoginSuccess = (userData) => {
     setIsLoggedIn(true);
-    localStorage.setItem('atithya_is_user_logged_in', 'true');
+    localStorage.setItem('samika_is_user_logged_in', 'true');
     if (userData) {
-      localStorage.setItem('atithya_current_user', JSON.stringify(userData));
+      localStorage.setItem('samika_current_user', JSON.stringify(userData));
     }
     handleNavigate('dashboard');
   };
 
   const handleLogout = () => {
     setIsLoggedIn(false);
-    localStorage.setItem('atithya_is_user_logged_in', 'false');
+    localStorage.setItem('samika_is_user_logged_in', 'false');
+    localStorage.removeItem('samika_current_user');
     localStorage.removeItem('atithya_current_user');
     handleNavigate('home');
   };
 
   const handleAdminLoginSuccess = (adminUser) => {
     setIsAdminAuthenticated(true);
-    localStorage.setItem('atithya_is_admin_auth', 'true');
+    localStorage.setItem('samika_is_admin_auth', 'true');
     if (adminUser) {
-      localStorage.setItem('atithya_current_user', JSON.stringify(adminUser));
+      localStorage.setItem('samika_current_user', JSON.stringify(adminUser));
     }
     handleNavigate('admin');
   };
 
   const handleAdminLogout = () => {
     setIsAdminAuthenticated(false);
-    localStorage.setItem('atithya_is_admin_auth', 'false');
-    localStorage.setItem('atithya_active_tab', 'admin-login');
+    localStorage.setItem('samika_is_admin_auth', 'false');
+    localStorage.setItem('samika_active_tab', 'admin-login');
+    localStorage.removeItem('samika_current_user');
     localStorage.removeItem('atithya_current_user');
     handleNavigate('admin-login');
   };

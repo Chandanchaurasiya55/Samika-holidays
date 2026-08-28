@@ -19,7 +19,7 @@ export default function UserDashboard({
   // Load Logged-In User from localStorage
   const [currentUser, setCurrentUser] = useState(() => {
     try {
-      const saved = localStorage.getItem('atithya_current_user');
+      const saved = localStorage.getItem('samika_current_user') || localStorage.getItem('atithya_current_user');
       return saved ? JSON.parse(saved) : null;
     } catch (e) {
       return null;
@@ -69,7 +69,7 @@ export default function UserDashboard({
       address: profile.address
     };
     setCurrentUser(updated);
-    localStorage.setItem('atithya_current_user', JSON.stringify(updated));
+    localStorage.setItem('samika_current_user', JSON.stringify(updated));
     setSaveSuccess(true);
     setTimeout(() => setSaveSuccess(false), 3000);
   };
@@ -600,7 +600,7 @@ export default function UserDashboard({
               <div className="flex items-center gap-3">
                 <img src="/logo.png" alt="Logo" className="h-10 w-auto object-contain" />
                 <div>
-                  <div className="font-serif text-lg font-bold text-[#0F382C]">Atithya Stay Booking Voucher</div>
+                  <div className="font-serif text-lg font-bold text-[#0F382C]">Samika Holidays Booking Voucher</div>
                   <div className="text-[10px] text-stone-400 font-bold">GSTIN: 05AAACA1234F1Z9</div>
                 </div>
               </div>

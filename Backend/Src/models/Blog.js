@@ -10,7 +10,7 @@ const blogSchema = new mongoose.Schema({
   category: { type: String, default: 'Travel Guide' },
   location: { type: String, default: '' },
   readTime: { type: String, default: '5 min read' },
-  author: { type: String, default: 'Atithya Travel Desk' },
+  author: { type: String, default: 'Samika Holiday Travel Desk' },
   bestTimeToVisit: { type: String, default: '' },
   idealDuration: { type: String, default: '' },
   howToReach: { type: String, default: '' },

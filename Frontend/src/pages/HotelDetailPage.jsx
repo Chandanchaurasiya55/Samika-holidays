@@ -32,8 +32,8 @@ export default function HotelDetailPage({
   const handleShare = () => {
     if (navigator.share) {
       navigator.share({
-        title: `${hotel.name} | Atithya Stay`,
-        text: `Check out ${hotel.name} on Atithya Stay!`,
+        title: `${hotel.name} | Samika Holidays`,
+        text: `Check out ${hotel.name} on Samika Holidays!`,
         url: window.location.href,
       }).catch(() => {});
     } else {
@@ -215,7 +215,7 @@ export default function HotelDetailPage({
                 </button>
 
                 <a
-                  href={`https://wa.me/919258677823?text=${encodeURIComponent(`Hello Atithya Stay, I want to book rooms at: ${hotel.name} in ${hotel.location} (Starting: ₹${hotel.price}/night)`)}`}
+                  href={`https://wa.me/919258677823?text=${encodeURIComponent(`Hello Samika Holidays, I want to book rooms at: ${hotel.name} in ${hotel.location} (Starting: ₹${hotel.price}/night)`)}`}
                   target="_blank"
                   rel="noreferrer"
                   className="w-full bg-emerald-600 hover:bg-emerald-700 text-white py-3.5 rounded-xl font-bold text-sm shadow-md flex items-center justify-center gap-2 transition-all"

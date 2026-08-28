@@ -155,7 +155,7 @@ export default function BlogPage({ blogsList = [], onSelectBlog, onOpenEnquiry }
                     {/* Card Content */}
                     <div className="p-6 space-y-3">
                       <div className="flex items-center gap-2 text-[11px] text-stone-400 font-bold uppercase tracking-wider">
-                        <span>{blog.author || 'Atithya Travel Desk'}</span>
+                        <span>{blog.author || 'Samika Holiday Travel Desk'}</span>
                         <span>•</span>
                         <span>{blog.createdAt ? new Date(blog.createdAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : 'Recent'}</span>
                       </div>
