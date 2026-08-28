@@ -167,15 +167,15 @@ export default function EnquiryModal({
         })
       });
 
-      const contentType = orderRes.headers.get('content-type') || '';
-      if (!contentType.includes('application/json')) {
-        throw new Error('Backend server is not responding properly. Please check backend running status.');
+      let orderData;
+      try {
+        orderData = await orderRes.json();
+      } catch (e) {
+        throw new Error('Unable to connect to backend server. Please refresh the page and try again.');
       }
 
-      const orderData = await orderRes.json();
-
       if (!orderData.success || !orderData.order) {
-        throw new Error(orderData.message || 'Failed to create order');
+        throw new Error(orderData.message || 'Failed to create Razorpay order');
       }
 
       // Step 2: Get Razorpay Key from Backend

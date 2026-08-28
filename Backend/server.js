@@ -49,10 +49,22 @@ app.get('/api/health', (req, res) => {
 });
 
 // Start Server & Connect MongoDB
-app.listen(PORT, async () => {
+const server = app.listen(PORT, async () => {
   console.log(`🚀 Samika Holiday Backend API server running on http://localhost:${PORT}`);
-  const conn = await connectDB();
-  if (!conn) {
-    console.log('⚠️ Running backend with in-memory persistence fallback');
+  try {
+    const conn = await connectDB();
+    if (!conn) {
+      console.log('⚠️ Running backend with in-memory persistence fallback');
+    }
+  } catch (err) {
+    console.log('⚠️ MongoDB connection deferred:', err.message);
+  }
+});
+
+server.on('error', (err) => {
+  if (err.code === 'EADDRINUSE') {
+    console.error(`❌ Port ${PORT} is already in use.`);
+  } else {
+    console.error('❌ Server error:', err);
   }
 });
